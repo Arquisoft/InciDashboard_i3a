@@ -9,7 +9,7 @@ This module is in charge of displaying the various incidents that are sent by va
 
 
 # Authors
-* (Elena Allegue González)[https://github.com/eleallegue]
-* (Marcos Álvarez García)[https://github.com/alvarezGarciaMarcos]
-* (Anamaria Cotorei)[https://github.com/UO251547]
-* (Cristina Vena Naredo)[https://github.com/cristinavn]
+* [Elena Allegue González](https://github.com/eleallegue)
+* [Marcos Álvarez García(https://github.com/alvarezGarciaMarcos)
+* [Anamaria Cotorei](https://github.com/UO251547)
+* [Cristina Vena Naredo](https://github.com/cristinavn)
