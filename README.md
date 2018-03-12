@@ -1,27 +1,13 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2f5e9b234d9b4cbd8669629c299990ad)](https://www.codacy.com/app/jelabra/participants0?utm_source=github.com&utm_medium=referral&utm_content=Arquisoft/participants0&utm_campaign=badger)
-[![Build Status](https://travis-ci.org/Arquisoft/participants0.svg?branch=master)](https://travis-ci.org/Arquisoft/participants0)
-[![codecov](https://codecov.io/gh/Arquisoft/participants0/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/participants0)
+# Inci_i3a
+Incidence System i3a
 
-
-[![Join the chat at https://gitter.im/Arquisoft/participants0](https://badges.gitter.im/Arquisoft/participants0.svg)](https://gitter.im/Arquisoft/participants0?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-# InciDashboard_i3a
-This is the InciDashboard of the group i3a.
-This module is a small part of a bigger project composed by:
-
-* [Loader](https://github.com/Arquisoft/Loader_i3a)
-* [Agents](https://github.com/Arquisoft/Agents_i3a)
-
-This module is in charge of displaying the various incidents that are sent by various sensors.
-
-
-# Authors
-* [Elena Allegue González](https://github.com/eleallegue)
-* [Marcos Álvarez García](https://github.com/alvarezGarciaMarcos)
-* [Anamaria Cotorei](https://github.com/UO251547)
-* [Cristina Vena Naredo](https://github.com/cristinavn)
+[![Build Status](https://travis-ci.org/Arquisoft/Inci_i3a.svg?branch=master)](https://travis-ci.org/Arquisoft/Inci_i3a)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/27b04e16c41248d0abad6d5a4ce83911)](https://www.codacy.com/app/jelabra/Inci_i3a?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Arquisoft/Loader_i3a&amp;utm_campaign=Badge_Grade)
+[![codecov](https://codecov.io/gh/Arquisoft/Inci_i3a/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/Inci_i3a)
 
 # Authors
 
-- Herminio García González (@herminiogg)
-- Jose Emilio Labra Gayo (@labra)
+* Elena Allegue González ([@eleallegue](https://github.com/eleallegue))
+* Marcos Álvarez García ([@alvarezGarciaMarcos](https://github.com/alvarezGarciaMarcos))
+* Anamaria Cotorei ([@uo251547](https://github.com/UO251547))
+* Cristina Vena Naredo ([@cristinavn](https://github.com/cristinavn))
