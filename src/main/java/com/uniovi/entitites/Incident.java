@@ -1,23 +1,24 @@
 package com.uniovi.entitites;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-@Entity
+@Document
+@TypeAlias("incident")
 public class Incident {
 
 	@Id
-	@GeneratedValue
 	private long id;
 
-	private String name;
-	private String description;
-	private IncidentStates state;
-	private String decription;
-	private String location;
-	private String[] tags;
+	
+	@Field("name") private String name;
+	@Field("description") private String description;
+	@Field("state") private IncidentStates state;
+	@Field("StateDescription") private String decription;
+	@Field("location") private String location;
+	@Field("tags") private String[] tags;
 
 	public Incident() {
 
