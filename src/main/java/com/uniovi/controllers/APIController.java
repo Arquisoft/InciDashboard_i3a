@@ -1,8 +1,10 @@
-package hello;
+package com.uniovi.controllers;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.uniovi.UserInfo;
 
 @RestController
 public class APIController {

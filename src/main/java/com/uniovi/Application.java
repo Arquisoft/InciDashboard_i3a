@@ -1,4 +1,4 @@
-package hello;
+package com.uniovi;
 
 
 import org.springframework.boot.SpringApplication;
