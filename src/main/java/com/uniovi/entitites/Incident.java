@@ -34,6 +34,22 @@ public class Incident {
 		this.tags = tags;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public IncidentStates getState() {
 		return state;
 	}
@@ -42,23 +58,28 @@ public class Incident {
 		this.state = state;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
 	public String getDecription() {
 		return decription;
+	}
+
+	public void setDecription(String decription) {
+		this.decription = decription;
 	}
 
 	public String getLocation() {
 		return location;
 	}
 
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
 	public String[] getTags() {
 		return tags;
 	}
+
+	public void setTags(String[] tags) {
+		this.tags = tags;
+	}
+
 }
