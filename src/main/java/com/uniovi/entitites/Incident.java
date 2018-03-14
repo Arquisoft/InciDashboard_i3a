@@ -15,7 +15,6 @@ public class Incident {
 	private String name;
 	private String description;
 	private IncidentStates state;
-	private String decription;
 	private String location;
 	private String[] tags;
 
@@ -23,13 +22,11 @@ public class Incident {
 
 	}
 
-	public Incident(String name, String description, IncidentStates state, String decription, String location,
-			String[] tags) {
+	public Incident(String name, String description, IncidentStates state, String location, String[] tags) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.state = state;
-		this.decription = decription;
 		this.location = location;
 		this.tags = tags;
 	}
@@ -56,14 +53,6 @@ public class Incident {
 
 	public void setState(IncidentStates state) {
 		this.state = state;
-	}
-
-	public String getDecription() {
-		return decription;
-	}
-
-	public void setDecription(String decription) {
-		this.decription = decription;
 	}
 
 	public String getLocation() {
