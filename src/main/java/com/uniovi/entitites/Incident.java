@@ -1,38 +1,51 @@
 package com.uniovi.entitites;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.TypeAlias;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import java.util.List;
+import java.util.Map;
 
-@Document
-@TypeAlias("incident")
 public class Incident {
 
-	@Id
 	private long id;
-
-	
-	@Field("name") private String name;
-	@Field("description") private String description;
-	@Field("state") private IncidentStates state;
-	@Field("StateDescription") private String decription;
-	@Field("location") private String location;
-	@Field("tags") private String[] tags;
+	private String name;
+	private String description;
+	private IncidentStates state;
+	private String location;
+	private List<String> tags;
+	private List<String> multimedia;
+	private Map<String, String> property_value;
+	private List<String> comments;
 
 	public Incident() {
 
 	}
 
-	public Incident(String name, String description, IncidentStates state, String decription, String location,
-			String[] tags) {
+	public Incident(Long id, String name, String description, IncidentStates state, String location, List<String> tags,
+			List<String> multimedia, Map<String, String> property_value, List<String> comments) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.state = state;
-		this.decription = decription;
 		this.location = location;
 		this.tags = tags;
+		this.multimedia = multimedia;
+		this.property_value = property_value;
+		this.comments = comments;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public IncidentStates getState() {
@@ -43,23 +56,52 @@ public class Incident {
 		this.state = state;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public String getDecription() {
-		return decription;
-	}
-
 	public String getLocation() {
 		return location;
 	}
 
-	public String[] getTags() {
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public List<String> getTags() {
 		return tags;
 	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
+
+	public List<String> getMultimedia() {
+		return multimedia;
+	}
+
+	public void setMultimedia(List<String> multimedia) {
+		this.multimedia = multimedia;
+	}
+
+	public Map<String, String> getProperty_value() {
+		return property_value;
+	}
+
+	public void setProperty_value(Map<String, String> property_value) {
+		this.property_value = property_value;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public List<String> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<String> comments) {
+		this.comments = comments;
+	}
+
 }

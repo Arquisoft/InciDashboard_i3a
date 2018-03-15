@@ -5,16 +5,15 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.uniovi.repository.IncidentRepository;
+import com.uniovi.repository.OperatorRepository;
 
 @Service
-public class IncidentService {
+public class OperatorService {
 
 	@Autowired
-	private IncidentRepository incidentRepository;
+	private OperatorRepository operatorRepository;
 
 	@PostConstruct
 	public void init() {
 	}
-
 }

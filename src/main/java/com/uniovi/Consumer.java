@@ -7,6 +7,9 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.uniovi.entitites.Incident;
+
 public class Consumer {
 
 	public static void main(String[] args) throws Exception {
@@ -22,7 +25,7 @@ public class Consumer {
 		Properties props = new Properties();
 
 		props.put("bootstrap.servers", "localhost:9092");
-		props.put("group.id", "asw");
+		props.put("group.id", "es.uniovi");
 		props.put("enable.auto.commit", "true");
 		props.put("auto.commit.interval.ms", "1000");
 		props.put("session.timeout.ms", "30000");
@@ -37,13 +40,17 @@ public class Consumer {
 
 		// print the topic name
 		System.out.println("Subscribed to topic " + topicName);
-		int i = 0;
 
 		while (true) {
 			ConsumerRecords<String, String> records = consumer.poll(100);
-			for (ConsumerRecord<String, String> record : records)
+			for (ConsumerRecord<String, String> record : records) {
 				// print the offset,key and value for the consumer records.
+				ObjectMapper mapper = new ObjectMapper();
+				String jsonInString = record.value();
+				Incident obj = mapper.readValue(jsonInString, Incident.class);
 				System.out.printf("offset = %d, key = %s, value = %s\n", record.offset(), record.key(), record.value());
+				System.out.println(obj.toString());
+			}
 		}
 	}
 }
