@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.uniovi.entitites.Incident;
 
-public interface IncidentRepository extends CrudRepository<Incident, Long> {
+public interface OperatorRepository extends CrudRepository<Incident, Long> {
 
 }
