@@ -19,8 +19,8 @@ import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 public class KafkaListenerFactory {
 
 	@Bean
-	KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> kafkaListenerContainerFactory() {
-		ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+	public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<Integer, String>> kafkaListenerContainerFactory() {
+		ConcurrentKafkaListenerContainerFactory<Integer, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
 		factory.setConsumerFactory(consumerFactory());
 		factory.setConcurrency(3);
 		factory.getContainerProperties().setPollTimeout(3000);
@@ -28,7 +28,7 @@ public class KafkaListenerFactory {
 	}
 
 	@Bean
-	public ConsumerFactory<String, String> consumerFactory() {
+	public ConsumerFactory<Integer, String> consumerFactory() {
 		return new DefaultKafkaConsumerFactory<>(consumerConfigs());
 	}
 
@@ -43,11 +43,6 @@ public class KafkaListenerFactory {
 		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		props.put(ConsumerConfig.GROUP_ID_CONFIG, "es.uniovi");
 		return props;
-	}
-
-	@Bean
-	public Receiver receiver() {
-		return new Receiver();
 	}
 
 }

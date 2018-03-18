@@ -1,0 +1,37 @@
+<!-- nav.html -->
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#myNavbar">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav">
+				<li><a href="/">Home</a></li>
+				<li  class="dropdown"><a id="users-menu" class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+					<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a id="listIncidents" href="/dashboard/list">Listar Incidencias</a></li>
+					</ul>
+                </li>
+				<li class="dropdown"><a id="posts-menu" class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+						<span class="caret"></span>
+				</a>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/login"> <span
+						class="glyphicon glyphicon-log-in"></span> <span>Identifícate</span>
+				</a></li>
+				<li><a href="/logout"> <span
+						class="glyphicon glyphicon-log-out"></span> <span>Desconectar</span>
+				</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
