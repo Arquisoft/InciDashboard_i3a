@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2 id="usuarios_titulo">Incidencias</h2>
+		<div class="panel panel-default">
+			<table class="table" th:fragment="tableIncidents" id="tableIncidents">
+				<thead>
+					<tr th:if="${!#lists.isEmpty(incidentsList)}">
+						<th>Name</th>
+						<th>Description</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="inci : ${incidentsList}">
+						<td th:text="${inci.name}">Incident</td>
+						<td th:text="${inci.description}">Description</td>
+                        <td th:text="${inci.status}">Status</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<footer th:replace="fragments/pagination" />
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

@@ -10,6 +10,11 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uniovi.entitites.Incident;
 
+/**
+ * ESTO AUN NO DE MOMENTO
+ * 
+ * @author elena
+ */
 public class Consumer {
 
 	public static void main(String[] args) throws Exception {
