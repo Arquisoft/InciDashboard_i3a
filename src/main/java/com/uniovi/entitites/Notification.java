@@ -23,8 +23,12 @@ public class Notification {
 	}
 
 	public Notification(Long id, Incident incident, Operator operator) {
+		this(incident, operator);
+		this.id = id;	
+	}
+	
+	public Notification(Incident incident, Operator operator) {
 		super();
-		this.id = id;
 		this.incident = incident;
 		this.operator = operator;
 	}

@@ -1,5 +1,6 @@
 package com.uniovi.entitites;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import com.uniovi.properties.Fire;
+import com.uniovi.properties.Humidity;
+import com.uniovi.properties.Property;
+import com.uniovi.properties.Temperature;
+import com.uniovi.properties.Wind;
 
 @Entity
 public class Incident {
@@ -39,6 +46,8 @@ public class Incident {
 	@JoinColumn(name = "notification_id")
 	private Notification notification;
 
+	private Operator operator;
+	
 	public Incident() {
 
 	}
@@ -165,6 +174,44 @@ public class Incident {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	public List<Property> getProperties() {
+		List<Property> properties = new ArrayList<Property>();
+		if (property_value.containsKey("temperature")) {
+			try {
+				properties.add(new Temperature(Double.parseDouble(property_value.get("temperature"))));
+			} catch (NumberFormatException e) {
+				System.out.println("Wrong value for temperature");
+			}
+		}
+		if (property_value.containsKey("humidity")) {
+			try {
+				properties.add(new Humidity(Double.parseDouble(property_value.get("humidity"))));
+			} catch (NumberFormatException e) {
+				System.out.println("Wrong value for humidity");
+			}
+		}
+		if (property_value.containsKey("wind")) {
+			properties.add(new Wind(property_value.get("wind")));
+		}
+		if (property_value.containsKey("fire")) {
+			properties.add(new Fire(Boolean.parseBoolean(property_value.get("fire"))));
+		}
+		return null;
+	}
+
+	public boolean hasNormalValues() {
+		List<Property> properties = getProperties();
+		for (Property p : properties) {
+			if (!p.hasNormalValue())
+				return false;
+		}
+		return true;
+	}
+
+	public Notification createNotification() {
+		return new Notification(this, this.operator);
 	}
 
 }
