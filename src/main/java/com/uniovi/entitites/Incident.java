@@ -14,19 +14,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.uniovi.properties.Attack;
+import com.uniovi.properties.Dead;
 import com.uniovi.properties.Fire;
+import com.uniovi.properties.Flood;
 import com.uniovi.properties.Humidity;
 import com.uniovi.properties.Property;
+import com.uniovi.properties.Robbery;
 import com.uniovi.properties.Temperature;
 import com.uniovi.properties.Wind;
+import com.uniovi.properties.Wounded;
 
 @Entity
 public class Incident {
 
 	@Id
 	@GeneratedValue
-	@JsonIgnore
 	private Long id;
 
 	private String name;
@@ -50,7 +53,7 @@ public class Incident {
 	private Notification notification;
 
 	private Operator operator;
-	
+
 	public Incident() {
 	}
 
@@ -65,7 +68,7 @@ public class Incident {
 		this.multimedia = multimedia;
 		this.property_value = property_value;
 	}
-	
+
 	public Incident(Long id, String name, String description, IncidentStates state, String location, List<String> tags,
 			List<String> multimedia, Map<String, String> property_value) {
 		this(name, description, state, location, tags, multimedia, property_value);
@@ -76,7 +79,7 @@ public class Incident {
 		this(id, name, description, state, location, tags, multimedia, property_value);
 		this.comments = comments;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -182,7 +185,7 @@ public class Incident {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Incident [id=" + id + ", name=" + name + ", description=" + description + ", state=" + state
@@ -208,10 +211,37 @@ public class Incident {
 			}
 		}
 		if (property_value.containsKey("wind")) {
-			properties.add(new Wind(property_value.get("wind")));
+			try {
+				properties.add(new Wind(Double.parseDouble(property_value.get("wind"))));
+			} catch (NumberFormatException e) {
+				System.out.println("Wrong value for humidity");
+			}
+		}
+		if (property_value.containsKey("wounded")) {
+			try {
+				properties.add(new Wounded(Integer.parseInt(property_value.get("wounded"))));
+			} catch (NumberFormatException e) {
+				System.out.println("Wrong value for number of wounded people");
+			}
+		}
+		if (property_value.containsKey("dead")) {
+			try {
+				properties.add(new Dead(Integer.parseInt(property_value.get("dead"))));
+			} catch (NumberFormatException e) {
+				System.out.println("Wrong value for temperature");
+			}
 		}
 		if (property_value.containsKey("fire")) {
 			properties.add(new Fire(Boolean.parseBoolean(property_value.get("fire"))));
+		}
+		if (property_value.containsKey("flood")) {
+			properties.add(new Flood(Boolean.parseBoolean(property_value.get("flood"))));
+		}
+		if (property_value.containsKey("attack")) {
+			properties.add(new Attack(Boolean.parseBoolean(property_value.get("attack"))));
+		}
+		if (property_value.containsKey("robbery")) {
+			properties.add(new Robbery(Boolean.parseBoolean(property_value.get("robbery"))));
 		}
 	}
 
