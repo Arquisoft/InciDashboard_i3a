@@ -38,7 +38,7 @@ public class Incident {
 
 	@Enumerated(EnumType.STRING)
 	private IncidentStates state;
-	private Location location;
+	private String location;
 	private List<String> tags;
 	private List<String> multimedia;
 	private Map<String, String> property_value;
@@ -109,11 +109,11 @@ public class Incident {
 		this.state = state;
 	}
 
-	public Location getLocation() {
+	public String getLocation() {
 		return location;
 	}
 
-	public void setLocation(Location location) {
+	public void setLocation(String location) {
 		this.location = location;
 	}
 
