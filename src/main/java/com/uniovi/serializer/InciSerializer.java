@@ -1,29 +1,48 @@
 package com.uniovi.serializer;
-import java.util.Map;
 
-import org.apache.kafka.common.serialization.Serializer;
+import java.io.IOException;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.uniovi.entitites.Incident;
-public class InciSerializer implements Serializer<Incident>{
+
+public class InciSerializer extends JsonSerializer<Incident> {
 
 	@Override
-	public void close() {
-	}
+	public void serialize(Incident incident, JsonGenerator generator, SerializerProvider sp)
+			throws IOException, JsonProcessingException {
 
-	@Override
-	public void configure(Map<String, ?> arg0, boolean arg1) {
-	}
+		generator.writeStartObject();
 
-	@Override
-	public byte[] serialize(String arg0, Incident toBeSerialized) {
-		byte[] serialized = null;
-		ObjectMapper objectMapper = new ObjectMapper();
-		try {
-			serialized = objectMapper.writeValueAsString(toBeSerialized).getBytes();
-		} catch (Exception e) {
-			e.printStackTrace();
+		// agent:
+		generator.writeObjectFieldStart("agent");
+		generator.writeStringField("username", incident.getAgent().getUsername());
+		generator.writeNumberField("kind", incident.getAgent().getKind());
+		generator.writeEndObject();
+
+		// location:
+		generator.writeObjectFieldStart("location");
+		generator.writeNumberField("latitude", incident.getLocation().getLatitude());
+		generator.writeNumberField("longitude", incident.getLocation().getLongitude());
+		generator.writeEndObject();
+
+		// tags
+		generator.writeArrayFieldStart("tags");
+		for (String tag : incident.getTags()) {
+			generator.writeString(tag);
 		}
-		return serialized;
+		generator.writeEndArray();
+
+		generator.writeObjectFieldStart("property_values");
+		for (String key : incident.getProperty_value().keySet()) {
+			generator.writeObjectField(key, incident.getProperty_value().get(key));
+		}
+		generator.writeEndObject();
+
+		generator.writeEndObject();
+
 	}
+
 }

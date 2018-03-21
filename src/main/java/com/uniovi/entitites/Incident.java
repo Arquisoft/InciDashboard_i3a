@@ -1,5 +1,6 @@
 package com.uniovi.entitites;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,7 @@ public class Incident {
 
 	@Enumerated(EnumType.STRING)
 	private IncidentStates state;
-	private String location;
+	private Location location;
 	private List<String> tags;
 	private List<String> multimedia;
 	private Map<String, String> property_value;
@@ -51,14 +52,18 @@ public class Incident {
 	@OneToOne
 	@JoinColumn(name = "notification_id")
 	private Notification notification;
+	
+	private static String[] keyWordsDanger= {"temperature","fire","flood","windy","wonded","attack",
+			"robbery","dead"}; 
 
 	private Operator operator;
 
 	public Incident() {
 	}
 
+
 	public Incident(String name, String description, IncidentStates state, String location, List<String> tags,
-			List<String> multimedia, Map<String, String> property_value) {
+      List<String> multimedia, Map<String, String> property_value) {
 		this();
 		this.name = name;
 		this.description = description;
@@ -104,11 +109,11 @@ public class Incident {
 		this.state = state;
 	}
 
-	public String getLocation() {
+	public Location getLocation() {
 		return location;
 	}
 
-	public void setLocation(String location) {
+	public void setLocation(Location location) {
 		this.location = location;
 	}
 
@@ -151,6 +156,31 @@ public class Incident {
 	public void setComments(List<String> comments) {
 		this.comments = comments;
 	}
+	
+
+	public Agent getAgent() {
+		return agent;
+	}
+
+	public void setAgent(Agent agent) {
+		this.agent = agent;
+	}
+
+	public Notification getNotification() {
+		return notification;
+	}
+
+	public void setNotification(Notification notification) {
+		this.notification = notification;
+	}
+
+	public static String[] getKeyWordsDanger() {
+		return keyWordsDanger;
+	}
+
+	public static void setKeyWordsDanger(String[] keyWordsDanger) {
+		Incident.keyWordsDanger = keyWordsDanger;
+	}
 
 	@Override
 	public int hashCode() {
@@ -185,7 +215,7 @@ public class Incident {
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Incident [id=" + id + ", name=" + name + ", description=" + description + ", state=" + state
