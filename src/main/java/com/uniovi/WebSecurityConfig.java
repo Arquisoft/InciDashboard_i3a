@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
 	@Autowired
 	private UserDetailsService userDetailsService;
 
@@ -24,9 +23,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers("/css/**", "/img/**", "/script/**", "/").permitAll()
-				.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
-				.defaultSuccessUrl("/operator/list").failureUrl("/login.html?error=true").and().logout().permitAll();
+		http.csrf().disable().authorizeRequests()
+				.antMatchers("/css/**", "/img/**", "/script/**", "/", "/signup", "/admin/login").permitAll()
+				.antMatchers("/user/list").authenticated()
+				.antMatchers("/user/**").hasAnyAuthority("ROLE_USER")
+				.antMatchers("/admin/list").hasAnyAuthority("ROLE_ADMIN")
+				.antMatchers("/admin/list/**").hasAnyAuthority("ROLE_ADMIN")
+				.anyRequest().authenticated()
+				.and()
+				.formLogin().loginPage("/login").permitAll()
+				.defaultSuccessUrl("/user/list").failureUrl("/login.html?error=true").and().logout().permitAll();
 	}
 
 	@Autowired

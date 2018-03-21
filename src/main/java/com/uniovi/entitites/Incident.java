@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import com.uniovi.properties.Attack;
 import com.uniovi.properties.Dead;
@@ -38,10 +40,15 @@ public class Incident {
 	@Enumerated(EnumType.STRING)
 	private IncidentStates state;
 	private String location;
+	@ElementCollection(targetClass = String.class)
 	private List<String> tags;
+	@ElementCollection(targetClass = String.class)
 	private List<String> multimedia;
+	@ElementCollection
 	private Map<String, String> property_value;
+	@Transient
 	private List<Property> properties;
+	@ElementCollection(targetClass = String.class)
 	private List<String> comments;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
@@ -55,9 +62,8 @@ public class Incident {
 	private static String[] keyWordsDanger = { "temperature", "fire", "flood", "windy", "wonded", "attack", "robbery",
 			"dead" };
 
-	private Operator operator;
-
 	public Incident() {
+		comments = new ArrayList<String>();
 	}
 
 	public Incident(String name, String description, IncidentStates state, String location, List<String> tags,
@@ -72,13 +78,13 @@ public class Incident {
 		this.property_value = property_value;
 	}
 
-	public Incident(Long id, String name, String description, IncidentStates state, String location,
-			List<String> tags, List<String> multimedia, Map<String, String> property_value) {
+	public Incident(Long id, String name, String description, IncidentStates state, String location, List<String> tags,
+			List<String> multimedia, Map<String, String> property_value) {
 		this(name, description, state, location, tags, multimedia, property_value);
 	}
 
-	public Incident(Long id, String name, String description, IncidentStates state, String location,
-			List<String> tags, List<String> multimedia, Map<String, String> property_value, List<String> comments) {
+	public Incident(Long id, String name, String description, IncidentStates state, String location, List<String> tags,
+			List<String> multimedia, Map<String, String> property_value, List<String> comments) {
 		this(id, name, description, state, location, tags, multimedia, property_value);
 		this.comments = comments;
 	}
@@ -218,7 +224,7 @@ public class Incident {
 		return "Incident [id=" + id + ", name=" + name + ", description=" + description + ", state=" + state
 				+ ", location=" + location + ", tags=" + tags + ", multimedia=" + multimedia + ", property_value="
 				+ property_value + ", comments=" + comments + ", agent=" + agent + ", notification=" + notification
-				+ ", operator=" + operator + "]";
+				+ "]";
 	}
 
 	public void setProperties() {
@@ -282,7 +288,7 @@ public class Incident {
 	}
 
 	public Notification createNotification() {
-		return new Notification(this, this.operator);
+		return new Notification(this, new Operator());
 	}
 
 }
