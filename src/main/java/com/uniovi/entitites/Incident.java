@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.uniovi.properties.Fire;
 import com.uniovi.properties.Humidity;
 import com.uniovi.properties.Property;
@@ -25,6 +26,7 @@ public class Incident {
 
 	@Id
 	@GeneratedValue
+	@JsonIgnore
 	private Long id;
 
 	private String name;
@@ -36,6 +38,7 @@ public class Incident {
 	private List<String> tags;
 	private List<String> multimedia;
 	private Map<String, String> property_value;
+	private List<Property> properties;
 	private List<String> comments;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
@@ -49,10 +52,9 @@ public class Incident {
 	private Operator operator;
 	
 	public Incident() {
-
 	}
 
-	public Incident(Long id, String name, String description, IncidentStates state, String location, List<String> tags,
+	public Incident(String name, String description, IncidentStates state, String location, List<String> tags,
 			List<String> multimedia, Map<String, String> property_value) {
 		this();
 		this.name = name;
@@ -63,13 +65,18 @@ public class Incident {
 		this.multimedia = multimedia;
 		this.property_value = property_value;
 	}
+	
+	public Incident(Long id, String name, String description, IncidentStates state, String location, List<String> tags,
+			List<String> multimedia, Map<String, String> property_value) {
+		this(name, description, state, location, tags, multimedia, property_value);
+	}
 
 	public Incident(Long id, String name, String description, IncidentStates state, String location, List<String> tags,
 			List<String> multimedia, Map<String, String> property_value, List<String> comments) {
 		this(id, name, description, state, location, tags, multimedia, property_value);
 		this.comments = comments;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -175,9 +182,17 @@ public class Incident {
 			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return "Incident [id=" + id + ", name=" + name + ", description=" + description + ", state=" + state
+				+ ", location=" + location + ", tags=" + tags + ", multimedia=" + multimedia + ", property_value="
+				+ property_value + ", comments=" + comments + ", agent=" + agent + ", notification=" + notification
+				+ ", operator=" + operator + "]";
+	}
 
-	public List<Property> getProperties() {
-		List<Property> properties = new ArrayList<Property>();
+	public void setProperties() {
+		this.properties = new ArrayList<Property>();
 		if (property_value.containsKey("temperature")) {
 			try {
 				properties.add(new Temperature(Double.parseDouble(property_value.get("temperature"))));
@@ -198,11 +213,10 @@ public class Incident {
 		if (property_value.containsKey("fire")) {
 			properties.add(new Fire(Boolean.parseBoolean(property_value.get("fire"))));
 		}
-		return null;
 	}
 
 	public boolean hasNormalValues() {
-		List<Property> properties = getProperties();
+		setProperties();
 		for (Property p : properties) {
 			if (!p.hasNormalValue())
 				return false;

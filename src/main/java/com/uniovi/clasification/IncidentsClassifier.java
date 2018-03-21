@@ -12,11 +12,19 @@ public class IncidentsClassifier {
 		this.incidents = incidents;
 	}
 	
+	public IncidentsClassifier() {}
+	
 	public void classify() {
 		for (Incident i : incidents) {
 			if (! i.hasNormalValues()) {
 				NotificationManager.getInstance().addNotification(i.createNotification());
 			}
+		}
+	}
+	
+	public void classify(Incident i) {
+		if (! i.hasNormalValues()) {
+			NotificationManager.getInstance().addNotification(i.createNotification());
 		}
 	}
 }
