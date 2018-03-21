@@ -20,8 +20,9 @@ public class OperatorService {
 
 	}
 
-	public Operator getOperatorByUsername(String email) {
+	public Operator getOperatorByEmail(String email) {
 		return operatorRepository.findByEmail(email);
+	}
 
 	public List<Incident> getIncidentsFromUser(Operator op) {
 		return operatorRepository.findIncidentsByOp(op);

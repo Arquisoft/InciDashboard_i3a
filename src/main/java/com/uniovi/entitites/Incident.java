@@ -60,7 +60,7 @@ public class Incident {
 	public Incident() {
 	}
 
-	public Incident(String name, String description, IncidentStates state, Location location, List<String> tags,
+	public Incident(String name, String description, IncidentStates state, String location, List<String> tags,
 			List<String> multimedia, Map<String, String> property_value) {
 		this();
 		this.name = name;
@@ -72,12 +72,12 @@ public class Incident {
 		this.property_value = property_value;
 	}
 
-	public Incident(Long id, String name, String description, IncidentStates state, Location location,
+	public Incident(Long id, String name, String description, IncidentStates state, String location,
 			List<String> tags, List<String> multimedia, Map<String, String> property_value) {
 		this(name, description, state, location, tags, multimedia, property_value);
 	}
 
-	public Incident(Long id, String name, String description, IncidentStates state, Location location,
+	public Incident(Long id, String name, String description, IncidentStates state, String location,
 			List<String> tags, List<String> multimedia, Map<String, String> property_value, List<String> comments) {
 		this(id, name, description, state, location, tags, multimedia, property_value);
 		this.comments = comments;
