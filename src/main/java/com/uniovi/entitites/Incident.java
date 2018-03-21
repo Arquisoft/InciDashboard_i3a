@@ -1,6 +1,5 @@
 package com.uniovi.entitites;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -52,18 +51,17 @@ public class Incident {
 	@OneToOne
 	@JoinColumn(name = "notification_id")
 	private Notification notification;
-	
-	private static String[] keyWordsDanger= {"temperature","fire","flood","windy","wonded","attack",
-			"robbery","dead"}; 
+
+	private static String[] keyWordsDanger = { "temperature", "fire", "flood", "windy", "wonded", "attack", "robbery",
+			"dead" };
 
 	private Operator operator;
 
 	public Incident() {
 	}
 
-
-	public Incident(String name, String description, IncidentStates state, String location, List<String> tags,
-      List<String> multimedia, Map<String, String> property_value) {
+	public Incident(String name, String description, IncidentStates state, Location location, List<String> tags,
+			List<String> multimedia, Map<String, String> property_value) {
 		this();
 		this.name = name;
 		this.description = description;
@@ -74,13 +72,13 @@ public class Incident {
 		this.property_value = property_value;
 	}
 
-	public Incident(Long id, String name, String description, IncidentStates state, String location, List<String> tags,
-			List<String> multimedia, Map<String, String> property_value) {
+	public Incident(Long id, String name, String description, IncidentStates state, Location location,
+			List<String> tags, List<String> multimedia, Map<String, String> property_value) {
 		this(name, description, state, location, tags, multimedia, property_value);
 	}
 
-	public Incident(Long id, String name, String description, IncidentStates state, String location, List<String> tags,
-			List<String> multimedia, Map<String, String> property_value, List<String> comments) {
+	public Incident(Long id, String name, String description, IncidentStates state, Location location,
+			List<String> tags, List<String> multimedia, Map<String, String> property_value, List<String> comments) {
 		this(id, name, description, state, location, tags, multimedia, property_value);
 		this.comments = comments;
 	}
@@ -156,7 +154,6 @@ public class Incident {
 	public void setComments(List<String> comments) {
 		this.comments = comments;
 	}
-	
 
 	public Agent getAgent() {
 		return agent;
@@ -215,7 +212,7 @@ public class Incident {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Incident [id=" + id + ", name=" + name + ", description=" + description + ", state=" + state
