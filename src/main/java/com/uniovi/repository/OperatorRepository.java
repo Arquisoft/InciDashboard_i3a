@@ -10,7 +10,7 @@ import com.uniovi.entitites.Operator;
 
 public interface OperatorRepository extends CrudRepository<Operator, Long> {
 
-	Operator findByUsername(String username);
+	Operator findByEmail(String username);
 
 	@Query("SELECT inci from Incident inci where inci.agent = ?1")
 	List<Incident> findIncidentsByOp(Operator op);

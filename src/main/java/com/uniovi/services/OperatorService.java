@@ -21,7 +21,7 @@ public class OperatorService {
 	}
 
 	public Operator getOperatorByUsername(String username) {
-		return operatorRepository.findByUsername(username);
+		return operatorRepository.findByEmail(username);
 	}
 
 	public List<Incident> getIncidentsFromUser(Operator op) {
