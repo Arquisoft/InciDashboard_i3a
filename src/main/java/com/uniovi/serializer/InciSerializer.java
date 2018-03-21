@@ -24,8 +24,9 @@ public class InciSerializer extends JsonSerializer<Incident> {
 
 		// location:
 		generator.writeObjectFieldStart("location");
-		generator.writeNumberField("latitude", incident.getLocation().getLatitude());
-		generator.writeNumberField("longitude", incident.getLocation().getLongitude());
+		generator.writeStringField("location", incident.getLocation());
+		//generator.writeNumberField("latitude", incident.getLocation().getLatitude());
+		//generator.writeNumberField("longitude", incident.getLocation().getLongitude());
 		generator.writeEndObject();
 
 		// tags

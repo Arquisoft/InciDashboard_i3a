@@ -27,7 +27,7 @@ public class OperatorController {
 	private Operator getActiveUser() {
 		org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String username = auth.getName();
-		return operatorService.getOperatorByUsername(username);
+		return operatorService.getOperatorByEmail(username);
 	}
 
 }
