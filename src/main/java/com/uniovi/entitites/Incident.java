@@ -1,6 +1,7 @@
 package com.uniovi.entitites;
 
-import java.util.Arrays;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import com.uniovi.properties.Attack;
+import com.uniovi.properties.Dead;
+import com.uniovi.properties.Fire;
+import com.uniovi.properties.Flood;
+import com.uniovi.properties.Humidity;
+import com.uniovi.properties.Property;
+import com.uniovi.properties.Robbery;
+import com.uniovi.properties.Temperature;
+import com.uniovi.properties.Wind;
+import com.uniovi.properties.Wounded;
 
 @Entity
 public class Incident {
@@ -30,6 +42,7 @@ public class Incident {
 	private List<String> tags;
 	private List<String> multimedia;
 	private Map<String, String> property_value;
+	private List<Property> properties;
 	private List<String> comments;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
@@ -43,12 +56,14 @@ public class Incident {
 	private static String[] keyWordsDanger= {"temperature","fire","flood","windy","wonded","attack",
 			"robbery","dead"}; 
 
-	public Incident() {
+	private Operator operator;
 
+	public Incident() {
 	}
 
-	public Incident(Long id, String name, String description, IncidentStates state, Location location, List<String> tags,
-			List<String> multimedia, Map<String, String> property_value) {
+
+	public Incident(String name, String description, IncidentStates state, String location, List<String> tags,
+      List<String> multimedia, Map<String, String> property_value) {
 		this();
 		this.name = name;
 		this.description = description;
@@ -59,7 +74,12 @@ public class Incident {
 		this.property_value = property_value;
 	}
 
-	public Incident(Long id, String name, String description, IncidentStates state, Location location, List<String> tags,
+	public Incident(Long id, String name, String description, IncidentStates state, String location, List<String> tags,
+			List<String> multimedia, Map<String, String> property_value) {
+		this(name, description, state, location, tags, multimedia, property_value);
+	}
+
+	public Incident(Long id, String name, String description, IncidentStates state, String location, List<String> tags,
 			List<String> multimedia, Map<String, String> property_value, List<String> comments) {
 		this(id, name, description, state, location, tags, multimedia, property_value);
 		this.comments = comments;
@@ -196,58 +216,76 @@ public class Incident {
 		return true;
 	}
 	
-	public boolean isDangerous() {
-		if(!property_value.isEmpty()) {
-			for (Map.Entry<String, String> entry : property_value.entrySet()) {
-				if(Arrays.asList(keyWordsDanger).contains(entry.getKey())) {
-					if(checkDanger(entry.getKey(),entry.getValue())) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
+	@Override
+	public String toString() {
+		return "Incident [id=" + id + ", name=" + name + ", description=" + description + ", state=" + state
+				+ ", location=" + location + ", tags=" + tags + ", multimedia=" + multimedia + ", property_value="
+				+ property_value + ", comments=" + comments + ", agent=" + agent + ", notification=" + notification
+				+ ", operator=" + operator + "]";
 	}
-	
-	private boolean checkDanger(String key, String value) {
-		if(key.equals("temperature")) {
-			double temp = Double.parseDouble(value);
-			if(temp > 40.0 || temp < 10.0) {
-				return true;
-			}
-		}else if(key.equals("fire")) {
-			if(value.equals("yes")) {
-				return true;
-			}
-		}else if(key.equals("flood")) {
-			if(value.equals("yes")) {
-				return true;
-			}
-		}else if(key.equals("windy")) {
-			double speed = Double.parseDouble(value);
-			if(speed > 30.0) {
-				return true;
-			}
-		}else if(key.equals("wounded")) {
-			int wounded = Integer.parseInt(value);
-			if(wounded > 0) {
-				return true;
-			}
-		}else if(key.equals("dead")) {
-			int dead = Integer.parseInt(value);
-			if(dead > 0) {
-				return true;
-			}
-		}else if(key.equals("attack")) {
-			if(value.equals("yes")) {
-				return true;
-			}
-		}else if(key.equals("robbery")) {
-			if(value.equals("yes")) {
-				return true;
+
+	public void setProperties() {
+		this.properties = new ArrayList<Property>();
+		if (property_value.containsKey("temperature")) {
+			try {
+				properties.add(new Temperature(Double.parseDouble(property_value.get("temperature"))));
+			} catch (NumberFormatException e) {
+				System.out.println("Wrong value for temperature");
 			}
 		}
-		return false;
+		if (property_value.containsKey("humidity")) {
+			try {
+				properties.add(new Humidity(Double.parseDouble(property_value.get("humidity"))));
+			} catch (NumberFormatException e) {
+				System.out.println("Wrong value for humidity");
+			}
+		}
+		if (property_value.containsKey("wind")) {
+			try {
+				properties.add(new Wind(Double.parseDouble(property_value.get("wind"))));
+			} catch (NumberFormatException e) {
+				System.out.println("Wrong value for humidity");
+			}
+		}
+		if (property_value.containsKey("wounded")) {
+			try {
+				properties.add(new Wounded(Integer.parseInt(property_value.get("wounded"))));
+			} catch (NumberFormatException e) {
+				System.out.println("Wrong value for number of wounded people");
+			}
+		}
+		if (property_value.containsKey("dead")) {
+			try {
+				properties.add(new Dead(Integer.parseInt(property_value.get("dead"))));
+			} catch (NumberFormatException e) {
+				System.out.println("Wrong value for temperature");
+			}
+		}
+		if (property_value.containsKey("fire")) {
+			properties.add(new Fire(Boolean.parseBoolean(property_value.get("fire"))));
+		}
+		if (property_value.containsKey("flood")) {
+			properties.add(new Flood(Boolean.parseBoolean(property_value.get("flood"))));
+		}
+		if (property_value.containsKey("attack")) {
+			properties.add(new Attack(Boolean.parseBoolean(property_value.get("attack"))));
+		}
+		if (property_value.containsKey("robbery")) {
+			properties.add(new Robbery(Boolean.parseBoolean(property_value.get("robbery"))));
+		}
+	}
+
+	public boolean hasNormalValues() {
+		setProperties();
+		for (Property p : properties) {
+			if (!p.hasNormalValue())
+				return false;
+		}
+		return true;
+	}
+
+	public Notification createNotification() {
+		return new Notification(this, this.operator);
 	}
 
 }
