@@ -26,19 +26,15 @@ public class Operator {
 
 	private String password;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "incident_id")
-	private Set<Incident> incidents = new HashSet<>();
-
 	public Operator() {
 
 	}
 
-	public Operator(String username, String password, Set<Incident> incidents) {
+	public Operator(String username, String password, Set<Notification> n) {
 		super();
 		this.email = username;
 		this.password = password;
-		this.incidents = incidents;
+		this.notifications = n;
 	}
 
 	public String getPassword() {
@@ -47,14 +43,6 @@ public class Operator {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public Set<Incident> getIncidents() {
-		return incidents;
-	}
-
-	public void setIncidents(Set<Incident> incidents) {
-		this.incidents = incidents;
 	}
 
 	public Set<Notification> getNotifications() {

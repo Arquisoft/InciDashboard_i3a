@@ -15,12 +15,12 @@ public class Agent {
 	private Long id;
 
 	private String username;
-	private String kind;
+	private int kind;
 
 	public Agent() {
 	}
 
-	public Agent(String username, String kind) {
+	public Agent(String username, int kind) {
 		this.username = username;
 		this.kind = kind;
 	}
@@ -33,11 +33,11 @@ public class Agent {
 		this.username = username;
 	}
 
-	public String getKind() {
+	public int getKind() {
 		return kind;
 	}
 
-	public void setKind(String kind) {
+	public void setKind(int kind) {
 		this.kind = kind;
 	}
 

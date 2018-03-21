@@ -1,5 +1,6 @@
 package com.uniovi.entitites;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class Incident {
 
 	@Enumerated(EnumType.STRING)
 	private IncidentStates state;
-	private String location;
+	private Location location;
 	private List<String> tags;
 	private List<String> multimedia;
 	private Map<String, String> property_value;
@@ -38,12 +39,15 @@ public class Incident {
 	@OneToOne
 	@JoinColumn(name = "notification_id")
 	private Notification notification;
+	
+	private static String[] keyWordsDanger= {"temperature","fire","flood","windy","wonded","attack",
+			"robbery","dead"}; 
 
 	public Incident() {
 
 	}
 
-	public Incident(Long id, String name, String description, IncidentStates state, String location, List<String> tags,
+	public Incident(Long id, String name, String description, IncidentStates state, Location location, List<String> tags,
 			List<String> multimedia, Map<String, String> property_value) {
 		this();
 		this.name = name;
@@ -55,7 +59,7 @@ public class Incident {
 		this.property_value = property_value;
 	}
 
-	public Incident(Long id, String name, String description, IncidentStates state, String location, List<String> tags,
+	public Incident(Long id, String name, String description, IncidentStates state, Location location, List<String> tags,
 			List<String> multimedia, Map<String, String> property_value, List<String> comments) {
 		this(id, name, description, state, location, tags, multimedia, property_value);
 		this.comments = comments;
@@ -85,11 +89,11 @@ public class Incident {
 		this.state = state;
 	}
 
-	public String getLocation() {
+	public Location getLocation() {
 		return location;
 	}
 
-	public void setLocation(String location) {
+	public void setLocation(Location location) {
 		this.location = location;
 	}
 
@@ -132,6 +136,31 @@ public class Incident {
 	public void setComments(List<String> comments) {
 		this.comments = comments;
 	}
+	
+
+	public Agent getAgent() {
+		return agent;
+	}
+
+	public void setAgent(Agent agent) {
+		this.agent = agent;
+	}
+
+	public Notification getNotification() {
+		return notification;
+	}
+
+	public void setNotification(Notification notification) {
+		this.notification = notification;
+	}
+
+	public static String[] getKeyWordsDanger() {
+		return keyWordsDanger;
+	}
+
+	public static void setKeyWordsDanger(String[] keyWordsDanger) {
+		Incident.keyWordsDanger = keyWordsDanger;
+	}
 
 	@Override
 	public int hashCode() {
@@ -165,6 +194,60 @@ public class Incident {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+	
+	public boolean isDangerous() {
+		if(!property_value.isEmpty()) {
+			for (Map.Entry<String, String> entry : property_value.entrySet()) {
+				if(Arrays.asList(keyWordsDanger).contains(entry.getKey())) {
+					if(checkDanger(entry.getKey(),entry.getValue())) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	private boolean checkDanger(String key, String value) {
+		if(key.equals("temperature")) {
+			double temp = Double.parseDouble(value);
+			if(temp > 40.0 || temp < 10.0) {
+				return true;
+			}
+		}else if(key.equals("fire")) {
+			if(value.equals("yes")) {
+				return true;
+			}
+		}else if(key.equals("flood")) {
+			if(value.equals("yes")) {
+				return true;
+			}
+		}else if(key.equals("windy")) {
+			double speed = Double.parseDouble(value);
+			if(speed > 30.0) {
+				return true;
+			}
+		}else if(key.equals("wounded")) {
+			int wounded = Integer.parseInt(value);
+			if(wounded > 0) {
+				return true;
+			}
+		}else if(key.equals("dead")) {
+			int dead = Integer.parseInt(value);
+			if(dead > 0) {
+				return true;
+			}
+		}else if(key.equals("attack")) {
+			if(value.equals("yes")) {
+				return true;
+			}
+		}else if(key.equals("robbery")) {
+			if(value.equals("yes")) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
