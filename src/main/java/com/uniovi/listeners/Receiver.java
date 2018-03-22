@@ -20,7 +20,7 @@ public class Receiver {
 		return latch;
 	}
 
-	// @KafkaListener(topics = "${kakfa.topic.json}")
+	// @KafkaListener(topics = "${INCIDENTS}")
 	public void receive(Incident incident) {
 		LOGGER.info("received incident='{}'", incident.toString());
 		latch.countDown();
