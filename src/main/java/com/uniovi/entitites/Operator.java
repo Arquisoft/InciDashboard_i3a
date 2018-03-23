@@ -3,28 +3,19 @@ package com.uniovi.entitites;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document(collection = "operators")
 public class Operator {
 
 	@Id
-	@GeneratedValue
-	@Column(name = "operator_id")
-	private Long id;
+	private ObjectId id;
 
-	@Column(unique = true)
 	private String email;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "operator_id")
-	private Set<Notification> notifications = new HashSet<>();
+	private Set<Notification> notifications = new HashSet<Notification>();
 
 	private String password;
 
