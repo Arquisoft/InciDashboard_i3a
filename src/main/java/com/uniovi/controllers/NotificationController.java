@@ -7,6 +7,7 @@ import com.uniovi.services.NotificationService;
 
 @Controller
 public class NotificationController {
+
 	@Autowired
 	private NotificationService notificationService;
 }
