@@ -7,9 +7,10 @@ import java.util.Map;
 import javax.persistence.Transient;
 
 import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.uniovi.properties.Attack;
 import com.uniovi.properties.Dead;
 import com.uniovi.properties.Fire;
@@ -21,6 +22,7 @@ import com.uniovi.properties.Temperature;
 import com.uniovi.properties.Wind;
 import com.uniovi.properties.Wounded;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Document(collection = "incidents")
 public class Incident {
 

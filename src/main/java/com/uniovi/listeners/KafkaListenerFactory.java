@@ -55,7 +55,7 @@ public class KafkaListenerFactory {
 		props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
 		props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "100");;
 		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, InciDeserializer.class);
 		props.put(ConsumerConfig.GROUP_ID_CONFIG, "es.uniovi");
 		props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, protocol);
 		props.put("sasl.mechanism", "SCRAM-SHA-256");
