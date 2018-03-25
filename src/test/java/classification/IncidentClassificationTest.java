@@ -19,10 +19,9 @@ public class IncidentClassificationTest {
 		Incident i = deserializer.deserialize("", json.getBytes());
 		assertEquals(i.getDescription(), "se ha producido un incendio en la Escuela de Ingeniería Informática");
 		System.out.println(i.toString());
-		
+
 		IncidentsClassifier classifier = new IncidentsClassifier();
 		classifier.classify(i);
-		
 		assertEquals(NotificationManager.getInstance().getNotifications().size(), 1);
 	}
 

@@ -35,8 +35,11 @@ public class OperatorService {
 	 */
 	public Operator getRandomOperator() {
 		List<Operator> ops = getAll();
-		Random rand = new Random();
-		int randomNum = rand.nextInt(ops.size());
-		return ops.get(randomNum);
+		if (ops.size() >= 1) {
+			Random rand = new Random();
+			int randomNum = rand.nextInt(ops.size());
+			return ops.get(randomNum);
+		}
+		return null;
 	}
 }
