@@ -22,8 +22,8 @@ public class Receiver {
 	}
 
 	@KafkaListener(topics = "${kafka.topic}")
-	public void receive(Incident incident) {
-		LOGGER.info("received incident='{}'", incident.toString());
+	public void listen(String incident) {
+		LOGGER.info("received incident='{}'", incident);
 		latch.countDown();
 	}
 }
