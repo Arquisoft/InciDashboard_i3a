@@ -24,9 +24,9 @@ public class OperatorService {
 		return operatorRepository.findByEmail(email);
 	}
 
-	public List<Incident> getIncidentsFromUser(Operator op) {
-		return operatorRepository.findIncidentsByOp(op);
-	}
+	//public List<Incident> getIncidentsFromUser(Operator op) {
+	//	return operatorRepository.findIncidentsByOp(op);
+	//}
 
 	public void add(Operator op) {
 		operatorRepository.save(op);
