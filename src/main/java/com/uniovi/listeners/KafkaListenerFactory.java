@@ -3,8 +3,10 @@ package com.uniovi.listeners;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -19,6 +21,15 @@ import com.uniovi.serializer.InciDeserializer;
 @Configuration
 @EnableKafka
 public class KafkaListenerFactory {
+
+	@Value("${spring.kafka.producer.bootstrap-servers}")
+	String server;
+	@Value("${karafka.username}")
+	String username;
+	@Value("${karafka.password}")
+	String password;
+	@Value("${kafka.protocol}")
+	String protocol;
 
 	@Bean
 	public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<Integer, String>> kafkaListenerContainerFactory() {
@@ -36,14 +47,19 @@ public class KafkaListenerFactory {
 
 	@Bean
 	public Map<String, Object> consumerConfigs() {
+		String jaasTemplate = "org.apache.kafka.common.security.scram.ScramLoginModule required username=\"%s\" password=\"%s\";";
+		String jaasCfg = String.format(jaasTemplate, username, password);
+
 		Map<String, Object> props = new HashMap<>();
-		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, server);
 		props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
-		props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "100");
-		props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "15000");
+		props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "100");;
 		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, InciDeserializer.class);
 		props.put(ConsumerConfig.GROUP_ID_CONFIG, "es.uniovi");
+		props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, protocol);
+		props.put("sasl.mechanism", "SCRAM-SHA-256");
+		props.put("sasl.jaas.config", jaasCfg);
 		return props;
 	}
 
