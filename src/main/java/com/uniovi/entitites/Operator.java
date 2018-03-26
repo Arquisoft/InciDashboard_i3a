@@ -23,10 +23,13 @@ public class Operator {
 
 	}
 
-	public Operator(String username, String password, Set<Notification> n) {
-		super();
+	public Operator(String username, String password) {
 		this.email = username;
 		this.password = password;
+	}
+
+	public Operator(String username, String password, Set<Notification> n) {
+		this(username, password);
 		this.notifications = n;
 	}
 
