@@ -12,6 +12,7 @@ before_install:
 - nohup bash -c "cd kafka && bin/kafka-server-start.sh config/server.properties &"
 after_success:
 - bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash) -t f4877c41-5b04-4699-acfe-4a7588010418
 before_script:
 - "export DISPLAY=:99.0"
 - "sh -e /etc/init.d/xvfb start"
