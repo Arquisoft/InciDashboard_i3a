@@ -6,6 +6,7 @@ import javax.annotation.ManagedBean;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.kafka.annotation.KafkaListener;
 
 import com.uniovi.entitites.Incident;
 
@@ -20,9 +21,9 @@ public class Receiver {
 		return latch;
 	}
 
-	// @KafkaListener(topics = "${INCIDENTS}")
-	public void receive(Incident incident) {
-		LOGGER.info("received incident='{}'", incident.toString());
+	@KafkaListener(topics = "${kafka.topic}")
+	public void listen(Incident incident) {
+		LOGGER.info("received incident='{}'", incident);
 		latch.countDown();
 	}
 }
