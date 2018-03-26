@@ -52,9 +52,6 @@ public class Incident {
 
 	private Notification notification;
 
-	private static String[] keyWordsDanger = { "temperature", "fire", "flood", "windy", "wonded", "attack", "robbery",
-			"dead" };
-
 	public Incident() {
 		comments = new ArrayList<String>();
 	}
@@ -170,14 +167,6 @@ public class Incident {
 		this.notification = notification;
 	}
 
-	public static String[] getKeyWordsDanger() {
-		return keyWordsDanger;
-	}
-
-	public static void setKeyWordsDanger(String[] keyWordsDanger) {
-		Incident.keyWordsDanger = keyWordsDanger;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -271,7 +260,8 @@ public class Incident {
 	}
 
 	public Notification createNotification() {
-		return new Notification(this);
+		setNotification(new Notification(this));
+		return this.notification;
 	}
 
 }
