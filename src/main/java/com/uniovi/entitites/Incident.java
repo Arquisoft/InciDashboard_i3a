@@ -4,18 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.uniovi.properties.Attack;
 import com.uniovi.properties.Dead;
 import com.uniovi.properties.Fire;
@@ -27,36 +22,34 @@ import com.uniovi.properties.Temperature;
 import com.uniovi.properties.Wind;
 import com.uniovi.properties.Wounded;
 
-@Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Document(collection = "incidents")
 public class Incident {
 
 	@Id
-	@GeneratedValue
-	private Long id;
+	private ObjectId id;
 
 	private String name;
+
 	private String description;
 
-	@Enumerated(EnumType.STRING)
 	private IncidentStates state;
+
 	private String location;
-	@ElementCollection(targetClass = String.class)
+
 	private List<String> tags;
-	@ElementCollection(targetClass = String.class)
+
 	private List<String> multimedia;
-	@ElementCollection
+
 	private Map<String, String> property_value;
+
 	@Transient
 	private List<Property> properties;
-	@ElementCollection(targetClass = String.class)
+
 	private List<String> comments;
 
-	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "agent_id")
 	private Agent agent;
 
-	@OneToOne
-	@JoinColumn(name = "notification_id")
 	private Notification notification;
 
 	private static String[] keyWordsDanger = { "temperature", "fire", "flood", "windy", "wonded", "attack", "robbery",
@@ -145,11 +138,11 @@ public class Incident {
 		this.property_value = property_value;
 	}
 
-	public Long getId() {
+	public ObjectId getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 
@@ -183,16 +176,6 @@ public class Incident {
 
 	public static void setKeyWordsDanger(String[] keyWordsDanger) {
 		Incident.keyWordsDanger = keyWordsDanger;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((location == null) ? 0 : location.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
 	}
 
 	@Override
@@ -288,7 +271,7 @@ public class Incident {
 	}
 
 	public Notification createNotification() {
-		return new Notification(this, new Operator());
+		return new Notification(this);
 	}
 
 }

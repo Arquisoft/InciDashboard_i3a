@@ -1,36 +1,30 @@
 package com.uniovi.entitites;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document(collection = "notificatios")
 public class Notification {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "notification_id")
-	private Long id;
-	@ManyToOne
+	private ObjectId id;
+
 	private Operator operator;
-	@OneToOne(mappedBy = "notification")
+
 	private Incident incident;
 
 	public Notification() {
 	}
 
-	public Notification(Long id, Incident incident, Operator operator) {
-		this(incident, operator);
-		this.id = id;	
-	}
-	
 	public Notification(Incident incident, Operator operator) {
-		super();
-		this.incident = incident;
+		this(incident);
 		this.operator = operator;
+	}
+
+	public Notification(Incident incident2) {
+		super();
+		this.incident = incident2;
 	}
 
 	public Operator getOperator() {

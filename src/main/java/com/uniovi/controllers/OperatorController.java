@@ -20,7 +20,7 @@ public class OperatorController {
 
 	@RequestMapping("/operator/list")
 	public String getIncidentsList(Model model) {
-		model.addAttribute("indicentsList", operatorService.getIncidentsFromUser(getActiveUser()));
+		//model.addAttribute("indicentsList", operatorService.getIncidentsFromUser(getActiveUser()));
 		return "operator/listIncidents";
 	}
 
