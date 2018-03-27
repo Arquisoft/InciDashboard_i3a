@@ -26,4 +26,8 @@ public class IncidentsService {
 		return incidentsRepository.findAll();
 	}
 
+	public Object getIncident(Long id) {
+		return null; //incidentsRepository.findById(id);
+	}
+
 }

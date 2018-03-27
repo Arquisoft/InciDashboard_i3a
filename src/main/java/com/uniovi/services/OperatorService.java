@@ -6,7 +6,9 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.uniovi.entitites.Incident;
 import com.uniovi.entitites.Operator;
+import com.uniovi.repository.IncidentsRepository;
 import com.uniovi.repository.OperatorRepository;
 
 @Service
@@ -15,6 +17,9 @@ public class OperatorService {
 	@Autowired
 	private OperatorRepository operatorRepository;
 
+	@Autowired
+	private IncidentsRepository incidentsRepository;
+	
 	public List<Operator> getAll() {
 		return operatorRepository.findAll();
 
@@ -41,5 +46,10 @@ public class OperatorService {
 			return ops.get(randomNum);
 		}
 		return null;
+	}
+
+	public List<Incident> getIncidents(Operator activeUser) {
+		//return incidentsRepository.findByOperator(activeUser);
+		return incidentsRepository.findAll();
 	}
 }

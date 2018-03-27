@@ -17,6 +17,7 @@ import com.uniovi.repository.OperatorRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+	
 	@Autowired
 	private OperatorRepository operatorRepository;
 

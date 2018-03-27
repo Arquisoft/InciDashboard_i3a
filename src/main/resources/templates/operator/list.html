@@ -5,7 +5,7 @@
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h2 id="usuarios_titulo">Incidencias</h2>
+		<h2 id="incidencias_titulo">Incidencias</h2>
 		<div class="panel panel-default">
 			<table class="table" th:fragment="tableIncidents" id="tableIncidents">
 				<thead>
@@ -16,7 +16,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="inci : ${incidentsList}">
+					<tr th:each="inci : ${indicentsList}">
 						<td th:text="${inci.name}">Incident</td>
 						<td th:text="${inci.description}">Description</td>
                         <td th:text="${inci.status}">Status</td>

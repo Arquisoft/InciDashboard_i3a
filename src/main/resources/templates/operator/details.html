@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lan="en">
+	<head th:replace="fragments/nav"/>
+	<body>
+		<h2>Incidents dashboard</h2>
+		<div class="table-responsive" name="tableIncidents">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>State</th>
+						<th>Location</th>
+						<th>Tags</th>
+						<th>Properties</th>
+						<th class="col-md-1"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="incident : ${incidentsList}">
+						<td th:text="${incident.name}">Incident name</td>
+						<td th:text="${incident.description}">Incident description</td>
+						<td th:text="${incident.state}">Incident state</td>
+						<td th:text="${incident.location.toString()}">Incident location</td>
+						<td th:text="${incident.tags}">Incident tags</td>
+						<td th:text="${incident.property_values}">Incident properties</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<footer th:replace="fragments/footer"/></footer>
+	</body>
+</html>

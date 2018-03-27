@@ -50,6 +50,8 @@ public class Incident {
 
 	private Agent agent;
 
+	private Operator operator;
+	
 	private Notification notification;
 
 	public Incident() {
@@ -157,6 +159,14 @@ public class Incident {
 
 	public void setAgent(Agent agent) {
 		this.agent = agent;
+	}
+
+	public Operator getOperator() {
+		return operator;
+	}
+
+	public void setOperator(Operator operator) {
+		this.operator = operator;
 	}
 
 	public Notification getNotification() {
