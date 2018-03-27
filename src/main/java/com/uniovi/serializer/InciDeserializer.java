@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.apache.kafka.common.serialization.Deserializer;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uniovi.entitites.Incident;
 
