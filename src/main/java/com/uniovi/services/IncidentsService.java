@@ -1,7 +1,9 @@
 package com.uniovi.services;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +28,12 @@ public class IncidentsService {
 		return incidentsRepository.findAll();
 	}
 
-	public Object getIncident(Long id) {
-		return null; //incidentsRepository.findById(id);
+	public Optional<Incident> getIncident(ObjectId id) {
+		return incidentsRepository.findById(id);
+	}
+
+	public void deleteAll() {
+		incidentsRepository.deleteAll();
 	}
 
 }

@@ -34,6 +34,11 @@ public class InsertSimpleDataService {
 	@PostConstruct
 	public void init() {
 
+		operatorServ.deleteAll();
+		incidentServ.deleteAll();
+		agentsServ.deleteAll();
+		notificationServ.deleteAll();
+		
 		// OPERADORES
 		Operator op1 = new Operator("pepe", "123456", new HashSet<>());
 		Operator op2 = new Operator("juan", "asdfgh", new HashSet<>());

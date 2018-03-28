@@ -21,4 +21,8 @@ public class NotificationService {
 	public List<Notification> getAllNotifications() {
 		return notificationsRepository.findAll();
 	}
+
+	public void deleteAll() {
+		notificationsRepository.deleteAll();
+	}
 }

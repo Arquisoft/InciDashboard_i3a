@@ -52,4 +52,8 @@ public class OperatorService {
 		//return incidentsRepository.findByOperator(activeUser);
 		return incidentsRepository.findAll();
 	}
+
+	public void deleteAll() {
+		operatorRepository.deleteAll();
+	}
 }

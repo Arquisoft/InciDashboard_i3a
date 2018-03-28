@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html lan="en">
-	<head th:replace="fragments/nav"/>
-	<body>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+	<div class="container">
 		<h2>Incidents dashboard</h2>
 		<div class="table-responsive" name="tableIncidents">
 			<table class="table table-hover">
@@ -17,16 +20,17 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="incident : ${incidentsList}">
+					<tr>
 						<td th:text="${incident.name}">Incident name</td>
 						<td th:text="${incident.description}">Incident description</td>
 						<td th:text="${incident.state}">Incident state</td>
 						<td th:text="${incident.location.toString()}">Incident location</td>
 						<td th:text="${incident.tags}">Incident tags</td>
-						<td th:text="${incident.property_values}">Incident properties</td>
+						<td th:text="${incident.property_value}">Incident properties</td>
 					</tr>
 				</tbody>
 			</table>
+		</div>
 		</div>
 		<footer th:replace="fragments/footer"/></footer>
 	</body>

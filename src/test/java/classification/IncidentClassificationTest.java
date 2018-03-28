@@ -3,15 +3,24 @@ package classification;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uniovi.clasification.IncidentsClassifier;
 import com.uniovi.clasification.NotificationManager;
 import com.uniovi.entitites.Incident;
 import com.uniovi.entitites.Operator;
+import com.uniovi.repository.IncidentsRepository;
+import com.uniovi.repository.OperatorRepository;
 import com.uniovi.serializer.InciDeserializer;
 
 public class IncidentClassificationTest {
 
+	@Autowired
+	OperatorRepository operatorRepository;
+	
+	@Autowired
+	IncidentsRepository incidentRepository;
+	
 	@SuppressWarnings("resource")
 	@Test
 	public void test() {
@@ -25,10 +34,7 @@ public class IncidentClassificationTest {
 		 
 		 IncidentsClassifier classifier = new IncidentsClassifier();
 		 classifier.classify(i);
-		 assertEquals(NotificationManager.getInstance().getNotifications().size(),
-		 1);
-
-		
+		 assertEquals(NotificationManager.getInstance().getNotifications().size(), 1);
 	}
 
 }
