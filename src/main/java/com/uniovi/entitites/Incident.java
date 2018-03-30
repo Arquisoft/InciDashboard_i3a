@@ -274,4 +274,8 @@ public class Incident {
 		return this.notification;
 	}
 
+	public void addComment(String comment) {
+		this.comments.add(comment);
+	}
+
 }

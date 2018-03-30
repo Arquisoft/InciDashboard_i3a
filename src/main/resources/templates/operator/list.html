@@ -14,6 +14,7 @@
 						<th>Description</th>
 						<th>State</th>
 						<th class="col-md-1"></th>
+						<th class="col-md-1"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -22,6 +23,7 @@
 						<td th:text="${inci.description}">Description</td>
                         <td th:text="${inci.state}">State</td>
                         <td><a th:href="${'/operator/details/' + inci.id}" >details</a></td>
+                        <td><a th:href="${'/operator/edit/' + inci.id}" >edit</a></td>
 					</tr>
 				</tbody>
 			</table>
