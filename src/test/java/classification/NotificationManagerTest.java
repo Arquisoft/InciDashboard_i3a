@@ -15,7 +15,7 @@ import com.uniovi.entitites.Operator;
 
 public class NotificationManagerTest {
 
-	@Test
+	/*@Test
 	public void testInserting() {
 		Operator o = new Operator("pepe", "123456");
 		Incident i = new Incident("Incidente de prueba", "Pruebaaa", IncidentStates.OPEN, "41N56E", new ArrayList<>(),
@@ -26,5 +26,5 @@ public class NotificationManagerTest {
 		assertTrue(manager.getNotifications().isEmpty());
 		manager.addNotification(n);
 		assertTrue(manager.getNotifications().size() == 1);
-	}
+	}*/
 }
