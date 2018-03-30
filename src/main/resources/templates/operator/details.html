@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2>Incidents dashboard</h2>
+		<div class="panel panel-default">
+			<div class="panel-heading">Incident name</div>
+			<div class="panel-body" th:text="${incident.name}"></div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">Incident description</div>
+			<div class="panel-body" th:text="${incident.description}"></div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">State</div>
+			<div class="panel-body" th:text="${incident.state}"></div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">Location</div>
+			<div class="panel-body" th:text="${incident.location}"></div>
+		</div>
+		<div class="panel panel-default" th:if="${!#lists.isEmpty(incident.tags)}">
+			<div class="panel-heading">Tags</div>
+			<div th:each="tag : ${incident.tags}">
+				<div class="panel-body" th:text="${tag}"></div>
+			</div>
+		</div>
+		<div class="panel panel-default" th:if="${!#lists.isEmpty(incident.property_value)}">
+			<div class="panel-heading">Property values</div>
+			<div th:each="pv : ${incident.property_value}">
+				<div class="panel-body" th:text="${pv}"></div>
+			</div>
+		</div>
+		<div class="panel panel-default" th:if="${!#lists.isEmpty(incident.comments)}">
+			<div class="panel-heading">Comments</div>
+			<div  th:each="comment : ${incident.comments}">
+				<p class="panel-body" th:text="${comment}"></p>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="fragments/footer" /></footer>
+</body>
+</html>

@@ -15,7 +15,7 @@ import com.uniovi.services.IncidentsService;
 public class IncidentController {
 	@Autowired
 	private IncidentsService incidentsService;
-
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String getLogin() {
 		return "login";

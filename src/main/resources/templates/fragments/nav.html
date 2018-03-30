@@ -11,25 +11,16 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li><a href="/">Home</a></li>
-				<li  class="dropdown"><a id="users-menu" class="dropdown-toggle"
-					data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
-					<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a id="listIncidents" href="/dashboard/list">Listar Incidencias</a></li>
-					</ul>
-                </li>
-				<li class="dropdown"><a id="posts-menu" class="dropdown-toggle"
-					data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
-						<span class="caret"></span>
-				</a>
+				<li sec:authorize="isAuthenticated()"><a id="listIncidents" href="/dashboard/list">List
+						Incidents</a></li>
+				<li sec:authorize="isAuthenticated()"><a href="/operator/list">Operator view</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/login"> <span
-						class="glyphicon glyphicon-log-in"></span> <span>Identifícate</span>
+				<li sec:authorize="!isAuthenticated()"><a href="/login"> <span
+						class="glyphicon glyphicon-log-in"></span>  Login
 				</a></li>
-				<li><a href="/logout"> <span
-						class="glyphicon glyphicon-log-out"></span> <span>Desconectar</span>
+				<li sec:authorize="isAuthenticated()"><a href="/logout"> <span
+						class="glyphicon glyphicon-log-out"></span>  Logout
 				</a></li>
 			</ul>
 		</div>

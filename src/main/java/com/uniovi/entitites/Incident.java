@@ -50,6 +50,8 @@ public class Incident {
 
 	private Agent agent;
 
+	private Operator operator;
+	
 	private Notification notification;
 
 	public Incident() {
@@ -159,6 +161,14 @@ public class Incident {
 		this.agent = agent;
 	}
 
+	public Operator getOperator() {
+		return operator;
+	}
+
+	public void setOperator(Operator operator) {
+		this.operator = operator;
+	}
+
 	public Notification getNotification() {
 		return notification;
 	}
@@ -262,6 +272,10 @@ public class Incident {
 	public Notification createNotification() {
 		setNotification(new Notification(this));
 		return this.notification;
+	}
+
+	public void addComment(String comment) {
+		this.comments.add(comment);
 	}
 
 }
