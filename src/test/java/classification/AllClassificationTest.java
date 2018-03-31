@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ NotificationManagerTest.class, IncidentClassificationTest.class })
+@SuiteClasses({ IncidentClassificationTest.class })
 public class AllClassificationTest {
 
 }
