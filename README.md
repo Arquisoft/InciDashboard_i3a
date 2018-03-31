@@ -47,7 +47,7 @@ You are not required to download MongoDB as we have it stored in [mLab](https://
 
 (Notice that the port 27017 is the default one, and you could have problems if it is being used by any other application. If so, you can change it)
 
-#### Maven
+### Maven
 For starting the application from the command line using [maven](https://maven.apache.org/) you can use the command:
 
 `>> mvn spring-boot:run`
