@@ -35,7 +35,7 @@ public class IncidentsClassifier {
 	private void addNotifications(Incident i) {
 		if (!i.hasNormalValues()) {
 			Notification not = i.createNotification();
-			if (i.getOperator()==null)
+			if (i.getOperator() == null)
 				not.setOperator(operatorService.getRandomOperator());
 			else
 				not.setOperator(i.getOperator());

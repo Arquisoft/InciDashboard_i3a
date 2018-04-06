@@ -51,7 +51,7 @@ public class Incident {
 	private Agent agent;
 
 	private Operator operator;
-	
+
 	private Notification notification;
 
 	public Incident() {
