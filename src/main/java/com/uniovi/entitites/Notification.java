@@ -17,14 +17,28 @@ public class Notification {
 	public Notification() {
 	}
 
-	public Notification(Incident incident, Operator operator) {
-		this(incident);
-		this.operator = operator;
-	}
-
 	public Notification(Incident incident2) {
 		super();
 		this.incident = incident2;
+		checkIncidentValue();
+	}
+
+	private void checkIncidentValue() {
+		if (this.incident == null) {
+			throw new IllegalArgumentException("The incident to be assigned cannot be null");
+		}
+	}
+
+	public Notification(Incident incident, Operator operator) {
+		this(incident);
+		this.operator = operator;
+		checkOperatorValue();
+	}
+
+	private void checkOperatorValue() {
+		if (this.operator == null) {
+			throw new IllegalArgumentException("The operator to be assigned cannot be null");
+		}
 	}
 
 	public Operator getOperator() {
