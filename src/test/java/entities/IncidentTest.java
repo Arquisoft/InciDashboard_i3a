@@ -2,6 +2,7 @@ package entities;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,5 +78,48 @@ public class IncidentTest {
 		i.setState(IncidentStates.CLOSED);
 		assertTrue(i.getState() == IncidentStates.CLOSED);
 		assertTrue(i.getState().toString().equals("CLOSED"));
+	}
+
+	@Test
+	public void testErrors() {
+		try {
+			new Incident("", "Pruebaaa", IncidentStates.OPEN, "41N56E", new ArrayList<>(), new ArrayList<>(),
+					new HashMap<>());
+			fail("An exception should have been thrown [name empty]");
+		} catch (IllegalArgumentException e) {
+			assertTrue(e.getMessage().equals("The name of the incident cannot be null nor empty"));
+		}
+
+		try {
+			new Incident(null, "Pruebaaa", IncidentStates.OPEN, "41N56E", new ArrayList<>(), new ArrayList<>(),
+					new HashMap<>());
+			fail("An exception should have been thrown [name null]");
+		} catch (IllegalArgumentException e) {
+			assertTrue(e.getMessage().equals("The name of the incident cannot be null nor empty"));
+		}
+
+		try {
+			new Incident("Accidente", "", IncidentStates.OPEN, "41N56E", new ArrayList<>(), new ArrayList<>(),
+					new HashMap<>());
+			fail("An exception should have been thrown [description empty]");
+		} catch (IllegalArgumentException e) {
+			assertTrue(e.getMessage().equals("The description of the incident cannot be null nor empty"));
+		}
+
+		try {
+			new Incident("Accidente", null, IncidentStates.OPEN, "41N56E", new ArrayList<>(), new ArrayList<>(),
+					new HashMap<>());
+			fail("An exception should have been thrown [description null]");
+		} catch (IllegalArgumentException e) {
+			assertTrue(e.getMessage().equals("The description of the incident cannot be null nor empty"));
+		}
+
+		try {
+			new Incident("Accidente", "Pruebaaa", null, "41N56E", new ArrayList<>(), new ArrayList<>(),
+					new HashMap<>());
+			fail("An exception should have been thrown [state null]");
+		} catch (IllegalArgumentException e) {
+			assertTrue(e.getMessage().equals("The state cannot be null"));
+		}
 	}
 }

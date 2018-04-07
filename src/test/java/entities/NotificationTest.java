@@ -2,6 +2,7 @@ package entities;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,5 +34,22 @@ public class NotificationTest {
 		n2.setId(new ObjectId());
 
 		assertFalse(n.equals(n2));
+	}
+
+	@Test
+	public void testErrors() {
+		try {
+			new Notification(null);
+			fail("An exception should have been raised [incident null]");
+		} catch (IllegalArgumentException e) {
+			assertTrue(e.getMessage().equals("The incident to be assigned cannot be null"));
+		}
+
+		try {
+			new Notification(new Incident(), null);
+			fail("An exception should have been raised [operator null]");
+		} catch (IllegalArgumentException e) {
+			assertTrue(e.getMessage().equals("The operator to be assigned cannot be null"));
+		}
 	}
 }

@@ -16,10 +16,10 @@
 				<label class="control-label col-sm-2" for="state">State</label>
 				<div class="col-sm-10">
 					<select th:value="${incident.state}" name="state" class="form-control">
-						<option value="OPEN">Open</option>
-						<option value="IN_PROCESS">In process</option>
-						<option value="CLOSED">Closed</option>
-						<option value="CANCELLED">Cancelled</option>
+						<option id="open" value="OPEN">Open</option>
+						<option id="process" value="IN_PROCESS">In process</option>
+						<option id="close" value="CLOSED">Closed</option>
+						<option id="cancel" value="CANCELLED">Cancelled</option>
 					</select>
 				</div>
 			</div>
@@ -27,7 +27,7 @@
 				<label class="control-label col-sm-2" for="comment">Comments: </label>
 				<div class="col-sm-10">
 					<textarea rows="5" class="form-control" placeholder="New comment" 
-						name="comments" id=comment required="false"></textarea>
+						name="comments" id="comment" required="false"></textarea>
 				</div>
 			</div>
 			<div class="form-group">

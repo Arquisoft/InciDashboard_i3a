@@ -2,6 +2,7 @@ package entities;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.bson.types.ObjectId;
 import org.junit.Test;
@@ -34,5 +35,29 @@ public class AgentTest {
 
 		assertFalse(a.equals(a2));
 		assertFalse(a.hashCode() == a2.hashCode());
+	}
+
+	@Test
+	public void testErrors() {
+		try {
+			new Agent(null, 0);
+			fail("An exception should have been raised [username null]");
+		} catch (IllegalArgumentException e) {
+			assertTrue(e.getMessage().equals("The username cannot be empty nor null"));
+		}
+
+		try {
+			new Agent("", 0);
+			fail("An exception should have been raised [username empty]");
+		} catch (IllegalArgumentException e) {
+			assertTrue(e.getMessage().equals("The username cannot be empty nor null"));
+		}
+
+		try {
+			new Agent("hola", -1);
+			fail("An exception should have been raised [kind < 0]");
+		} catch (IllegalArgumentException e) {
+			assertTrue(e.getMessage().equals("The kind should be a valid positive value"));
+		}
 	}
 }
