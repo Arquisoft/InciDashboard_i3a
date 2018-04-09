@@ -1,9 +1,8 @@
 package com.uniovi.entitites;
 
-
 import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "operators")
 public class Agent {
@@ -20,6 +19,17 @@ public class Agent {
 	public Agent(String username, int kind) {
 		this.username = username;
 		this.kind = kind;
+		checkValues();
+	}
+
+	private void checkValues() {
+		if (this.username == null || this.username.isEmpty()) {
+			throw new IllegalArgumentException("The username cannot be empty nor null");
+		}
+
+		if (this.kind < 0) {
+			throw new IllegalArgumentException("The kind should be a valid positive value");
+		}
 	}
 
 	public String getUsername() {

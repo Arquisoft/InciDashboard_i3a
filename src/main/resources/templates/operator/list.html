@@ -5,26 +5,29 @@
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h2 id="usuarios_titulo">Incidencias</h2>
-		<div class="panel panel-default">
+		<h2 id="incidencias_titulo">Incidencias</h2>
+		<div class="table-responsive">
 			<table class="table" th:fragment="tableIncidents" id="tableIncidents">
 				<thead>
-					<tr th:if="${!#lists.isEmpty(incidentsList)}">
+					<tr>
 						<th>Name</th>
 						<th>Description</th>
-						<th>Status</th>
+						<th>State</th>
+						<th class="col-md-1"></th>
+						<th class="col-md-1"></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="inci : ${incidentsList}">
+					<tr th:each="inci : ${indicentsList}">
 						<td th:text="${inci.name}">Incident</td>
 						<td th:text="${inci.description}">Description</td>
-                        <td th:text="${inci.status}">Status</td>
+                        <td th:text="${inci.state}">State</td>
+                        <td><a th:href="${'/operator/details/' + inci.id}" >details</a></td>
+                        <td><a th:href="${'/operator/edit/' + inci.id}" >edit</a></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		<footer th:replace="fragments/pagination" />
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>

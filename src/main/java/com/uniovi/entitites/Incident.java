@@ -50,6 +50,8 @@ public class Incident {
 
 	private Agent agent;
 
+	private Operator operator;
+
 	private Notification notification;
 
 	public Incident() {
@@ -66,17 +68,26 @@ public class Incident {
 		this.tags = tags;
 		this.multimedia = multimedia;
 		this.property_value = property_value;
+		checkCorrectValues();
 	}
 
-	public Incident(Long id, String name, String description, IncidentStates state, String location, List<String> tags,
-			List<String> multimedia, Map<String, String> property_value) {
-		this(name, description, state, location, tags, multimedia, property_value);
-	}
-
-	public Incident(Long id, String name, String description, IncidentStates state, String location, List<String> tags,
+	public Incident(String name, String description, IncidentStates state, String location, List<String> tags,
 			List<String> multimedia, Map<String, String> property_value, List<String> comments) {
-		this(id, name, description, state, location, tags, multimedia, property_value);
+		this(name, description, state, location, tags, multimedia, property_value);
 		this.comments = comments;
+	}
+
+	private void checkCorrectValues() {
+		if (this.name == null || this.name.isEmpty()) {
+			throw new IllegalArgumentException("The name of the incident cannot be null nor empty");
+		}
+		if (this.description == null || this.description.isEmpty()) {
+			throw new IllegalArgumentException("The description of the incident cannot be null nor empty");
+		}
+
+		if (this.state == null) {
+			throw new IllegalArgumentException("The state cannot be null");
+		}
 	}
 
 	public String getName() {
@@ -157,6 +168,14 @@ public class Incident {
 
 	public void setAgent(Agent agent) {
 		this.agent = agent;
+	}
+
+	public Operator getOperator() {
+		return operator;
+	}
+
+	public void setOperator(Operator operator) {
+		this.operator = operator;
 	}
 
 	public Notification getNotification() {
@@ -262,6 +281,10 @@ public class Incident {
 	public Notification createNotification() {
 		setNotification(new Notification(this));
 		return this.notification;
+	}
+
+	public void addComment(String comment) {
+		this.comments.add(comment);
 	}
 
 }

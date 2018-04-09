@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+
+
+	<div class="container">
+		<h2 th:text="${'Edit '+ incident.name}">Edit incident</h2>
+		<p th:text="${incident.description}"></p>
+		<form class="form-horizontal" method="post"
+			th:action="${'/operator/edit/' + incident.id}">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="state">State</label>
+				<div class="col-sm-10">
+					<select th:value="${incident.state}" name="state" class="form-control">
+						<option id="open" value="OPEN">Open</option>
+						<option id="process" value="IN_PROCESS">In process</option>
+						<option id="close" value="CLOSED">Closed</option>
+						<option id="cancel" value="CANCELLED">Cancelled</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="comment">Comments: </label>
+				<div class="col-sm-10">
+					<textarea rows="5" class="form-control" placeholder="New comment" 
+						name="comments" id="comment" required="false"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" id="save" class="btn btn-primary">Save</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<footer th:replace="fragments/footer" />
+
+</body>
+</html>

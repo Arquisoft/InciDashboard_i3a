@@ -17,14 +17,28 @@ public class Notification {
 	public Notification() {
 	}
 
-	public Notification(Incident incident, Operator operator) {
-		this(incident);
-		this.operator = operator;
-	}
-
 	public Notification(Incident incident2) {
 		super();
 		this.incident = incident2;
+		checkIncidentValue();
+	}
+
+	private void checkIncidentValue() {
+		if (this.incident == null) {
+			throw new IllegalArgumentException("The incident to be assigned cannot be null");
+		}
+	}
+
+	public Notification(Incident incident, Operator operator) {
+		this(incident);
+		this.operator = operator;
+		checkOperatorValue();
+	}
+
+	private void checkOperatorValue() {
+		if (this.operator == null) {
+			throw new IllegalArgumentException("The operator to be assigned cannot be null");
+		}
 	}
 
 	public Operator getOperator() {
@@ -48,6 +62,7 @@ public class Notification {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((incident == null) ? 0 : incident.hashCode());
 		result = prime * result + ((operator == null) ? 0 : operator.hashCode());
 		return result;
 	}
@@ -66,12 +81,21 @@ public class Notification {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (incident == null) {
+			if (other.incident != null)
+				return false;
+		} else if (!incident.equals(other.incident))
+			return false;
 		if (operator == null) {
 			if (other.operator != null)
 				return false;
 		} else if (!operator.equals(other.operator))
 			return false;
 		return true;
+	}
+
+	public void setId(ObjectId id) {
+		this.id = id;
 	}
 
 }

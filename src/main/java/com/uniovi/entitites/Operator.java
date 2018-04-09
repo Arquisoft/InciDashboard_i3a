@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "operators")
+// @Entity
 public class Operator {
 
 	@Id
@@ -23,10 +24,24 @@ public class Operator {
 
 	}
 
-	public Operator(String username, String password, Set<Notification> n) {
-		super();
+	public Operator(String username, String password) {
 		this.email = username;
 		this.password = password;
+		checkValues();
+	}
+
+	private void checkValues() {
+		if (this.email == null || this.email.isEmpty()) {
+			throw new IllegalArgumentException("The email cannot be empty nor null");
+		}
+		if (this.password == null || this.password.isEmpty()) {
+			throw new IllegalArgumentException("The password cannot be empty nor null");
+		}
+
+	}
+
+	public Operator(String username, String password, Set<Notification> n) {
+		this(username, password);
 		this.notifications = n;
 	}
 
