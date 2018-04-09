@@ -40,9 +40,7 @@ public class IncidentController {
 		return "operator/incidentsSocket";
 	}
 	
-	/*
-	 * Only use when kafka is not working for testing purposes.
-	 * 
+	
 	private static int counter = 0;
 	@Scheduled(fixedRate = 2500)
     public void addToDash() {
@@ -51,5 +49,5 @@ public class IncidentController {
 				new ArrayList<>(), new HashMap<>());
         this.template.convertAndSend("/topic/incidents", i);
     }
-    */
+    
 }
