@@ -3,6 +3,8 @@ package com.uniovi.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,5 +23,20 @@ public class IncidentController {
 		List<Incident> incidents = incidentsService.getAllIncidents();
 		model.addAttribute("incidentsList", incidents);
 		return "incidents";
+	}
+	
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	public String getDash(Model model) {
+		List<Incident> incidents = incidentsService.getAllIncidents();
+		model.addAttribute("incidentsList", incidents);
+		return "operator/incidentsSocket";
+	}
+	
+	@MessageMapping("/updateDashboard")
+    @SendTo("/topic/incidents")
+	public List<Incident> getDashboardSocket() {
+		List<Incident> incidents = incidentsService.getNewIncidents();
+		if ( incidents.size() > 0 ) return incidents;
+		return null;
 	}
 }

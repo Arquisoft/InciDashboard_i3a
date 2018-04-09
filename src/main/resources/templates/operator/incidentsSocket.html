@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2 id="usuarios_titulo">Incidencias</h2>
+		<div class="panel panel-default">
+			<table class="table" th:fragment="tableIncidents" id="tableIncidents">
+				<thead><th>Name</th><th>Description</th></thead>
+			</table>
+		</div>
+	
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

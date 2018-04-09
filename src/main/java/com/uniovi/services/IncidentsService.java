@@ -1,5 +1,7 @@
 package com.uniovi.services;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +18,21 @@ public class IncidentsService {
 
 	@Autowired
 	private IncidentsRepository incidentsRepository;
+	
+	List<Incident> newIncidents = new ArrayList<Incident>();
 
+	public List<Incident> getNewIncidents()
+	{
+		//Return temporary list and restart it.
+		List<Incident> aux = new ArrayList<Incident>(newIncidents);
+		newIncidents.clear();
+		return aux;
+	}
+	
 	public void addIncident(Incident incident) {
+		//Temporary list for websocket
+		newIncidents.add( incident );
+		
 		incidentsRepository.save(incident);
 	}
 
