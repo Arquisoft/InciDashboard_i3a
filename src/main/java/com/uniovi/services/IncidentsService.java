@@ -1,5 +1,7 @@
 package com.uniovi.services;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +18,8 @@ public class IncidentsService {
 
 	@Autowired
 	private IncidentsRepository incidentsRepository;
-
-	public void addIncident(Incident incident) {
+	
+	public void addIncident(Incident incident) {		
 		incidentsRepository.save(incident);
 	}
 
