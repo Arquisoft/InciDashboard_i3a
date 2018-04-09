@@ -36,18 +36,8 @@ public class IncidentController {
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String getDash(Model model) {
 		List<Incident> incidents = incidentsService.getAllIncidents();
-		model.addAttribute("incidentsList", incidents);
+		System.out.println( incidents );
+		model.addAttribute("incidents", incidents);
 		return "operator/incidentsSocket";
-	}
-	
-	
-	private static int counter = 0;
-	@Scheduled(fixedRate = 2500)
-    public void addToDash() {
-        System.out.println("scheduled");
-        Incident i = new Incident("Incidente de prueba_" + counter++ , "Pruebaaa", IncidentStates.OPEN, "41N56E", new ArrayList<>(),
-				new ArrayList<>(), new HashMap<>());
-        this.template.convertAndSend("/topic/incidents", i);
-    }
-    
+	}    
 }
