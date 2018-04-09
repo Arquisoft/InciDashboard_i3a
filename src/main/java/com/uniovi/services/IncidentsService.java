@@ -19,20 +19,7 @@ public class IncidentsService {
 	@Autowired
 	private IncidentsRepository incidentsRepository;
 	
-	List<Incident> newIncidents = new ArrayList<Incident>();
-
-	public List<Incident> getNewIncidents()
-	{
-		//Return temporary list and restart it.
-		List<Incident> aux = new ArrayList<Incident>(newIncidents);
-		newIncidents.clear();
-		return aux;
-	}
-	
-	public void addIncident(Incident incident) {
-		//Temporary list for websocket
-		newIncidents.add( incident );
-		
+	public void addIncident(Incident incident) {		
 		incidentsRepository.save(incident);
 	}
 
