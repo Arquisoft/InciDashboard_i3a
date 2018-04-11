@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Transient;
-
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -43,7 +41,6 @@ public class Incident {
 
 	private Map<String, String> property_value;
 
-	@Transient
 	private List<Property> properties;
 
 	private List<String> comments;

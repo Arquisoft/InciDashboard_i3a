@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -20,10 +21,11 @@ import com.uniovi.Application;
 
 @SpringBootTest(classes = { Application.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class OperatorController {
+@DirtiesContext
+public class OperatorControllerTest {
 
 	@InjectMocks
-	private OperatorController operatorController;
+	private OperatorControllerTest operatorController;
 
 	private MockMvc mockMvc;
 
