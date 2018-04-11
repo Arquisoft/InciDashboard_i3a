@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2 id="usuarios_titulo">Incidencias</h2>
+		<div class="panel panel-default table-responsive">
+			<table class="table table-hover table-striped" th:fragment="tableIncidents" id="tableIncidents">
+				<thead class="thead-dark"><th>Name</th><th>Description</th><th>State</th></thead>
+				<tbody id="tableContents">
+					<tr th:each="incident : ${incidents}" th:id="${incident.id}"> 
+						<td th:text="${incident.name}"></td>
+						<td th:text="${incident.description}"></td>
+						<td th:text="${incident.state}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

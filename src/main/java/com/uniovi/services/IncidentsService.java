@@ -23,6 +23,7 @@ public class IncidentsService {
 	private NotificationsRepository notificationsRepository;
 
 	public void addIncident(Incident incident) {
+
 		incidentsRepository.save(incident);
 	}
 
