@@ -9,15 +9,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.net.URL;
 
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestTemplate;
@@ -25,16 +23,13 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.uniovi.Application;
 
-@SuppressWarnings("deprecation")
+@SpringBootTest(classes = { Application.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
-@WebAppConfiguration
-@IntegrationTest({ "server.port=0" })
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@ActiveProfiles("test")
 public class OperatorControllerTest {
 
-	@Value("${local.server.port}")
-	private int port;
+	//@Value("${local.server.port}")
+	//private int port;
 
 	private URL base;
 	private RestTemplate template;
