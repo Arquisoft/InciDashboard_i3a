@@ -24,11 +24,6 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>de.flapdoodle.embed</groupId>
-			<artifactId>de.flapdoodle.embed.mongo</artifactId>
-			<version>2.0.0</version><!--$NO-MVN-MAN-VER$ -->
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
@@ -36,6 +31,18 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<dependency>
+	    		<groupId>org.apache.httpcomponents</groupId>
+	    		<artifactId>httpclient</artifactId>
+	    		<version>4.5.3</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
+		<dependency>
+			<groupId>com.mashape.unirest</groupId>
+			<artifactId>unirest-java</artifactId>
+			<version>1.4.9</version>
 		</dependency>
 
 		<dependency>
@@ -79,11 +86,7 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
@@ -137,11 +140,6 @@
 			<artifactId>cucumber-spring</artifactId>
 			<version>1.2.5</version>
 			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongo-java-driver</artifactId>
 		</dependency>
 
 	</dependencies>

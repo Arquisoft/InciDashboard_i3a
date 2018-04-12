@@ -9,14 +9,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.net.URL;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestTemplate;
@@ -24,9 +25,12 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.uniovi.Application;
 
-@SpringBootTest(classes = { Application.class })
+@SuppressWarnings("deprecation")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ActiveProfiles("test")
+@SpringApplicationConfiguration(classes = Application.class)
+@WebAppConfiguration
+@IntegrationTest({ "server.port=0" })
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OperatorControllerTest {
 
 	@Value("${local.server.port}")
@@ -45,8 +49,7 @@ public class OperatorControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		System.err.println(port);
-		this.base = new URL("http://localhost:" + port + "/");
+		this.base = new URL("http://localhost:37445/");
 		template = new RestTemplate();
 		MockitoAnnotations.initMocks(this);
 		this.mockMvc = MockMvcBuilders.standaloneSetup(context).build();
