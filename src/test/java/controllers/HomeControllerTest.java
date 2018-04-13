@@ -3,7 +3,6 @@ package controllers;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +22,7 @@ import com.uniovi.Application;
 @SpringBootTest(classes = { Application.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("test")
-public class OperatorControllerTest {
+public class HomeControllerTest {
 
 	@Autowired
 	private WebApplicationContext context;
@@ -38,10 +37,9 @@ public class OperatorControllerTest {
 	}
 
 	@Test
-	public void testLoginPage() throws Exception {
-		MockHttpServletRequestBuilder request = get("/login").session(session);
-
-		mockMvc.perform(request).andExpect(status().isOk()).andExpect(content().string(containsString("Email:")))
-				.andExpect(content().string(containsString("Password:")));
+	public void testHome() throws Exception {
+		MockHttpServletRequestBuilder request = get("/");
+		mockMvc.perform(request).andExpect(content().string(containsString("Welcome to the Incident Dashboard")));
 	}
+
 }

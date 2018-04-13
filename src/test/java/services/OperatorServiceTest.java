@@ -1,6 +1,9 @@
 package services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -51,5 +54,12 @@ public class OperatorServiceTest {
 
 		operatorService.delete(auxOp);
 		assertEquals(operatorService.getOperatorByEmail("prueba@prueba.org"), null);
+	}
+
+	@Test
+	public void testExtras() {
+		Operator op = operatorService.getRandomOperator();
+		List<Operator> operators = operatorService.getAll();
+		assertTrue(operators.contains(op));
 	}
 }
