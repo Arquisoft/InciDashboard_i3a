@@ -32,7 +32,7 @@ public class OperatorController {
 
 	@RequestMapping("/operator/details/{id}")
 	public String getDetail(Model model, @PathVariable ObjectId id) {
-		model.addAttribute("incident", incidentsService.getIncident(id).get());
+		model.addAttribute("incident", incidentsService.getIncident(id));
 		return "operator/details";
 	}
 
@@ -44,14 +44,14 @@ public class OperatorController {
 
 	@RequestMapping(value = "/operator/edit/{id}")
 	public String getEdit(Model model, @PathVariable ObjectId id) {
-		Incident incident = incidentsService.getIncident(id).get();
+		Incident incident = incidentsService.getIncident(id);
 		model.addAttribute("incident", incident);
 		return "operator/edit";
 	}
 
 	@RequestMapping(value = "/operator/edit/{id}", method = RequestMethod.POST)
 	public String setEdit(Model model, @PathVariable ObjectId id, @ModelAttribute Incident incident) {
-		Incident original = incidentsService.getIncident(id).get();
+		Incident original = incidentsService.getIncident(id);
 		original.setState(incident.getState());
 		original.addComment(incident.getComments().get(0));
 		incidentsService.addIncident(original);
