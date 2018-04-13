@@ -184,6 +184,24 @@ public class Incident {
 	}
 
 	@Override
+	public String toString() {
+		return "Incident [id=" + id + ", name=" + name + ", description=" + description + ", state=" + state
+				+ ", location=" + location + ", tags=" + tags + ", multimedia=" + multimedia + ", property_value="
+				+ property_value + ", comments=" + comments + ", agent=" + agent + ", notification=" + notification
+				+ "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -192,7 +210,10 @@ public class Incident {
 		if (getClass() != obj.getClass())
 			return false;
 		Incident other = (Incident) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (location == null) {
 			if (other.location != null)
@@ -205,14 +226,6 @@ public class Incident {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Incident [id=" + id + ", name=" + name + ", description=" + description + ", state=" + state
-				+ ", location=" + location + ", tags=" + tags + ", multimedia=" + multimedia + ", property_value="
-				+ property_value + ", comments=" + comments + ", agent=" + agent + ", notification=" + notification
-				+ "]";
 	}
 
 	public void setProperties() {

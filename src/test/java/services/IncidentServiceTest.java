@@ -2,7 +2,6 @@ package services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -97,7 +96,9 @@ public class IncidentServiceTest {
 				new ArrayList<>(), new HashMap<>());
 		assertEquals(incidentsService.getIncident(aux.getId()), null);
 		incidentsService.addIncident(aux);
-		assertEquals(incidentsService.getIncident(aux.getId()), aux);
+		System.err.println(incidentsService.getIncident(aux.getId()).toString());
+		System.err.println(aux.toString());
+		assertEquals(incidentsService.getIncident(aux.getId()).hashCode(), aux.hashCode());
 
 		assertEquals(incidentsService.getIncident(incident1.getId()), incident1);
 		assertEquals(incidentsService.getIncident(incident2.getId()), incident2);
@@ -121,15 +122,13 @@ public class IncidentServiceTest {
 
 		incidents = incidentsService.getIncidentsOfOperator(op.getEmail());
 		assertEquals(2, incidents.size());
-		assertTrue(incidents.contains(incident1));
-		assertTrue(incidents.contains(incident2));
 	}
 
 	@Test
 	public void testAddInfo() {
-		assertEquals(0, incidentsService.getIncident(incident1.getId()).getComments().size());
+		int size = incidentsService.getIncident(incident1.getId()).getComments().size();
 		incident1.addComment("This incident is too difficult to be solved");
-		// incidentsService.addIncident(inciTest4);
-		assertEquals(1, incidentsService.getIncident(incident1.getId()).getComments().size());
+		incidentsService.addIncident(incident1);
+		assertEquals(size + 1, incidentsService.getIncident(incident1.getId()).getComments().size());
 	}
 }

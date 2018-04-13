@@ -36,7 +36,10 @@ public class IncidentsService {
 	}
 
 	public Incident getIncident(ObjectId id) {
-		return incidentsRepository.findByIncidentId(id.toString());
+		if (id != null) {
+			return incidentsRepository.findByIncidentId(id.toString());
+		}
+		return null;
 	}
 
 	public List<Incident> getIncidentsOfOperator(String email) {
@@ -61,18 +64,21 @@ public class IncidentsService {
 	 *            the new state
 	 */
 	public void changeIncidentState(ObjectId id, String stateIn) {
-		Incident incident = incidentsRepository.findByIncidentId(id.toString());
-		if (incident != null) {
-			try {
-				IncidentStates state = IncidentStates.valueOf(stateIn);
-				incident.setState(state);
-				incidentsRepository.save(incident);
-			} catch (Exception e) {
+		if (id != null) {
+			Incident incident = incidentsRepository.findByIncidentId(id.toString());
+			if (incident != null) {
+				try {
+					IncidentStates state = IncidentStates.valueOf(stateIn);
+					incident.setState(state);
+					incidentsRepository.save(incident);
+				} catch (Exception e) {
+					return;
+				}
+			} else {
 				return;
 			}
-		} else {
-			return;
 		}
+		return;
 	}
 
 }
