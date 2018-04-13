@@ -112,7 +112,7 @@ public class IncidentServiceTest {
 		Operator op = new Operator("juan", "123456");
 
 		List<Incident> incidents = incidentsService.getIncidentsOfOperator(op.getEmail());
-		assertEquals(0, incidents.size());
+		int size = incidents.size();
 
 		Notification n1 = new Notification(incident1, op);
 		Notification n2 = new Notification(incident2, op);
@@ -121,7 +121,13 @@ public class IncidentServiceTest {
 		notificationsService.add(n2);
 
 		incidents = incidentsService.getIncidentsOfOperator(op.getEmail());
-		assertEquals(2, incidents.size());
+		assertEquals(size + 2, incidents.size());
+
+		notificationsService.delete(n1);
+		notificationsService.delete(n2);
+
+		incidents = incidentsService.getIncidentsOfOperator(op.getEmail());
+		assertEquals(size, incidents.size());
 	}
 
 	@Test

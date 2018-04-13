@@ -25,4 +25,8 @@ public class NotificationService {
 	public void deleteAll() {
 		notificationsRepository.deleteAll();
 	}
+
+	public void delete(Notification n1) {
+		notificationsRepository.delete(n1);
+	}
 }
