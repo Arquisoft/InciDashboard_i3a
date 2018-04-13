@@ -19,7 +19,7 @@ public class OperatorTest {
 
 	@Test
 	public void testCreation() {
-		Operator op = new Operator("pepe", "123456");
+		Operator op = new Operator("pepe@gmail.com", "123456");
 		Notification n = new Notification();
 		Incident i = new Incident("Incidente de prueba", "Pruebaaa", IncidentStates.OPEN, "41N56E", new ArrayList<>(),
 				new ArrayList<>(), new HashMap<>());
@@ -36,8 +36,8 @@ public class OperatorTest {
 
 	@Test
 	public void testGetters() {
-		Operator op = new Operator("pepe", "123456");
-		assertTrue(op.getEmail().equals("pepe"));
+		Operator op = new Operator("pepe@gmail.com", "123456");
+		assertTrue(op.getEmail().equals("pepe@gmail.com"));
 		assertTrue(op.getPassword().equals("123456"));
 		assertTrue(op.getNotifications().isEmpty());
 	}
@@ -59,14 +59,14 @@ public class OperatorTest {
 		}
 
 		try {
-			new Operator("hola", "");
+			new Operator("hola@gmail.com", "");
 			fail("An exception should have been raised [password empty]");
 		} catch (IllegalArgumentException e) {
 			assertTrue(e.getMessage().equals("The password cannot be empty nor null"));
 		}
 
 		try {
-			new Operator("hola", null);
+			new Operator("hola@gmail.com", null);
 			fail("An exception should have been raised [password null]");
 		} catch (IllegalArgumentException e) {
 			assertTrue(e.getMessage().equals("The password cannot be empty nor null"));

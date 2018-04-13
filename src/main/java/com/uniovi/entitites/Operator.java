@@ -3,6 +3,9 @@ package com.uniovi.entitites;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -33,10 +36,31 @@ public class Operator {
 		if (this.email == null || this.email.isEmpty()) {
 			throw new IllegalArgumentException("The email cannot be empty nor null");
 		}
+		// if (!correctFormEmail(email)) {
+		// throw new IllegalArgumentException("The email has an invalid
+		// format");
+		// }
 		if (this.password == null || this.password.isEmpty()) {
 			throw new IllegalArgumentException("The password cannot be empty nor null");
 		}
 
+	}
+
+	/**
+	 * This method checks if the email has a proper form. That is: @ and a .*
+	 * 
+	 * @param email
+	 *            the email to be checked
+	 * @return true if the format is correct, false otherwise.
+	 */
+	private boolean correctFormEmail(String email) {
+		try {
+			InternetAddress emailAddr = new InternetAddress(email);
+			emailAddr.validate();
+		} catch (AddressException ex) {
+			return false;
+		}
+		return true;
 	}
 
 	public Operator(String username, String password, Set<Notification> n) {

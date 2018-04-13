@@ -17,11 +17,11 @@ import com.uniovi.services.IncidentsService;
 public class Receiver {
 
 	@Autowired
-    private SimpMessagingTemplate template;
-	
+	private SimpMessagingTemplate template;
+
 	@Autowired
 	private IncidentsService inciService;
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(Receiver.class);
 
 	private CountDownLatch latch = new CountDownLatch(1);

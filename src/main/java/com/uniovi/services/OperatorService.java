@@ -20,10 +20,10 @@ public class OperatorService {
 
 	@Autowired
 	private IncidentsRepository incidentsRepository;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bcrypt;
-	
+
 	public List<Operator> getAll() {
 		return operatorRepository.findAll();
 	}
@@ -58,5 +58,9 @@ public class OperatorService {
 
 	public void deleteAll() {
 		operatorRepository.deleteAll();
+	}
+
+	public void delete(Operator op1) {
+		operatorRepository.delete(op1);
 	}
 }
