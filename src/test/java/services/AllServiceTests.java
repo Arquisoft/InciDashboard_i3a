@@ -6,6 +6,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ IncidentServiceTest.class, OperatorServiceTest.class })
-public class AllServiceTest {
+public class AllServiceTests {
 
 }
