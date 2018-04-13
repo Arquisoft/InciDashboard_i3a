@@ -1,51 +1,48 @@
 package controllers;
 
-import java.net.URL;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.WebApplicationContext;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.hamcrest.Matchers.containsString;
 
 import com.uniovi.Application;
-import com.uniovi.controllers.OperatorController;
 
 @SpringBootTest(classes = { Application.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("test")
 public class OperatorControllerTest {
+    
+    @Autowired
+    private WebApplicationContext context;
 
-	private URL base;
-	private RestTemplate template;
+    private MockMvc mockMvc;
+    private MockHttpSession session;
 
-	private MockMvc mockMvc;
+    @Before
+    public void setUp() throws Exception {
+	this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
+	session = new MockHttpSession();
+    }
 
-	@Autowired
-	private OperatorController context;
-
-	@Before
-	public void setUp() throws Exception {
-		this.base = new URL("http://localhost:8080/");
-		template = new RestTemplate();
-		MockitoAnnotations.initMocks(this);
-		this.mockMvc = MockMvcBuilders.standaloneSetup(context).build();
-	}
-
-	@Test
-	public void testLoginPage() throws Exception {
-		// template.getForEntity(base.toString(), String.class);
-		// String message =
-		// mockMvc.perform(get("/login")).andExpect(status().isOk())
-		// .andExpect(content().string(containsString("Email:")))
-		// .andExpect(content().string(containsString("Password:"))).andReturn().toString();
-		//
-		// assertNotNull(message);
-	}
+    @Test
+    public void testLoginPage() throws Exception {
+	MockHttpServletRequestBuilder request = get("/login").session(session);
+	
+	mockMvc.perform(request)
+		.andExpect(status().isOk())
+		.andExpect(content().string(containsString("Email:")))
+		.andExpect(content().string(containsString("Password:")));
+    }
 }
