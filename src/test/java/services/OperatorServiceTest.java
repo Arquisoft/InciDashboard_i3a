@@ -44,16 +44,16 @@ public class OperatorServiceTest {
 
 	@Test
 	public void testOperator() {
-		assertEquals(operatorService.getOperatorByEmail("paco@gmail.com"), op1);
-		assertEquals(operatorService.getOperatorByEmail("pepe@gmail.com"), op2);
+		assertEquals(op1, operatorService.getOperatorByEmail("paco@gmail.com"));
+		assertEquals(op2, operatorService.getOperatorByEmail("pepe@gmail.com"));
 
 		Operator auxOp = new Operator("prueba@prueba.org", "asdfgh");
-		assertEquals(operatorService.getOperatorByEmail("prueba@prueba.org"), null);
+		assertEquals(null, operatorService.getOperatorByEmail("prueba@prueba.org"));
 		operatorService.add(auxOp);
-		assertEquals(operatorService.getOperatorByEmail("prueba@prueba.org"), auxOp);
+		assertEquals(auxOp, operatorService.getOperatorByEmail("prueba@prueba.org"));
 
 		operatorService.delete(auxOp);
-		assertEquals(operatorService.getOperatorByEmail("prueba@prueba.org"), null);
+		assertEquals(null, operatorService.getOperatorByEmail("prueba@prueba.org"));
 	}
 
 	@Test
