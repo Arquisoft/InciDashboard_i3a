@@ -115,8 +115,6 @@ public class IncidentServiceTest {
 
 		List<Incident> incidents = incidentsService.getIncidentsOfOperator(op.getEmail());
 		int size = incidents.size();
-		List<Incident> ins = operatorService.getIncidents(op);
-		assertEquals(size, ins.size());
 
 		Notification n1 = new Notification(incident1, op);
 		Notification n2 = new Notification(incident2, op);
