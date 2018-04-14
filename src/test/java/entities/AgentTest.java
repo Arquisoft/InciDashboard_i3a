@@ -17,6 +17,12 @@ public class AgentTest {
 		assertTrue(a.getKind() == 1);
 		assertTrue(a.getUsername() == "pepito");
 		assertTrue(a.getId() == null);
+		a.setUsername("hola");
+		assertTrue(a.getUsername() == "hola");
+		a.setKind(2);
+		assertTrue(a.getKind() == 2);
+		Agent a2 = new Agent("hola", 2);
+		assertTrue(a.equals(a2));
 	}
 
 	@Test
