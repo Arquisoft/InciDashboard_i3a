@@ -14,7 +14,4 @@ public interface OperatorRepository extends MongoRepository<Operator, ObjectId> 
 	Operator findByEmail(String username);
 
 	List<Operator> findAll();
-
-	// @Query("SELECT inci from Incident inci where inci.agent = ?1")
-	// List<Incident> findIncidentsByOp(Operator op);
 }
