@@ -1,8 +1,7 @@
 package controllers;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +21,7 @@ import com.uniovi.Application;
 @SpringBootTest(classes = { Application.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("test")
-public class HomeControllerTest {
+public class IncidentsControllerTest {
 
 	@Autowired
 	private WebApplicationContext context;
@@ -37,9 +36,14 @@ public class HomeControllerTest {
 	}
 
 	@Test
-	public void testHome() throws Exception {
-		MockHttpServletRequestBuilder request = get("/").session(session);
-		mockMvc.perform(request).andExpect(content().string(containsString("Welcome to the Incident Dashboard")));
+	public void testIncis() throws Exception {
+		MockHttpServletRequestBuilder request = get("/incidents").session(session);
+		mockMvc.perform(request).andExpect(view().name("incidents"));
 	}
 
+	@Test
+	public void testDashboard() throws Exception {
+		MockHttpServletRequestBuilder request = get("/dashboard").session(session);
+		mockMvc.perform(request).andExpect(view().name("operator/incidentsSocket"));
+	}
 }

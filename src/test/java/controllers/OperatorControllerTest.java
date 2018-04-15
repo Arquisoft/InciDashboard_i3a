@@ -4,6 +4,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,5 +44,11 @@ public class OperatorControllerTest {
 
 		mockMvc.perform(request).andExpect(status().isOk()).andExpect(content().string(containsString("Email:")))
 				.andExpect(content().string(containsString("Password:")));
+	}
+
+	@Test
+	public void testOperatorList() throws Exception {
+		MockHttpServletRequestBuilder request = get("/operator/list");
+		mockMvc.perform(request).andExpect(view().name("login"));
 	}
 }

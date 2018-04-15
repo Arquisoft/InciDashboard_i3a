@@ -25,7 +25,6 @@ import com.uniovi.entitites.Operator;
 import com.uniovi.services.AgentsService;
 import com.uniovi.services.IncidentsService;
 import com.uniovi.services.NotificationService;
-import com.uniovi.services.OperatorService;
 
 @SpringBootTest(classes = { Application.class })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -39,9 +38,6 @@ public class IncidentServiceTest {
 
 	@Autowired
 	private IncidentsService incidentsService;
-
-	@Autowired
-	private OperatorService operatorService;
 
 	@Autowired
 	private AgentsService agentsService;

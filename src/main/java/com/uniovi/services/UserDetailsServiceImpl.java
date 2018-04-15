@@ -15,20 +15,21 @@ import org.springframework.stereotype.Service;
 import com.uniovi.entitites.Operator;
 import com.uniovi.repository.OperatorRepository;
 
-
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-	
+
 	@Autowired
 	private OperatorRepository operatorRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String email)
-			throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		Operator operator = operatorRepository.findByEmail(email);
-		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-		grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-		return new User(
-				operator.getEmail(), operator.getPassword(), grantedAuthorities);
+		if (operator != null) {
+			Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+			grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+			return new User(operator.getEmail(), operator.getPassword(), grantedAuthorities);
+		}
+		return null;
+
 	}
 }

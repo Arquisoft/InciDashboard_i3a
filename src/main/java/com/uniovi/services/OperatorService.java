@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.entitites.Operator;
-import com.uniovi.repository.IncidentsRepository;
 import com.uniovi.repository.OperatorRepository;
 
 @Service
@@ -16,9 +15,6 @@ public class OperatorService {
 
 	@Autowired
 	private OperatorRepository operatorRepository;
-
-	@Autowired
-	private IncidentsRepository incidentsRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder bcrypt;

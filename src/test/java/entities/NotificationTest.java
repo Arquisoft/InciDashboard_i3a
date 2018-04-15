@@ -61,12 +61,14 @@ public class NotificationTest {
 		n.setId(new ObjectId());
 		assertFalse(n.equals(n2));
 
+		n.setIncident(null);
 		n2.setIncident(new Incident());
 		assertFalse(n.equals(n2));
 		n.setIncident(new Incident("Incidente de prueba", "Pruebaaa", IncidentStates.OPEN, "41N56E", new ArrayList<>(),
 				new ArrayList<>(), new HashMap<>()));
 		assertFalse(n.equals(n2));
 
+		n.setOperator(null);
 		n2.setOperator(new Operator());
 		assertFalse(n.equals(n2));
 		n.setOperator(new Operator("pepe@gmail.com", "123456"));
