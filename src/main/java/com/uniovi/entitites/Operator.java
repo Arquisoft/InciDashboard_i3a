@@ -64,6 +64,14 @@ public class Operator {
 		return email;
 	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

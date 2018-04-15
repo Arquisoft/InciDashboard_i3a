@@ -31,9 +31,9 @@ public class PropertiesTest {
 		Dead d;
 
 		try {
-			new Dead(-1);
+			d = new Dead(-1);
 		} catch (IllegalArgumentException e) {
-			assertTrue(e.getMessage().equals("The number of dead shoulb be 0 or more"));
+			assertTrue(e.getMessage().equals("The number of dead should be 0 or more"));
 		}
 
 		d = new Dead(0);
@@ -43,6 +43,7 @@ public class PropertiesTest {
 		assertFalse(d.hasNormalValue());
 		d = new Dead(100);
 		assertFalse(d.hasNormalValue());
+
 	}
 
 	@Test

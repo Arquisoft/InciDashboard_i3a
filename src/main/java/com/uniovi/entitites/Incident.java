@@ -147,6 +147,14 @@ public class Incident {
 		return id;
 	}
 
+	public List<Property> getProperties() {
+		return properties;
+	}
+
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+
 	public List<String> getComments() {
 		return comments;
 	}

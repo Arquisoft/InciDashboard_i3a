@@ -5,9 +5,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bson.types.ObjectId;
 import org.junit.Test;
 
 import com.uniovi.entitites.Agent;
@@ -142,6 +144,7 @@ public class IncidentTest {
 		assertFalse(i.getComments().isEmpty());
 		i.setComments(new ArrayList<>());
 		assertTrue(i.getComments().isEmpty());
+		assertTrue(i.getProperties() == null);
 	}
 
 	@Test
@@ -195,5 +198,47 @@ public class IncidentTest {
 		assertTrue(i.hasNormalValues());
 		i.getProperty_value().put("robbery", "true");
 		assertFalse(i.hasNormalValues());
+
+		i.getProperty_value().clear();
+		i.getProperty_value().put("dead", "2");
+		assertFalse(i.hasNormalValues());
+
+		i.getProperty_value().clear();
+		i.getProperty_value().put("wounded", "3");
+		assertFalse(i.hasNormalValues());
+
+		i.getProperty_value().clear();
+		i.getProperty_value().put("humidity", "37.5");
+		assertTrue(i.hasNormalValues());
+
+		i.getProperty_value().clear();
+		i.getProperty_value().put("wind", "20.9");
+		assertTrue(i.hasNormalValues());
+	}
+
+	@Test
+	public void testEquals() {
+		Incident in = new Incident();
+		Incident in2 = null;
+
+		assertFalse(in.equals(in2));
+		assertFalse(in.equals(new Object()));
+
+		in2 = new Incident();
+		in2.setId(new ObjectId());
+		assertFalse(in.equals(in2));
+
+		in.setId(new ObjectId(new Date()));
+		assertFalse(in.equals(in2));
+
+		in2.setLocation("41N56W");
+		assertFalse(in.equals(in2));
+
+		in2.setName("Prueba");
+		assertFalse(in.equals(in2));
+
+		in.setName("No son iguales");
+		assertFalse(in.equals(in2));
+
 	}
 }
