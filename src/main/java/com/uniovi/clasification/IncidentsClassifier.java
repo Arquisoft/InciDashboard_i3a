@@ -24,8 +24,12 @@ public class IncidentsClassifier {
 
 	public void classify() {
 		for (Incident i : incidents) {
-			addNotifications(i);
+			classify(i);
 		}
+	}
+
+	public List<Incident> getIncidents() {
+		return incidents;
 	}
 
 	public void classify(Incident i) {

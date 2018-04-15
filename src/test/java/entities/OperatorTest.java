@@ -87,9 +87,11 @@ public class OperatorTest {
 		op.setEmail(null);
 		op2 = new Operator("paco@gmail.com", "12356");
 		assertFalse(op.equals(op2));
+
 		op.setId(null);
 		op2.setId(new ObjectId());
 		assertFalse(op.equals(op2));
+
 		op.setId(new ObjectId(new Date()));
 		assertFalse(op.equals(op2));
 	}
