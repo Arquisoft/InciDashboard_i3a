@@ -1,11 +1,11 @@
-package services;
+package controllers;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ IncidentServiceTest.class, OperatorServiceTest.class })
-public class AllServiceTest {
+@SuiteClasses({ OperatorControllerTest.class, HomeControllerTest.class })
+public class AllControllerTests {
 
 }

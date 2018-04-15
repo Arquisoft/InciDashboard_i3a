@@ -25,6 +25,7 @@ import com.uniovi.entitites.Operator;
 import com.uniovi.services.AgentsService;
 import com.uniovi.services.IncidentsService;
 import com.uniovi.services.NotificationService;
+import com.uniovi.services.OperatorService;
 
 @SpringBootTest(classes = { Application.class })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -38,6 +39,9 @@ public class IncidentServiceTest {
 
 	@Autowired
 	private IncidentsService incidentsService;
+
+	@Autowired
+	private OperatorService operatorService;
 
 	@Autowired
 	private AgentsService agentsService;
@@ -96,8 +100,6 @@ public class IncidentServiceTest {
 				new ArrayList<>(), new HashMap<>());
 		assertEquals(incidentsService.getIncident(aux.getId()), null);
 		incidentsService.addIncident(aux);
-		System.err.println(incidentsService.getIncident(aux.getId()).toString());
-		System.err.println(aux.toString());
 		assertEquals(incidentsService.getIncident(aux.getId()).hashCode(), aux.hashCode());
 
 		assertEquals(incidentsService.getIncident(incident1.getId()), incident1);
