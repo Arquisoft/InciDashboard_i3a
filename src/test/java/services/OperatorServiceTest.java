@@ -54,6 +54,9 @@ public class OperatorServiceTest {
 
 		operatorService.delete(auxOp);
 		assertEquals(null, operatorService.getOperatorByEmail("prueba@prueba.org"));
+
+		Operator rndOp = operatorService.getRandomOperator();
+		assertTrue(rndOp != null);
 	}
 
 	@Test
