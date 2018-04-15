@@ -38,7 +38,7 @@ public class HomeControllerTest {
 
 	@Test
 	public void testHome() throws Exception {
-		MockHttpServletRequestBuilder request = get("/");
+		MockHttpServletRequestBuilder request = get("/").session(session);
 		mockMvc.perform(request).andExpect(content().string(containsString("Welcome to the Incident Dashboard")));
 	}
 
