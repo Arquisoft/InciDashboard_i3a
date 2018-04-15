@@ -9,9 +9,9 @@ public class Dead implements Property {
 		this.value = value;
 	}
 
-	private void checkValue(int value2) {
+	public void checkValue(int value2) {
 		if (value < 0) {
-			throw new IllegalArgumentException("The number of dead shoulb be 0 or more");
+			throw new IllegalArgumentException("The number of dead should be 0 or more");
 		}
 	}
 

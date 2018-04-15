@@ -77,5 +77,7 @@ public class NotificationTest {
 		n2 = n;
 		assertTrue(n.equals(n2));
 
+		assertTrue(n.hashCode() == n2.hashCode());
+
 	}
 }
