@@ -94,8 +94,4 @@ public class Notification {
 		return true;
 	}
 
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
-
 }

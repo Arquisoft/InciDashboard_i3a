@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import com.uniovi.entitites.Agent;
 import com.uniovi.entitites.Incident;
 import com.uniovi.entitites.IncidentStates;
 import com.uniovi.entitites.Notification;
@@ -121,5 +122,78 @@ public class IncidentTest {
 		} catch (IllegalArgumentException e) {
 			assertTrue(e.getMessage().equals("The state cannot be null"));
 		}
+	}
+
+	@Test
+	public void extraTest() {
+		Incident i = new Incident("Accidente", "Pruebaaa", IncidentStates.OPEN, "41N56E", new ArrayList<>(),
+				new ArrayList<>(), new HashMap<>(), new ArrayList<>());
+		assertTrue(i.getTags().isEmpty());
+		assertTrue(i.getMultimedia().isEmpty());
+		i.getMultimedia().add("foto.png");
+		assertFalse(i.getMultimedia().isEmpty());
+		i.setMultimedia(new ArrayList<>());
+		assertTrue(i.getMultimedia().isEmpty());
+		assertTrue(i.getAgent() == null);
+		i.setAgent(new Agent());
+		assertFalse(i.getAgent() == null);
+
+		i.getComments().add("hello");
+		assertFalse(i.getComments().isEmpty());
+		i.setComments(new ArrayList<>());
+		assertTrue(i.getComments().isEmpty());
+	}
+
+	@Test
+	public void propertiesTest() {
+		Incident i = new Incident("Incidente de prueba", "Pruebaaa", IncidentStates.OPEN, "41N56E", new ArrayList<>(),
+				new ArrayList<>(), new HashMap<>());
+		try {
+			i.getProperty_value().put("temperature", "notADouble");
+			i.hasNormalValues();
+		} catch (NumberFormatException e) {
+			assertTrue(e.getMessage().equals("Wrong value for temperature"));
+		}
+
+		i.getProperty_value().clear();
+		try {
+			i.getProperty_value().put("humidity", "notADouble");
+			i.hasNormalValues();
+		} catch (NumberFormatException e) {
+			assertTrue(e.getMessage().equals("Wrong value for humidity"));
+		}
+		i.getProperty_value().clear();
+
+		try {
+			i.getProperty_value().put("wind", "notADouble");
+			i.hasNormalValues();
+		} catch (NumberFormatException e) {
+			assertTrue(e.getMessage().equals("Wrong value for wind"));
+		}
+
+		i.getProperty_value().clear();
+		try {
+			i.getProperty_value().put("wounded", "notANumber");
+			i.hasNormalValues();
+		} catch (NumberFormatException e) {
+			assertTrue(e.getMessage().equals("Wrong value for number of wounded people"));
+		}
+		i.getProperty_value().clear();
+
+		try {
+			i.getProperty_value().put("dead", "notANumber");
+			i.hasNormalValues();
+		} catch (NumberFormatException e) {
+			assertTrue(e.getMessage().equals("Wrong value for dead people"));
+		}
+
+		i.getProperty_value().clear();
+
+		i.getProperty_value().put("attack", "true");
+		assertFalse(i.hasNormalValues());
+		i.getProperty_value().put("attack", "false");
+		assertTrue(i.hasNormalValues());
+		i.getProperty_value().put("robbery", "true");
+		assertFalse(i.hasNormalValues());
 	}
 }

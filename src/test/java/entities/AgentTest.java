@@ -1,10 +1,8 @@
 package entities;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.bson.types.ObjectId;
 import org.junit.Test;
 
 import com.uniovi.entitites.Agent;
@@ -31,16 +29,6 @@ public class AgentTest {
 		assertTrue(a.getUsername() == null);
 		assertTrue(a.getKind() == 0);
 		assertTrue(a.getId() == null);
-	}
-
-	@Test
-	public void testId() {
-		Agent a = new Agent("hola", 2);
-		Agent a2 = new Agent("pepito", 1);
-		a.setId(new ObjectId());
-
-		assertFalse(a.equals(a2));
-		assertFalse(a.hashCode() == a2.hashCode());
 	}
 
 	@Test

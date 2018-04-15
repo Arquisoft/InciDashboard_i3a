@@ -147,10 +147,6 @@ public class Incident {
 		return id;
 	}
 
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
-
 	public List<String> getComments() {
 		return comments;
 	}
@@ -234,35 +230,35 @@ public class Incident {
 			try {
 				properties.add(new Temperature(Double.parseDouble(property_value.get("temperature"))));
 			} catch (NumberFormatException e) {
-				System.out.println("Wrong value for temperature");
+				throw new NumberFormatException("Wrong value for temperature");
 			}
 		}
 		if (property_value.containsKey("humidity")) {
 			try {
 				properties.add(new Humidity(Double.parseDouble(property_value.get("humidity"))));
 			} catch (NumberFormatException e) {
-				System.out.println("Wrong value for humidity");
+				throw new NumberFormatException("Wrong value for humidity");
 			}
 		}
 		if (property_value.containsKey("wind")) {
 			try {
 				properties.add(new Wind(Double.parseDouble(property_value.get("wind"))));
 			} catch (NumberFormatException e) {
-				System.out.println("Wrong value for humidity");
+				throw new NumberFormatException("Wrong value for wind");
 			}
 		}
 		if (property_value.containsKey("wounded")) {
 			try {
 				properties.add(new Wounded(Integer.parseInt(property_value.get("wounded"))));
 			} catch (NumberFormatException e) {
-				System.out.println("Wrong value for number of wounded people");
+				throw new NumberFormatException("Wrong value for number of wounded people");
 			}
 		}
 		if (property_value.containsKey("dead")) {
 			try {
 				properties.add(new Dead(Integer.parseInt(property_value.get("dead"))));
 			} catch (NumberFormatException e) {
-				System.out.println("Wrong value for temperature");
+				throw new NumberFormatException("Wrong value for dead people");
 			}
 		}
 		if (property_value.containsKey("fire")) {
