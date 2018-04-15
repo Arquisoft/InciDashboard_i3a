@@ -38,8 +38,12 @@ public class OperatorController {
 
 	@RequestMapping("/operator/list")
 	public String getIncidentsList(Model model) {
-		model.addAttribute("indicentsList", incidentsService.getIncidentsOfOperator(getActiveUser().getEmail()));
-		return "operator/list";
+		if (getActiveUser() != null) {
+			model.addAttribute("indicentsList", incidentsService.getIncidentsOfOperator(getActiveUser().getEmail()));
+			return "operator/list";
+		} else {
+			return "login";
+		}
 	}
 
 	@RequestMapping(value = "/operator/edit/{id}")
@@ -60,8 +64,11 @@ public class OperatorController {
 
 	private Operator getActiveUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String username = auth.getName();
-		return operatorService.getOperatorByEmail(username);
+		if (auth != null) {
+			String username = auth.getName();
+			return operatorService.getOperatorByEmail(username);
+		}
+		return null;
 	}
 
 }

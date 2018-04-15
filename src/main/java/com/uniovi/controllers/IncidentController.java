@@ -29,7 +29,6 @@ public class IncidentController {
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String getDash(Model model) {
 		List<Incident> incidents = incidentsService.getAllIncidents();
-		System.out.println(incidents);
 		model.addAttribute("incidents", incidents);
 		return "operator/incidentsSocket";
 	}
