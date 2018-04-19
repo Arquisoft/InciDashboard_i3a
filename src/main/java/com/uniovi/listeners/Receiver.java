@@ -10,17 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
+import com.uniovi.client.IncidentService;
 import com.uniovi.entitites.Incident;
-import com.uniovi.services.IncidentsService;
 
 @ManagedBean
 public class Receiver {
 
 	@Autowired
 	private SimpMessagingTemplate template;
-
-	@Autowired
-	private IncidentsService inciService;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Receiver.class);
 
@@ -34,7 +31,7 @@ public class Receiver {
 	public void listen(Incident incident) {
 		LOGGER.info("received incident='{}'", incident);
 		this.template.convertAndSend("/topic/incidents", incident);
-		inciService.addIncident(incident);
+		IncidentService.addIncident(incident);
 		latch.countDown();
 	}
 }

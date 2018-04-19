@@ -12,10 +12,9 @@ import java.util.Map;
 import org.bson.types.ObjectId;
 import org.junit.Test;
 
-import com.uniovi.entitites.Agent;
+import com.uniovi.entitites.Comment;
 import com.uniovi.entitites.Incident;
 import com.uniovi.entitites.IncidentStates;
-import com.uniovi.entitites.Notification;
 
 public class IncidentTest {
 
@@ -28,15 +27,6 @@ public class IncidentTest {
 		assertTrue(i.getName().equals("Incidente de prueba"));
 		assertTrue(i.getLocation().equals("41N56E"));
 		assertTrue(i.getProperty_value().isEmpty());
-	}
-
-	@Test
-	public void testNotificationCreation() {
-		Incident i = new Incident("Incidente de prueba", "Pruebaaa", IncidentStates.OPEN, "41N56E", new ArrayList<>(),
-				new ArrayList<>(), new HashMap<>());
-		Notification created = i.createNotification();
-		assertTrue(created.equals(i.getNotification()));
-		assertTrue(created.getIncident().equals(i));
 	}
 
 	@Test
@@ -136,11 +126,9 @@ public class IncidentTest {
 		assertFalse(i.getMultimedia().isEmpty());
 		i.setMultimedia(new ArrayList<>());
 		assertTrue(i.getMultimedia().isEmpty());
-		assertTrue(i.getAgent() == null);
-		i.setAgent(new Agent());
-		assertFalse(i.getAgent() == null);
+		assertTrue(i.getAgent_id() == null);
 
-		i.getComments().add("hello");
+		i.getComments().add(new Comment("hello", new Date(), "pepe"));
 		assertFalse(i.getComments().isEmpty());
 		i.setComments(new ArrayList<>());
 		assertTrue(i.getComments().isEmpty());

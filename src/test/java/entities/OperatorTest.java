@@ -4,38 +4,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.bson.types.ObjectId;
 import org.junit.Test;
 
-import com.uniovi.entitites.Incident;
-import com.uniovi.entitites.IncidentStates;
-import com.uniovi.entitites.Notification;
 import com.uniovi.entitites.Operator;
 
 public class OperatorTest {
-
-	@Test
-	public void testCreation() {
-		Operator op = new Operator("pepe@gmail.com", "123456");
-		Notification n = new Notification();
-		Incident i = new Incident("Incidente de prueba", "Pruebaaa", IncidentStates.OPEN, "41N56E", new ArrayList<>(),
-				new ArrayList<>(), new HashMap<>());
-		n.setIncident(i);
-		n.setOperator(op);
-
-		Set<Notification> nots = new HashSet<>();
-		nots.add(n);
-		op.setNotifications(nots);
-
-		assertTrue(op.getNotifications().size() == 1);
-		assertTrue(n.getOperator().equals(op));
-	}
 
 	@Test
 	public void testGetters() {
@@ -44,7 +20,6 @@ public class OperatorTest {
 		op.setEmail("pepe2@gmail.com");
 		assertTrue(op.getEmail().equals("pepe2@gmail.com"));
 		assertTrue(op.getPassword().equals("123456"));
-		assertTrue(op.getNotifications().isEmpty());
 	}
 
 	@Test

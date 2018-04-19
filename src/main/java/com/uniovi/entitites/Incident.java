@@ -34,6 +34,8 @@ public class Incident {
 
 	private String description;
 
+	private String date;
+
 	private IncidentStates state;
 
 	private String location;
@@ -48,9 +50,9 @@ public class Incident {
 
 	private List<Comment> comments;
 
-	private Agent agent;
+	private String agent_id;
 
-	private Operator operator;
+	private String operator_id;
 
 	public Incident() {
 		comments = new ArrayList<Comment>();
