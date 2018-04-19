@@ -4,6 +4,9 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.Data;
+
+@Data
 @Document(collection = "agents")
 public class Agent {
 
@@ -30,30 +33,6 @@ public class Agent {
 		if (this.kind < 0) {
 			throw new IllegalArgumentException("The kind should be a valid positive value");
 		}
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public int getKind() {
-		return kind;
-	}
-
-	public void setKind(int kind) {
-		this.kind = kind;
-	}
-
-	public ObjectId getId() {
-		return id;
-	}
-
-	public void setId(ObjectId id) {
-		this.id = id;
 	}
 
 	@Override

@@ -20,6 +20,9 @@ import com.uniovi.properties.Temperature;
 import com.uniovi.properties.Wind;
 import com.uniovi.properties.Wounded;
 
+import lombok.Data;
+
+@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Document(collection = "incidents")
 public class Incident {
@@ -43,16 +46,14 @@ public class Incident {
 
 	private List<Property> properties;
 
-	private List<String> comments;
+	private List<Comment> comments;
 
 	private Agent agent;
 
 	private Operator operator;
 
-	private Notification notification;
-
 	public Incident() {
-		comments = new ArrayList<String>();
+		comments = new ArrayList<Comment>();
 	}
 
 	public Incident(String name, String description, IncidentStates state, String location, List<String> tags,
@@ -69,7 +70,7 @@ public class Incident {
 	}
 
 	public Incident(String name, String description, IncidentStates state, String location, List<String> tags,
-			List<String> multimedia, Map<String, String> property_value, List<String> comments) {
+			List<String> multimedia, Map<String, String> property_value, List<Comment> comments) {
 		this(name, description, state, location, tags, multimedia, property_value);
 		this.comments = comments;
 	}
@@ -85,114 +86,6 @@ public class Incident {
 		if (this.state == null) {
 			throw new IllegalArgumentException("The state cannot be null");
 		}
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public IncidentStates getState() {
-		return state;
-	}
-
-	public void setState(IncidentStates state) {
-		this.state = state;
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public List<String> getTags() {
-		return tags;
-	}
-
-	public void setTags(List<String> tags) {
-		this.tags = tags;
-	}
-
-	public List<String> getMultimedia() {
-		return multimedia;
-	}
-
-	public void setMultimedia(List<String> multimedia) {
-		this.multimedia = multimedia;
-	}
-
-	public Map<String, String> getProperty_value() {
-		return property_value;
-	}
-
-	public void setProperty_value(Map<String, String> property_value) {
-		this.property_value = property_value;
-	}
-
-	public ObjectId getId() {
-		return id;
-	}
-
-	public List<Property> getProperties() {
-		return properties;
-	}
-
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
-
-	public List<String> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<String> comments) {
-		this.comments = comments;
-	}
-
-	public Agent getAgent() {
-		return agent;
-	}
-
-	public void setAgent(Agent agent) {
-		this.agent = agent;
-	}
-
-	public Operator getOperator() {
-		return operator;
-	}
-
-	public void setOperator(Operator operator) {
-		this.operator = operator;
-	}
-
-	public Notification getNotification() {
-		return notification;
-	}
-
-	public void setNotification(Notification notification) {
-		this.notification = notification;
-	}
-
-	@Override
-	public String toString() {
-		return "Incident [id=" + id + ", name=" + name + ", description=" + description + ", state=" + state
-				+ ", location=" + location + ", tags=" + tags + ", multimedia=" + multimedia + ", property_value="
-				+ property_value + ", comments=" + comments + ", agent=" + agent + ", notification=" + notification
-				+ "]";
 	}
 
 	@Override
@@ -292,12 +185,7 @@ public class Incident {
 		return true;
 	}
 
-	public Notification createNotification() {
-		setNotification(new Notification(this));
-		return this.notification;
-	}
-
-	public void addComment(String comment) {
+	public void addComment(Comment comment) {
 		this.comments.add(comment);
 	}
 
