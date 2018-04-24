@@ -29,7 +29,8 @@ public class OperatorController {
 	}
 
 	@RequestMapping("/operator/details/{id}")
-	public String getDetail(Model model, @PathVariable ObjectId id) {
+	public String getDetail(Model model, @PathVariable ObjectId id)
+			throws JsonParseException, JsonMappingException, IOException, UnirestException {
 		model.addAttribute("incident", IncidentService.getIncident(id));
 		return "operator/details";
 	}
@@ -47,14 +48,16 @@ public class OperatorController {
 	}
 
 	@RequestMapping(value = "/operator/edit/{id}")
-	public String getEdit(Model model, @PathVariable ObjectId id) {
+	public String getEdit(Model model, @PathVariable ObjectId id)
+			throws JsonParseException, JsonMappingException, IOException, UnirestException {
 		Incident incident = IncidentService.getIncident(id);
 		model.addAttribute("incident", incident);
 		return "operator/edit";
 	}
 
 	@RequestMapping(value = "/operator/edit/{id}", method = RequestMethod.POST)
-	public String setEdit(Model model, @PathVariable ObjectId id, @ModelAttribute Incident incident) {
+	public String setEdit(Model model, @PathVariable ObjectId id, @ModelAttribute Incident incident)
+			throws JsonParseException, JsonMappingException, IOException, UnirestException {
 		Incident original = IncidentService.getIncident(id);
 		original.setState(incident.getState());
 		original.addComment(incident.getComments().get(0));
