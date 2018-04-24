@@ -1,19 +1,18 @@
 package com.uniovi.clasification;
 
+import java.io.IOException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import com.uniovi.client.OperatorService;
 import com.uniovi.entitites.Incident;
-import com.uniovi.entitites.Notification;
-import com.uniovi.services.OperatorService;
+import com.uniovi.entitites.IncidentStates;
 
 public class IncidentsClassifier {
 
 	private List<Incident> incidents;
-
-	@Autowired
-	private OperatorService operatorService;
 
 	public IncidentsClassifier(List<Incident> incidents) {
 		this.incidents = incidents;
@@ -22,9 +21,9 @@ public class IncidentsClassifier {
 	public IncidentsClassifier() {
 	}
 
-	public void classify() {
+	public void classify() throws JsonParseException, JsonMappingException, UnirestException, IOException {
 		for (Incident i : incidents) {
-			classify(i);
+			addNotification(i);
 		}
 	}
 
@@ -32,18 +31,11 @@ public class IncidentsClassifier {
 		return incidents;
 	}
 
-	public void classify(Incident i) {
-		addNotifications(i);
-	}
-
-	private void addNotifications(Incident i) {
+	private void addNotification(Incident i)
+			throws JsonParseException, JsonMappingException, UnirestException, IOException {
 		if (!i.hasNormalValues()) {
-			Notification not = i.createNotification();
-			if (i.getOperator() == null)
-				not.setOperator(operatorService.getRandomOperator());
-			else
-				not.setOperator(i.getOperator());
-			NotificationManager.getInstance().addNotification(i.createNotification());
+			i.setOperator_id(OperatorService.getRandomOperator());
+			i.setState(IncidentStates.IN_PROCESS);
 		}
 	}
 }

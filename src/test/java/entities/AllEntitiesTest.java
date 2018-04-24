@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ AgentTest.class, IncidentTest.class, NotificationTest.class, OperatorTest.class })
+@SuiteClasses({ AgentTest.class, IncidentTest.class, OperatorTest.class })
 public class AllEntitiesTest {
 
 }
