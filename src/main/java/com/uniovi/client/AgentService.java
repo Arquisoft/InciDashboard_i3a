@@ -28,4 +28,15 @@ public class AgentService {
 		}
 	}
 
+	public static Agent getAgent(String id) {
+		try {
+			HttpResponse<JsonNode> response = Unirest.post(API_GATEWAY + "/agents/" + id).asJson();
+			ObjectMapper mapper = new ObjectMapper();
+			return mapper.readValue(response.getBody().toString(), Agent.class);
+		} catch (IOException | UnirestException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

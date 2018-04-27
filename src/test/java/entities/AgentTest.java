@@ -17,23 +17,26 @@ public class AgentTest {
 	@Test
 	public void testAll() {
 		assertNull(agent);
-		agent = new Agent("pepe", 1);
+		agent = new Agent("pepe", 1, "");
 
-		assertTrue(agent.getUsername().equals("pepe"));
-		assertTrue(agent.getKind() == 1);
+		assertTrue(agent.getEmail().equals("pepe"));
+		assertTrue(agent.getKindCode() == 1);
 
-		Agent aux = new Agent("pepe", 1);
+		Agent aux = new Agent("pepe", 1, "");
 		assertTrue(aux.equals(agent));
 		assertTrue(aux.hashCode() == agent.hashCode());
 
-		agent.setUsername("paco");
-		assertTrue(agent.getUsername().equals("paco"));
-		agent.setKind(2);
-		assertTrue(agent.getKind() == 2);
+		agent.setEmail("paco");
+		assertTrue(agent.getEmail().equals("paco"));
+		agent.setKindCode(2);
+		assertTrue(agent.getKindCode() == 2);
 
 		assertTrue(agent.getId() == null);
 		agent.setId(new ObjectId(new Date()));
 		assertTrue(agent.getId() != null);
+
+		aux.setLocation("39N56W");
+		assertTrue(aux.getLocation().equals("39N56W"));
 
 		assertTrue(agent.toString().equals("Agent [username=paco, kind=2]"));
 	}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2>Sensor's Details</h2>
+		<div class="panel panel-default">
+			<div class="panel-heading">Sensor's name</div>
+			<div class="panel-body" th:text="${sensor.email}"></div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">Sensor's location</div>
+			<div class="panel-body" th:text="${sensor.location}"></div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">Sensor's evolution of incidents</div>
+		</div>
+	</div>
+	<footer th:replace="fragments/footer" /></footer>
+</body>
+</html>
