@@ -1,23 +1,39 @@
 package entities;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
-import org.junit.Before;
+import java.util.Date;
+
+import org.bson.types.ObjectId;
 import org.junit.Test;
+
+import com.uniovi.entitites.Operator;
 
 public class OperatorTest {
 
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
+	private Operator operator;
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		assertNull(operator);
+		operator = new Operator("paco", "1234");
+		assertTrue(operator.getEmail().equals("paco"));
+		assertTrue(operator.getPassword().equals("1234"));
+
+		Operator aux = new Operator("pepe", "asdf");
+		assertFalse(aux.equals(operator));
+		assertFalse(aux.hashCode() == operator.hashCode());
+
+		aux.setEmail(operator.getEmail());
+		aux.setPassword(operator.getPassword());
+
+		assertTrue(aux.equals(operator));
+		assertTrue(aux.hashCode() == operator.hashCode());
+
+		assertTrue(operator.getId() == null);
+		operator.setId(new ObjectId(new Date()));
+		assertFalse(operator.getId() == null);
 	}
 }

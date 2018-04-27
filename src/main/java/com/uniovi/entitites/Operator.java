@@ -15,4 +15,10 @@ public class Operator {
 	private String email;
 
 	private String password;
+
+	public Operator(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
+	}
 }

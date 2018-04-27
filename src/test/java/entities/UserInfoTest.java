@@ -1,24 +1,34 @@
 package entities;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+
+import com.uniovi.entitites.UserInfo;
 
 public class UserInfoTest {
 
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
+	private UserInfo user;
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		assertNull(user);
+		user = new UserInfo("paco", "1234");
+		assertNotNull(user);
+		assertTrue(user.getLogin().equals("paco"));
+		assertTrue(user.getPassword().equals("1234"));
+
+		UserInfo aux = new UserInfo("pepe", "asdfg");
+		assertFalse(aux.equals(user));
+		aux.setLogin(user.getLogin());
+		assertFalse(aux.equals(user));
+		aux.setPassword(user.getPassword());
+		assertTrue(aux.equals(user));
+
+		assertTrue(aux.hashCode() == user.hashCode());
 	}
 
 }

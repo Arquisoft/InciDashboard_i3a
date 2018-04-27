@@ -1,24 +1,33 @@
 package entities;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+
+import com.uniovi.entitites.Comment;
 
 public class CommentTest {
 
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
+	private Comment comment;
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		assertNull(comment);
+		comment = new Comment("Prueba", "235b");
+		assertTrue(comment.getComment().equals("Prueba"));
+		assertTrue(comment.getOperatorId().equals("235b"));
+
+		Comment aux = new Comment("Segunda prueba", "468t");
+		assertFalse(aux.equals(comment));
+		aux.setComment(comment.getComment());
+		aux.setOperatorId(comment.getOperatorId());
+		assertTrue(aux.equals(comment));
+		aux.setDate(comment.getDate());
+		assertTrue(aux.equals(comment));
+
+		assertTrue(aux.hashCode() == comment.hashCode());
 	}
 
 }

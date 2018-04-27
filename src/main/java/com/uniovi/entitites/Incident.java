@@ -39,6 +39,22 @@ public class Incident {
 
 	private String operatorId;
 
+	public Incident(String title, String description, String status, String location, String[] tags,
+			String[] multimedia, Map<String, String> property_value, List<Comment> comments, String agentId,
+			String operatorId) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.status = status;
+		this.location = location;
+		this.tags = tags;
+		this.multimedia = multimedia;
+		this.property_value = property_value;
+		this.comments = comments;
+		this.agentId = agentId;
+		this.operatorId = operatorId;
+	}
+
 	public void addComment(Comment comment) {
 		this.comments.add(comment);
 	}
