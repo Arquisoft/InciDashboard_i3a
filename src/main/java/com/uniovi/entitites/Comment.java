@@ -17,4 +17,9 @@ public class Comment {
 		this.operatorId = idOp;
 	}
 
+	@Override
+	public String toString() {
+		return "Comment [comment=" + comment + ", operatorId=" + operatorId + "]";
+	}
+
 }

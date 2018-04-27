@@ -21,4 +21,10 @@ public class Operator {
 		this.email = email;
 		this.password = password;
 	}
+
+	@Override
+	public String toString() {
+		return "Operator [email=" + email + ", password=" + password + "]";
+	}
+
 }

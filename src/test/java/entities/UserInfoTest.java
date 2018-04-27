@@ -27,8 +27,9 @@ public class UserInfoTest {
 		assertFalse(aux.equals(user));
 		aux.setPassword(user.getPassword());
 		assertTrue(aux.equals(user));
-
 		assertTrue(aux.hashCode() == user.hashCode());
+
+		assertTrue(user.toString().equals("UserInfo(login=paco, password=1234)"));
 	}
 
 }
