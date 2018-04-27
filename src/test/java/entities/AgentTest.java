@@ -34,6 +34,8 @@ public class AgentTest {
 		assertTrue(agent.getId() == null);
 		agent.setId(new ObjectId(new Date()));
 		assertTrue(agent.getId() != null);
+
+		assertTrue(agent.toString().equals("Agent [username=paco, kind=2]"));
 	}
 
 }

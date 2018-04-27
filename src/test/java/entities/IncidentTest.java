@@ -75,6 +75,8 @@ public class IncidentTest {
 
 		assertTrue(aux.equals(incident));
 		assertTrue(aux.hashCode() == incident.hashCode());
+		assertTrue(incident.toString().equals(
+				"Incident [id=null, title=Cambio, description=description, status=CLOSED, location=36N34W, tags=[null, null], multimedia=[null, null], property_value={accidente=true}, comments=aaa, , agentId=789, operatorId=321]"));
 	}
 
 }

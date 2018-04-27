@@ -22,4 +22,9 @@ public class Agent {
 		this.kind = kind;
 	}
 
+	@Override
+	public String toString() {
+		return "Agent [username=" + username + ", kind=" + kind + "]";
+	}
+
 }

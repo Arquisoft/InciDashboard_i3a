@@ -1,5 +1,6 @@
 package com.uniovi.entitites;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -57,6 +58,18 @@ public class Incident {
 
 	public void addComment(Comment comment) {
 		this.comments.add(comment);
+	}
+
+	@Override
+	public String toString() {
+		String aux = "Incident [id=" + id + ", title=" + title + ", description=" + description + ", status=" + status
+				+ ", location=" + location + ", tags=" + Arrays.toString(tags) + ", multimedia="
+				+ Arrays.toString(multimedia) + ", property_value=" + property_value + ", comments=";
+		for (Comment c : comments)
+			aux += c.getComment() + ", ";
+		aux += ", agentId=" + agentId + ", operatorId=" + operatorId + "]";
+
+		return aux;
 	}
 
 }
