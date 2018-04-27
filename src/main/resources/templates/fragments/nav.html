@@ -10,16 +10,13 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li><a href="/">Home</a></li>
-				<li sec:authorize="isAuthenticated()"><a id="listIncidents" href="/dashboard">List
-						Incidents</a></li>
-				<li sec:authorize="isAuthenticated()"><a href="/operator/list">Operator view</a></li>
+				<li><a id="listIncidents" href="/incidents">List
+						All Open Incidents</a></li>
+				<li><a href="/operator/listMyIncidents">List My Incidents</a></li>
+                <li><a href="/agent/listSensors">List All Sensors</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li sec:authorize="!isAuthenticated()"><a href="/login"> <span
-						class="glyphicon glyphicon-log-in"></span>  Login
-				</a></li>
-				<li sec:authorize="isAuthenticated()"><a href="/logout"> <span
+				<li><a href="/logout"> <span
 						class="glyphicon glyphicon-log-out"></span>  Logout
 				</a></li>
 			</ul>

@@ -14,17 +14,17 @@ public class Agent {
 	private ObjectId id;
 
 	private String username;
-	private int kind;
+	private int kindCode;
 
 	public Agent(String username, int kind) {
 		super();
 		this.username = username;
-		this.kind = kind;
+		this.kindCode = kind;
 	}
 
 	@Override
 	public String toString() {
-		return "Agent [username=" + username + ", kind=" + kind + "]";
+		return "Agent [username=" + username + ", kind=" + kindCode + "]";
 	}
 
 }

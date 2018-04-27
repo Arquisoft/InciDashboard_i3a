@@ -19,11 +19,11 @@
 				</thead>
 				<tbody>
 					<tr th:each="inci : ${indicentsList}">
-						<td th:text="${inci.name}">Incident</td>
+						<td th:text="${inci.title}">Incident</td>
 						<td th:text="${inci.description}">Description</td>
-                        <td th:text="${inci.state}">State</td>
-                        <td><a th:href="${'/operator/details/' + inci.id}" >details</a></td>
-                        <td><a th:href="${'/operator/edit/' + inci.id}" >edit</a></td>
+                        <td th:text="${inci.status}">State</td>
+                        <td><a th:href="${'/incident/details/' + inci.id}" >Details</a></td>
+                        <td><a th:href="${'/incident/edit/' + inci.id}" >Edit</a></td>
 					</tr>
 				</tbody>
 			</table>

@@ -9,16 +9,16 @@
 			<table class="table table-hover table-striped" th:fragment="tableIncidents" id="tableIncidents">
 				<thead class="thead-dark">
                     <th>Name</th>
-                    <th>Description</th>
                     <th>Status</th>
                     <th>Date</th>
                 </thead>
 				<tbody id="tableContents">
 					<tr th:each="incident : ${incidents}" th:id="${incident.id}"> 
-						<td th:text="${incident.name}"></td>
-						<td th:text="${incident.description}"></td>
+						<td th:text="${incident.title}"></td>
 						<td th:text="${incident.status}"></td>
                         <td th:text="${incident.date}"></td>
+                        <td><a th:href="${'/incident/details/' + incident.id}" >Details</a></td>
+                        <td><a th:href="${'/incident/edit/' + inci.id}" >Edit</a></td>
 					</tr>
 				</tbody>
 			</table>

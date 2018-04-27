@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -17,7 +16,6 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.uniovi.client.IncidentService;
 import com.uniovi.client.OperatorService;
-import com.uniovi.entitites.Incident;
 import com.uniovi.entitites.UserInfo;
 
 @Controller
@@ -25,6 +23,11 @@ public class OperatorController {
 
 	@RequestMapping("/")
 	public String getLogin() {
+		return "login";
+	}
+
+	@RequestMapping("/login")
+	public String getLoginAux() {
 		return "login";
 	}
 
@@ -47,38 +50,12 @@ public class OperatorController {
 		return "redirect:/login?error=true";
 	}
 
-	@RequestMapping("/operator/details/{id}")
-	public String getDetail(Model model, @PathVariable String id, @Nullable @CookieValue("operatorId") String opId) {
-		if (opId == null)
-			return "redirect:/login";
-		model.addAttribute("incident", IncidentService.getIncident(id));
-		return "operator/details";
-	}
-
-	@RequestMapping("/operator/list")
-	public String getIncidentsList(Model model, @Nullable @CookieValue("operatorId") String opId) {
+	@RequestMapping("/operator/listMyIncidents")
+	public String getMyIncidentsList(Model model, @Nullable @CookieValue("operatorId") String opId) {
 		if (opId == null)
 			return "redirect:/login";
 		model.addAttribute("indicentsList", IncidentService.getInProcessIncidentsOfOperator(opId));
-		return "operator/list";
-	}
-
-	@RequestMapping(value = "/operator/edit/{id}")
-	public String getEdit(Model model, @PathVariable String id, @Nullable @CookieValue("operatorId") String opId) {
-		if (opId == null)
-			return "redirect:/login";
-		Incident incident = IncidentService.getIncident(id);
-		model.addAttribute("incident", incident);
-		return "operator/edit";
-	}
-
-	@RequestMapping(value = "/operator/edit/{id}", method = RequestMethod.POST)
-	public String setEdit(Model model, @PathVariable String id, @ModelAttribute Incident incident,
-			@Nullable @CookieValue("operatorId") String opId) {
-		if (opId == null)
-			return "redirect:/login";
-		IncidentService.saveIncident(incident);
-		return "redirect:/operator/details/" + id;
+		return "operator/incidents";
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
