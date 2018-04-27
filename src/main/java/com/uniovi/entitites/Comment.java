@@ -9,12 +9,12 @@ public class Comment {
 
 	private String comment;
 	private Date date;
-	private String operator_id;
+	private String operatorId;
 
-	public Comment(String com, Date d, String idOp) {
+	public Comment(String com, String idOp) {
 		this.comment = com;
-		this.date = d;
-		this.operator_id = idOp;
+		this.date = new Date();
+		this.operatorId = idOp;
 	}
 
 }
