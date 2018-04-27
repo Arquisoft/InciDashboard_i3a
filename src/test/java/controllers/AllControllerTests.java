@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ OperatorControllerTest.class, HomeControllerTest.class })
+@SuiteClasses({ OperatorControllerTest.class })
 public class AllControllerTests {
 
 }

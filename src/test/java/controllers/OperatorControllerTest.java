@@ -40,8 +40,7 @@ public class OperatorControllerTest {
 
 	@Test
 	public void testLoginPage() throws Exception {
-		MockHttpServletRequestBuilder request = get("/login").session(session);
-
+		MockHttpServletRequestBuilder request = get("/").session(session);
 		mockMvc.perform(request).andExpect(status().isOk()).andExpect(content().string(containsString("Email:")))
 				.andExpect(content().string(containsString("Password:")));
 	}
@@ -49,6 +48,6 @@ public class OperatorControllerTest {
 	@Test
 	public void testOperatorList() throws Exception {
 		MockHttpServletRequestBuilder request = get("/operator/list");
-		mockMvc.perform(request).andExpect(view().name("login"));
+		mockMvc.perform(request).andExpect(view().name("redirect:/login"));
 	}
 }
