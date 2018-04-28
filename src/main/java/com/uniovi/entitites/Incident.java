@@ -19,26 +19,19 @@ public class Incident {
 
 	@Id
 	private ObjectId id;
-
 	private String title;
-
 	private String description;
-
 	private String status;
-
 	private String location;
-
 	private String[] tags;
-
 	private String[] multimedia;
-
 	private Map<String, String> property_value;
-
 	private List<Comment> comments;
-
 	private String agentId;
-
 	private String operatorId;
+	private String incidentId = "";
+	
+	public Incident() {}
 
 	public Incident(String title, String description, String status, String location, String[] tags,
 			String[] multimedia, Map<String, String> property_value, List<Comment> comments, String agentId,
@@ -71,5 +64,9 @@ public class Incident {
 
 		return aux;
 	}
+	
+	public String getDate() {
+		return new ObjectId(this.incidentId).getDate().toString();
+	    }
 
 }

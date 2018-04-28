@@ -48,8 +48,8 @@ public class OperatorController {
 	    } catch (JSONException e) {
 		e.printStackTrace();
 	    }
-
-	    return "redirect:/operator/list";
+	    return "redirect:/incidents";
+	    //return "redirect:/operator/list";
 	}
 	return "redirect:/login";
     }
@@ -58,7 +58,7 @@ public class OperatorController {
     public String getMyIncidentsList(Model model, @Nullable @CookieValue("operatorId") String opId) {
 	if (opId == null)
 	    return "redirect:/login";
-	model.addAttribute("indicentsList", IncidentService.getInProcessIncidentsOfOperator(opId));
+	model.addAttribute("incidents", IncidentService.getInProcessIncidentsOfOperator(opId));
 	return "operator/incidents";
     }
 

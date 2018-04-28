@@ -1,7 +1,5 @@
 package com.uniovi.controllers;
 
-import java.util.List;
-
 import org.springframework.lang.Nullable;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Controller;
@@ -22,7 +20,7 @@ public class AgentController {
 	public String getListOpen(Model model, @Nullable @CookieValue("operatorId") String opId) {
 		if (opId == null)
 			return "redirect:/login";
-		List<Agent> sensors = AgentService.getAllSensors();
+		Agent[] sensors = AgentService.getAllSensors();
 		model.addAttribute("sensors", sensors);
 		return "agent/listSensors";
 	}
