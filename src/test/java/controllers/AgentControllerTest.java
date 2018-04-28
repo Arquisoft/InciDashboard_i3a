@@ -1,9 +1,6 @@
 package controllers;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.Before;
@@ -24,7 +21,7 @@ import com.uniovi.Application;
 @SpringBootTest(classes = { Application.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("test")
-public class OperatorControllerTest {
+public class AgentControllerTest {
 
 	@Autowired
 	private WebApplicationContext context;
@@ -39,28 +36,8 @@ public class OperatorControllerTest {
 	}
 
 	@Test
-	public void testLoginPage() throws Exception {
-		MockHttpServletRequestBuilder request = get("/").session(session);
-		mockMvc.perform(request).andExpect(status().isOk()).andExpect(content().string(containsString("Email:")))
-				.andExpect(content().string(containsString("Password:")));
-	}
-
-	@Test
-	public void testSecondLoginPage() throws Exception {
-		MockHttpServletRequestBuilder request = get("/login").session(session);
-		mockMvc.perform(request).andExpect(status().isOk()).andExpect(content().string(containsString("Email:")))
-				.andExpect(content().string(containsString("Password:")));
-	}
-
-	@Test
-	public void testOperatorList() throws Exception {
-		MockHttpServletRequestBuilder request = get("/operator/listMyIncidents");
-		mockMvc.perform(request).andExpect(view().name("redirect:/login"));
-	}
-
-	@Test
-	public void testLogOut() throws Exception {
-		MockHttpServletRequestBuilder request = get("/logout");
+	public void testIncis() throws Exception {
+		MockHttpServletRequestBuilder request = get("/agent/listSensors").session(session);
 		mockMvc.perform(request).andExpect(view().name("redirect:/login"));
 	}
 }
