@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head th:replace="fragments/head" />
+
 <body>
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
@@ -18,12 +19,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="inci : ${indicentsList}">
-						<td th:text="${inci.title}">Incident</td>
-						<td th:text="${inci.description}">Description</td>
-                        <td th:text="${inci.status}">State</td>
-                        <td><a th:href="${'/incident/details/' + inci.id}" >Details</a></td>
-                        <td><a th:href="${'/incident/edit/' + inci.id}" >Edit</a></td>
+					<tr th:each="incident : ${incidents}">
+						<td th:text="${incident.title}">Incident</td>
+						<td th:text="${incident.description}">Description</td>
+						<td th:text="${incident.status}">State</td>
+						<td><a class="awstable-button" th:href="${'/incident/details/' + incident.incidentId}">Details</a></td>
+						<td><a class="awstable-button" th:href="${'/incident/edit/' + incident.incidentId}">Edit</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -31,4 +32,5 @@
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>
+
 </html>

@@ -1,6 +1,5 @@
 package com.uniovi.controllers;
 
-import java.util.List;
 
 import org.springframework.lang.Nullable;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -15,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.uniovi.client.IncidentService;
 import com.uniovi.entitites.Incident;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 @EnableScheduling
 public class IncidentController {
 
@@ -23,9 +25,10 @@ public class IncidentController {
 	public String getListOpen(Model model, @Nullable @CookieValue("operatorId") String opId) {
 		if (opId == null)
 			return "redirect:/login";
-		List<Incident> incidents = IncidentService.getAllOpenIncidents();
-		model.addAttribute("incidentsList", incidents);
-		return "incidents";
+		Incident[] incidents = IncidentService.getAllOpenIncidents();
+		model.addAttribute("incidents", incidents);
+		log.info("Incidents sent to the model: " + incidents.length);
+		return "incident/list";
 	}
 
 	@RequestMapping("/incident/details/{id}")
