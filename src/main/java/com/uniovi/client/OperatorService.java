@@ -56,10 +56,11 @@ public class OperatorService {
 
 	public static HttpResponse<JsonNode> authenticate(String login, String password) {
 		Map<String, String> map = new HashMap<>();
+		HttpResponse<JsonNode> response = null;
 		map.put("email", login);
 		map.put("password", password);
 		try {
-			HttpResponse<JsonNode> response = Unirest.post(API_GATEWAY + "/auth")
+			response = Unirest.post(API_GATEWAY + "/auth")
 					.header("Content-Type", "application/json").body(new JSONObject(map)).asJson();
 			if (response.getStatus() == HttpStatus.SC_OK) {
 				log.debug("Login succeded");
@@ -69,7 +70,7 @@ public class OperatorService {
 		} catch (UnirestException e) {
 			log.debug("The login didn't succeded");
 		}
-		return null;
+		return response;
 	}
 
 }
