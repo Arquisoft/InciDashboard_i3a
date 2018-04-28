@@ -21,12 +21,12 @@ import com.uniovi.entitites.UserInfo;
 @Controller
 public class OperatorController {
 
-	@RequestMapping("/")
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String getLogin() {
 		return "login";
 	}
 
-	@RequestMapping("/login")
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String getLoginAux() {
 		return "login";
 	}
@@ -47,7 +47,7 @@ public class OperatorController {
 
 			return "redirect:/operator/list";
 		}
-		return "redirect:/login?error=true";
+		return "redirect:/login";
 	}
 
 	@RequestMapping("/operator/listMyIncidents")
