@@ -54,9 +54,20 @@ public class IncidentController {
 			return "redirect:/login";
 		if (!id.equals(incident.getIncidentId()))
 			return "redirect:/incident/details/" + incident.getIncidentId();
-
+		assignOp(opId, incident);
 		IncidentService.saveIncident(incident);
 		return "redirect:/incident/details/" + id;
+	}
+
+	private void assignOp(String opId, Incident incident) {
+		switch (incident.getStatus()) {
+		case "OPEN":
+			incident.setOperatorId("");
+			break;
+		default:
+			incident.setOperatorId(opId);
+			break;
+		}
 	}
 
 }

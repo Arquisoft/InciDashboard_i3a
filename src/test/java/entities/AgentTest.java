@@ -28,8 +28,6 @@ public class AgentTest {
 		Agent aux = new Agent();
 		aux.setName("pepe");
 		aux.setKindCode(1);
-		//assertTrue(aux.equals(agent));
-		//assertTrue(aux.hashCode() == agent.hashCode());
 
 		agent.setEmail("paco");
 		assertTrue(agent.getEmail().equals("paco"));
@@ -42,8 +40,6 @@ public class AgentTest {
 
 		aux.setLocation("39N56W");
 		assertTrue(aux.getLocation().equals("39N56W"));
-
-		//assertTrue(agent.toString().equals("Agent [username=paco, kind=2]"));
 	}
 
 }
