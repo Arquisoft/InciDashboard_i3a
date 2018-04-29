@@ -5,18 +5,18 @@
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h2>Incidents dashboard</h2>
+		<h2>Incident's details</h2>
 		<div class="panel panel-default">
-			<div class="panel-heading">Incident name</div>
-			<div class="panel-body" th:text="${incident.name}"></div>
+			<div class="panel-heading">Incident's name</div>
+			<div class="panel-body" th:text="${incident.title}"></div>
 		</div>
 		<div class="panel panel-default">
-			<div class="panel-heading">Incident description</div>
+			<div class="panel-heading">Incident's description</div>
 			<div class="panel-body" th:text="${incident.description}"></div>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading">State</div>
-			<div class="panel-body" th:text="${incident.state}"></div>
+			<div class="panel-body" th:text="${incident.status}"></div>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading">Location</div>

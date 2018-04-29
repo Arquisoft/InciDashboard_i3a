@@ -10,6 +10,9 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.uniovi.entitites.Incident;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class IncidentService {
 
 	static String API_GATEWAY = "http://asw-i3a-zuul-eu-west-1.guill.io/incidents_service";
@@ -55,23 +58,30 @@ public class IncidentService {
 
 	}
 
-	public static List<Incident> getAllOpenIncidents() {
+	public static Incident[] getAllOpenIncidents() {
 		try {
 			HttpResponse<JsonNode> response = Unirest.post(API_GATEWAY + "/incidents?status=OPEN").asJson();
 			ObjectMapper mapper = new ObjectMapper();
-			List<Incident> items = mapper.readValue(response.getBody().toString(),
-					mapper.getTypeFactory().constructParametricType(List.class, Incident.class));
+			Incident[] items = mapper.readValue(response.getBody().toString(), Incident[].class);
+			log.info("Incidents retrieved: " + items.length);
 
 			return items;
 		} catch (IOException | UnirestException e) {
-			e.printStackTrace();
+			log.error("Error getting all open incidents: " + e.getMessage());
 			return null;
 		}
 
 	}
 
 	public static void saveIncident(Incident inci) {
-
+		try {
+			String obsAsString = new ObjectMapper().writeValueAsString(inci);
+			JsonNode json = new JsonNode(obsAsString);
+			Unirest.post(API_GATEWAY + "/save" + inci.getIncidentId())
+					.header("Content-Type", "application/json; charset=utf8;").body(json).asJson().getBody();
+		} catch (IOException | UnirestException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

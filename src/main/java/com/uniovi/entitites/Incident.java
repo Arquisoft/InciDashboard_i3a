@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -17,28 +16,20 @@ import lombok.Data;
 @Document(collection = "incidents")
 public class Incident {
 
-	@Id
-	private ObjectId id;
-
 	private String title;
-
 	private String description;
-
 	private String status;
-
 	private String location;
-
 	private String[] tags;
-
 	private String[] multimedia;
-
 	private Map<String, String> property_value;
-
 	private List<Comment> comments;
-
 	private String agentId;
-
 	private String operatorId;
+	private String incidentId = "";
+
+	public Incident() {
+	}
 
 	public Incident(String title, String description, String status, String location, String[] tags,
 			String[] multimedia, Map<String, String> property_value, List<Comment> comments, String agentId,
@@ -62,14 +53,18 @@ public class Incident {
 
 	@Override
 	public String toString() {
-		String aux = "Incident [id=" + id + ", title=" + title + ", description=" + description + ", status=" + status
-				+ ", location=" + location + ", tags=" + Arrays.toString(tags) + ", multimedia="
+		String aux = "Incident [id=" + incidentId + ", title=" + title + ", description=" + description + ", status="
+				+ status + ", location=" + location + ", tags=" + Arrays.toString(tags) + ", multimedia="
 				+ Arrays.toString(multimedia) + ", property_value=" + property_value + ", comments=";
 		for (Comment c : comments)
 			aux += c.getComment() + ", ";
 		aux += ", agentId=" + agentId + ", operatorId=" + operatorId + "]";
 
 		return aux;
+	}
+
+	public String getDate() {
+		return new ObjectId(this.incidentId).getDate().toString();
 	}
 
 }

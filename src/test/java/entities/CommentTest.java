@@ -30,6 +30,11 @@ public class CommentTest {
 
 		assertTrue(comment.toString().equals("Comment [comment=Prueba, operatorId=235b]"));
 
+		aux = new Comment();
+		assertNull(aux.getComment());
+		assertNull(aux.getDate());
+		assertNull(aux.getOperatorId());
+
 	}
 
 }

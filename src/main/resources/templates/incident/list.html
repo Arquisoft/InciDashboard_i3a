@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head th:replace="fragments/head" />
+
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container">
@@ -8,17 +9,17 @@
 		<div class="panel panel-default table-responsive">
 			<table class="table table-hover table-striped" th:fragment="tableIncidents" id="tableIncidents">
 				<thead class="thead-dark">
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                </thead>
+					<th>Name</th>
+					<th>Status</th>
+					<th>Date</th>
+				</thead>
 				<tbody id="tableContents">
-					<tr th:each="incident : ${incidents}" th:id="${incident.id}"> 
-						<td th:text="${incident.name}"></td>
-						<td th:text="${incident.description}"></td>
+					<tr th:each="incident : ${incidents}" th:id="${incident.incidentId}">
+						<td th:text="${incident.title}"></td>
 						<td th:text="${incident.status}"></td>
-                        <td th:text="${incident.date}"></td>
+						<td th:text="${incident.getDate()}"></td>
+						<td><a class="awstable-button" th:href="${'/incident/details/' + incident.incidentId}">Details</a></td>
+						<td><a class="awstable-button" th:href="${'/incident/edit/' + incident.incidentId}">Edit</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -26,4 +27,5 @@
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>
+
 </html>

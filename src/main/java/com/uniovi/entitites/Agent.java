@@ -1,30 +1,15 @@
 package com.uniovi.entitites;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import lombok.Data;
 
 @Data
-@Document(collection = "agents")
 public class Agent {
 
-	@Id
-	private ObjectId id;
-
-	private String username;
-	private int kind;
-
-	public Agent(String username, int kind) {
-		super();
-		this.username = username;
-		this.kind = kind;
-	}
-
-	@Override
-	public String toString() {
-		return "Agent [username=" + username + ", kind=" + kind + "]";
-	}
-
+	private String name;
+	private String email;
+	private String id;
+	private String location;
+	private int kindCode;
+	private String kind;
+	private String agentId;
 }
