@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head th:replace="fragments/head" />
+
 <body>
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
@@ -21,9 +22,36 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">Location</div>
 			<div class="panel-body" th:text="${incident.location}"></div>
-            <div th:if="${incident.location}!= """>
-				    <iframe width="400" height="250" frameborder="0" style="border:0" th:src="${mapSrc}" allowfullscreen></iframe>
-                </div>
+			<div id="map" style="min-height: 500px"></div>
+			<script th:inline="javascript">
+				/*<![CDATA[*/
+				function initMap() {
+					var uluru = {
+						lat: /*[[${lat}]]*/ ,
+						lng: /*[[${lng}]]*/
+					};
+					var contentString = /*[[${incident.location}]]*/ ;
+					var infowindow = new google.maps.InfoWindow({
+						content: contentString
+					});
+					var map = new google.maps.Map(document.getElementById('map'), {
+						zoom: 15,
+						center: uluru,
+						mapTypeId: 'hybrid'
+					});
+					var marker = new google.maps.Marker({
+						position: uluru,
+						map: map,
+						title: /*[[${incident.location}]]*/
+					});
+					marker.addListener('click', function() {
+						infowindow.open(map, marker);
+					});
+				}
+				/*]]>*/
+			</script>
+			<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC-BZDN5YUHWapbhMk2xwValmvBx8meFs&callback=initMap">
+			</script>
 		</div>
 		<div class="panel panel-default" th:if="${!#lists.isEmpty(incident.tags)}">
 			<div class="panel-heading">Tags</div>
@@ -39,11 +67,12 @@
 		</div>
 		<div class="panel panel-default" th:if="${!#lists.isEmpty(incident.comments)}">
 			<div class="panel-heading">Comments</div>
-			<div  th:each="comment : ${incident.comments}">
+			<div th:each="comment : ${incident.comments}">
 				<p class="panel-body" th:text="${comment}"></p>
 			</div>
 		</div>
 	</div>
 	<footer th:replace="fragments/footer" /></footer>
 </body>
+
 </html>

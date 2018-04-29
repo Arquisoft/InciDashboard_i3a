@@ -36,8 +36,8 @@ public class AgentController {
 		Agent sen = AgentService.getAgent(id);
 		log.info("Deatils of sensor: " + id);
 		model.addAttribute("sensor", sen);
-		model.addAttribute("mapSrc", "https://www.google.com/maps/embed/v1/view?key="
-				+ "AIzaSyCC-BZDN5YUHWapbhMk2xwValmvBx8meFs&center=" + sen.getLocation() + "&zoom=13&maptype=satellite");
+		model.addAttribute("lat", Double.parseDouble(sen.getLocation().split(", ")[0]));
+		model.addAttribute("lng", Double.parseDouble(sen.getLocation().split(", ")[1]));
 		log.info("Location: " + sen.getLocation());
 		return "agent/detailsSensor";
 	}

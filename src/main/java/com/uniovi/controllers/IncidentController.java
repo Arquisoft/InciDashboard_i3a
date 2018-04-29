@@ -36,9 +36,8 @@ public class IncidentController {
 			return "redirect:/login";
 		Incident inci = IncidentService.getIncident(id);
 		model.addAttribute("incident", inci);
-		model.addAttribute("mapSrc",
-				"https://www.google.com/maps/embed/v1/view?key=AIzaSyCC-BZDN5YUHWapbhMk2xwValmvBx8meFs&center="
-						+ inci.getLocation() + "&zoom=13&maptype=satellite");
+		model.addAttribute("lat", Double.parseDouble(inci.getLocation().split(", ")[0]));
+		model.addAttribute("lng", Double.parseDouble(inci.getLocation().split(", ")[1]));
 		log.info("Seeing incent: " + id + " details");
 		return "incident/details";
 	}
@@ -50,7 +49,7 @@ public class IncidentController {
 		Incident incident = IncidentService.getIncident(id);
 		model.addAttribute("incident", incident);
 		log.info("Page for editing incident: " + id);
-		return "incident/edit";
+		return "redirect:/incident/edit";
 	}
 
 	@RequestMapping(value = "/incident/edit/{id}", method = RequestMethod.POST)
