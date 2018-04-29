@@ -34,7 +34,11 @@ public class IncidentController {
 	public String getDetail(Model model, @PathVariable String id, @Nullable @CookieValue("operatorId") String opId) {
 		if (opId == null)
 			return "redirect:/login";
-		model.addAttribute("incident", IncidentService.getIncident(id));
+		Incident inci = IncidentService.getIncident(id);
+		model.addAttribute("incident", inci);
+		model.addAttribute("mapSrc",
+				"https://www.google.com/maps/embed/v1/view?key=AIzaSyCC-BZDN5YUHWapbhMk2xwValmvBx8meFs&center="
+						+ inci.getLocation() + "&zoom=13&maptype=satellite");
 		log.info("Seeing incent: " + id + " details");
 		return "incident/details";
 	}

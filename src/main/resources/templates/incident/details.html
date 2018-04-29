@@ -21,6 +21,9 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">Location</div>
 			<div class="panel-body" th:text="${incident.location}"></div>
+            <div th:if="${incident.location}!= """>
+				    <iframe width="400" height="250" frameborder="0" style="border:0" th:src="${mapSrc}" allowfullscreen></iframe>
+                </div>
 		</div>
 		<div class="panel panel-default" th:if="${!#lists.isEmpty(incident.tags)}">
 			<div class="panel-heading">Tags</div>
