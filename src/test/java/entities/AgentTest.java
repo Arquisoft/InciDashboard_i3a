@@ -1,11 +1,9 @@
 package entities;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Date;
-
-import org.bson.types.ObjectId;
 import org.junit.Test;
 
 import com.uniovi.entitites.Agent;
@@ -35,11 +33,17 @@ public class AgentTest {
 		assertTrue(agent.getKindCode() == 2);
 
 		assertTrue(agent.getId() == null);
-		agent.setAgentId(new ObjectId(new Date()).toString());
+		agent.setAgentId("asdfgh");
 		assertTrue(agent.getAgentId() != null);
+
+		assertFalse(aux.equals(agent));
+		assertFalse(aux.hashCode() == agent.hashCode());
 
 		aux.setLocation("39N56W");
 		assertTrue(aux.getLocation().equals("39N56W"));
+
+		assertTrue(agent.toString()
+				.equals("Agent(name=pepe, email=paco, id=null, location=null, kindCode=2, kind=null, agentId=asdfgh)"));
 	}
 
 }

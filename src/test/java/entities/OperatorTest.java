@@ -37,5 +37,6 @@ public class OperatorTest {
 		assertFalse(operator.getId() == null);
 
 		assertTrue(operator.toString().equals("Operator [email=paco, password=1234]"));
+
 	}
 }
