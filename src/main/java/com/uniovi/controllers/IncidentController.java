@@ -35,6 +35,7 @@ public class IncidentController {
 		if (opId == null)
 			return "redirect:/login";
 		model.addAttribute("incident", IncidentService.getIncident(id));
+		log.info("Seeing incent: " + id + " details");
 		return "incident/details";
 	}
 
@@ -44,6 +45,7 @@ public class IncidentController {
 			return "redirect:/login";
 		Incident incident = IncidentService.getIncident(id);
 		model.addAttribute("incident", incident);
+		log.info("Page for editing incident: " + id);
 		return "incident/edit";
 	}
 
@@ -52,10 +54,14 @@ public class IncidentController {
 			@Nullable @CookieValue("operatorId") String opId) {
 		if (opId == null)
 			return "redirect:/login";
-		if (!id.equals(incident.getIncidentId()))
+		if (!id.equals(incident.getIncidentId())) {
+			log.info("The id of the url doesn't math the incident you want to change");
 			return "redirect:/incident/details/" + incident.getIncidentId();
+		}
 		assignOp(opId, incident);
+		log.info("Operator assigned to the incident");
 		IncidentService.saveIncident(incident);
+		log.info("Incident updated in the database");
 		return "redirect:/incident/details/" + id;
 	}
 

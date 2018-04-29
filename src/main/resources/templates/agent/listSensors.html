@@ -16,7 +16,7 @@
 					<th class="col-md-1"></th>
 				</thead>
 				<tbody id="tableContents">
-					<tr th:each="sen : ${sensors}" th:id="${sen.agentId}">
+					<tr th:each="sen : ${sensors}" th:id="${sen.id}">
 						<td th:text="${sen.name}"></td>
                         <td th:text="${sen.id}"></td>
 						<td th:text="${sen.location}"></td>
