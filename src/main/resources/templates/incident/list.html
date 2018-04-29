@@ -14,7 +14,7 @@
 					<th>Date</th>
 				</thead>
 				<tbody id="tableContents">
-					<tr th:each="incident : ${incidents}" th:id="${incident.id}">
+					<tr th:each="incident : ${incidents}" th:id="${incident.incidentId}">
 						<td th:text="${incident.title}"></td>
 						<td th:text="${incident.status}"></td>
 						<td th:text="${incident.getDate()}"></td>

@@ -1,6 +1,5 @@
 package com.uniovi.controllers;
 
-
 import org.springframework.lang.Nullable;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Controller;
@@ -53,8 +52,8 @@ public class IncidentController {
 			@Nullable @CookieValue("operatorId") String opId) {
 		if (opId == null)
 			return "redirect:/login";
-		if (!id.equals(incident.getId().toString()))
-			return "redirect:/incident/details/" + incident.getId().toString();
+		if (!id.equals(incident.getIncidentId()))
+			return "redirect:/incident/details/" + incident.getIncidentId();
 
 		IncidentService.saveIncident(incident);
 		return "redirect:/incident/details/" + id;

@@ -10,13 +10,15 @@
 			<table class="table table-hover table-striped" th:fragment="tableSensors" id="tableSensors">
 				<thead class="thead-dark">
 					<th>Name</th>
+                    <th>ID</th>
 					<th>Location</th>
 					<th>Email</th>
 					<th class="col-md-1"></th>
 				</thead>
 				<tbody id="tableContents">
-					<tr th:each="sen : ${sensors}" th:id="${sen.id}">
+					<tr th:each="sen : ${sensors}" th:id="${sen.agentId}">
 						<td th:text="${sen.name}"></td>
+                        <td th:text="${sen.id}"></td>
 						<td th:text="${sen.location}"></td>
 						<td th:text="${sen.email}"></td>
 						<td>

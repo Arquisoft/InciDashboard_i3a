@@ -13,7 +13,10 @@
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-heading">Sensor's location</div>
-				<div class="panel-body" th:text="${sensor.location}"></div>
+                <div class="panel-body" th:text="${sensor.location}"></div>
+                <div th:if="${sensor.location != ""}">
+				    <iframe width="400" height="250" frameborder="0" style="border:0" th:src="${mapSrc}" allowfullscreen></iframe>
+                </div>
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-heading">Sensor's evolution of incidents</div>

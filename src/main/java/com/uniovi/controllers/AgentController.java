@@ -29,7 +29,10 @@ public class AgentController {
 	public String getDetail(Model model, @PathVariable String id, @Nullable @CookieValue("operatorId") String opId) {
 		if (opId == null)
 			return "redirect:/login";
-		model.addAttribute("sensor", AgentService.getAgent(id));
+		Agent sen = AgentService.getAgent(id);
+		model.addAttribute("sensor", sen);
+		model.addAttribute("mapSrc", "https://www.google.com/maps/embed/v1/view?key="
+				+ "AIzaSyCC-BZDN5YUHWapbhMk2xwValmvBx8meFs&center=" + sen.getLocation() + "&zoom=13&maptype=satellite");
 		return "agent/detailsSensor";
 	}
 }

@@ -74,7 +74,14 @@ public class IncidentService {
 	}
 
 	public static void saveIncident(Incident inci) {
-
+		try {
+			String obsAsString = new ObjectMapper().writeValueAsString(inci);
+			JsonNode json = new JsonNode(obsAsString);
+			Unirest.post(API_GATEWAY + "/save" + inci.getIncidentId())
+					.header("Content-Type", "application/json; charset=utf8;").body(json).asJson().getBody();
+		} catch (IOException | UnirestException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

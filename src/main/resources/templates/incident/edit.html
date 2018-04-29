@@ -12,7 +12,7 @@
 		<p th:text="${incident.description}"></p>
         <p th:text="'Current status:' + ${incident.status}"></p>
 		<form class="form-horizontal" method="post"
-			th:action="${'/incident/edit/' + incident.id}">
+			th:action="${'/incident/edit/' + incident.incidentId}">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="state">Status</label>
 				<div class="col-sm-10">
