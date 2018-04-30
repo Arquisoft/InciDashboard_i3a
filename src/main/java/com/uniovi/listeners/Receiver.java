@@ -29,7 +29,7 @@ public class Receiver {
 
 	private Incident assignOperator(Incident in) {
 		if (in.getOperatorId() == "") {
-			in.setOperatorId(OperatorService.getRandomOperator());
+			in.setOperatorId(OperatorService.getOperatorToAssign());
 			in.setStatus("IN_PROCESS");
 			IncidentService.saveIncident(in);
 		}

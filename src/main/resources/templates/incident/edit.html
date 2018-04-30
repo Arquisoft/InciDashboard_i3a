@@ -8,15 +8,14 @@
 
 
 	<div class="container">
-		<h2 th:text="${'Edit '+ incident.title}">Edit incident</h2>
+		<h2 th:text="'Edit ' + ${incident.title}">Edit incident</h2>
 		<p th:text="${incident.description}"></p>
         <p th:text="'Current status:' + ${incident.status}"></p>
-		<form class="form-horizontal" method="post"
-			th:action="${'/incident/edit/' + incident.incidentId}">
+		<form class="form-horizontal" method="post" th:action="${'/incident/edit/' + incident.incidentId}" th:object="${inciInfo}">
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="state">Status</label>
+				<label class="control-label col-sm-2" for="status">Status</label>
 				<div class="col-sm-10">
-					<select th:value="${incident.status}" name="state" class="form-control">
+					<select th:value="${incident.status}" name="status" class="form-control" id="status">
 						<option id="open" value="OPEN">Open</option>
 						<option id="process" value="IN_PROCESS">In process</option>
 						<option id="close" value="CLOSED">Closed</option>
@@ -25,10 +24,12 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="comment">Comments: </label>
-				<div class="col-sm-10">
+                <div class="col-sm-10">
+				    <label class="control-label col-sm-2" for="comment">Comment</label>
+                </div>
+				<div class="col-sm-30">
 					<textarea rows="5" class="form-control" placeholder="New comment" 
-						name="comments" id="comment" required="false"></textarea>
+						name="comment" id="comment" required="false"></textarea>
 				</div>
 			</div>
 			<div class="form-group">

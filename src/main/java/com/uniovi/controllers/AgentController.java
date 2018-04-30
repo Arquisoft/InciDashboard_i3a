@@ -36,8 +36,10 @@ public class AgentController {
 		Agent sen = AgentService.getAgent(id);
 		log.info("Deatils of sensor: " + id);
 		model.addAttribute("sensor", sen);
-		model.addAttribute("lat", Double.parseDouble(sen.getLocation().split(", ")[0]));
-		model.addAttribute("lng", Double.parseDouble(sen.getLocation().split(", ")[1]));
+		if (sen.getLocation() != "") {
+			model.addAttribute("lat", Double.parseDouble(sen.getLocation().split(", ")[0]));
+			model.addAttribute("lng", Double.parseDouble(sen.getLocation().split(", ")[1]));
+		}
 		log.info("Location: " + sen.getLocation());
 		return "agent/detailsSensor";
 	}

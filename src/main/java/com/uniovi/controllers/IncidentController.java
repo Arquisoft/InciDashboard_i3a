@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.uniovi.client.IncidentService;
+import com.uniovi.entitites.Comment;
+import com.uniovi.entitites.InciInfo;
 import com.uniovi.entitites.Incident;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,8 +38,10 @@ public class IncidentController {
 			return "redirect:/login";
 		Incident inci = IncidentService.getIncident(id);
 		model.addAttribute("incident", inci);
-		model.addAttribute("lat", Double.parseDouble(inci.getLocation().split(", ")[0]));
-		model.addAttribute("lng", Double.parseDouble(inci.getLocation().split(", ")[1]));
+		if (inci.getLocation() != "") {
+			model.addAttribute("lat", Double.parseDouble(inci.getLocation().split(", ")[0]));
+			model.addAttribute("lng", Double.parseDouble(inci.getLocation().split(", ")[1]));
+		}
 		log.info("Seeing incent: " + id + " details");
 		return "incident/details";
 	}
@@ -49,32 +53,43 @@ public class IncidentController {
 		Incident incident = IncidentService.getIncident(id);
 		model.addAttribute("incident", incident);
 		log.info("Page for editing incident: " + id);
-		return "redirect:/incident/edit";
+		return "incident/edit";
 	}
 
 	@RequestMapping(value = "/incident/edit/{id}", method = RequestMethod.POST)
-	public String setEdit(Model model, @PathVariable String id, @ModelAttribute Incident incident,
+	public String setEdit(Model model, @PathVariable String id, @ModelAttribute("inciInfo") InciInfo newInciData,
 			@Nullable @CookieValue("operatorId") String opId) {
 		if (opId == null)
 			return "redirect:/login";
-		if (!id.equals(incident.getIncidentId())) {
-			log.info("The id of the url doesn't math the incident you want to change");
-			return "redirect:/incident/details/" + incident.getIncidentId();
-		}
+		Incident incident = IncidentService.getIncident(id);
+		giveNewDataToIncident(newInciData, incident, opId);
 		assignOp(opId, incident);
+		incident.setIncidentId(id);
 		log.info("Operator assigned to the incident");
 		IncidentService.saveIncident(incident);
 		log.info("Incident updated in the database");
-		return "redirect:/incident/details/" + id;
+		return "redirect:/incidents";
+	}
+
+	private void giveNewDataToIncident(InciInfo newInciData, Incident incident, String opId) {
+		log.info("The old status of the incident is: " + incident.getStatus());
+		log.info("The NEW status: " + newInciData.getStatus());
+		incident.setStatus(newInciData.getStatus());
+		log.info("There are " + incident.getComments().size() + " comments in the incident");
+		log.info("Content of the new comment: " + newInciData.getComment());
+		incident.getComments().add(new Comment(newInciData.getComment(), opId));
+		log.info("UPDATE  " + incident.getComments().size() + " comments in the incident");
 	}
 
 	private void assignOp(String opId, Incident incident) {
 		switch (incident.getStatus()) {
 		case "OPEN":
 			incident.setOperatorId("");
+			log.info("The operator has been desassigned");
 			break;
 		default:
 			incident.setOperatorId(opId);
+			log.info("The new operator " + opId + " has been assigned");
 			break;
 		}
 	}

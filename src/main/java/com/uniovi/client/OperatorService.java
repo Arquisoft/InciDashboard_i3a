@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.apache.http.HttpStatus;
 import org.json.JSONObject;
@@ -22,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class OperatorService {
 
 	static String API_GATEWAY = "http://asw-i3a-zuul-eu-west-1.guill.io/operators_service";
+	private static int operatorCounterAssignment = 0;
 
 	public static List<Operator> getAllOperators() {
 		try {
@@ -48,10 +48,15 @@ public class OperatorService {
 		}
 	}
 
-	public static String getRandomOperator() {
+	public static String getOperatorToAssign() {
 		List<Operator> ops = getAllOperators();
-		Random rn = new Random();
-		return ops.get(rn.nextInt(ops.size())).getId().toString();
+		String idRetOp = ops.get(operatorCounterAssignment).getId().toString();
+		if (operatorCounterAssignment == ops.size() - 1) {
+			operatorCounterAssignment = 0;
+		} else {
+			operatorCounterAssignment++;
+		}
+		return idRetOp;
 	}
 
 	public static HttpResponse<JsonNode> authenticate(String login, String password) {
@@ -60,8 +65,8 @@ public class OperatorService {
 		map.put("email", login);
 		map.put("password", password);
 		try {
-			response = Unirest.post(API_GATEWAY + "/auth")
-					.header("Content-Type", "application/json").body(new JSONObject(map)).asJson();
+			response = Unirest.post(API_GATEWAY + "/auth").header("Content-Type", "application/json")
+					.body(new JSONObject(map)).asJson();
 			if (response.getStatus() == HttpStatus.SC_OK) {
 				log.debug("Login succeded");
 			} else {

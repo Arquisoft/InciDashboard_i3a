@@ -13,7 +13,7 @@
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-heading">Sensor's location</div>
-				<div id="map" style="min-height: 500px"></div>
+				<div id="map" style="min-height: 500px" th:if="${sensor.location} != ''"></div>
 				<script th:inline="javascript">
 					/*<![CDATA[*/
 					function initMap() {

@@ -22,7 +22,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">Location</div>
 			<div class="panel-body" th:text="${incident.location}"></div>
-			<div id="map" style="min-height: 500px"></div>
+			<div id="map" style="min-height: 500px" th:if="${incident.location} != ''"></div>
 			<script th:inline="javascript">
 				/*<![CDATA[*/
 				function initMap() {
