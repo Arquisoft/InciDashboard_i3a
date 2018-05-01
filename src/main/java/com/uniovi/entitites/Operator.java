@@ -4,6 +4,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 
 @Data
@@ -11,11 +13,13 @@ import lombok.Data;
 public class Operator {
 	@Id
 	private ObjectId id;
-
+	private String name;
 	private String email;
-
 	private String password;
-
+    private String operatorId;
+    
+	public Operator() {}
+	
 	public Operator(String email, String password) {
 		super();
 		this.email = email;
