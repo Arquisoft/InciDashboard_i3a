@@ -5,15 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true)
-@Document(collection = "incidents")
 public class Incident {
 
 	private String title;
@@ -22,7 +17,7 @@ public class Incident {
 	private String location;
 	private String[] tags;
 	private String[] multimedia;
-	private Map<String, String> property_value;
+	private Map<String, String> propertyVal;
 	private List<Comment> comments;
 	private String agentId;
 	private String operatorId;
@@ -41,7 +36,7 @@ public class Incident {
 		this.location = location;
 		this.tags = tags;
 		this.multimedia = multimedia;
-		this.property_value = property_value;
+		this.propertyVal = property_value;
 		this.comments = comments;
 		this.agentId = agentId;
 		this.operatorId = operatorId;
@@ -55,7 +50,7 @@ public class Incident {
 	public String toString() {
 		String aux = "Incident [id=" + incidentId + ", title=" + title + ", description=" + description + ", status="
 				+ status + ", location=" + location + ", tags=" + Arrays.toString(tags) + ", multimedia="
-				+ Arrays.toString(multimedia) + ", property_value=" + property_value + ", comments=";
+				+ Arrays.toString(multimedia) + ", property_value=" + propertyVal + ", comments=";
 		for (Comment c : comments)
 			aux += c.getComment() + ", ";
 		aux += ", agentId=" + agentId + ", operatorId=" + operatorId + "]";

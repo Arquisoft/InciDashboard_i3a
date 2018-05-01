@@ -24,6 +24,12 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>com.github.computer-engineering-uniovi</groupId>
+			<artifactId>swift</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
@@ -268,5 +274,12 @@
 		</plugins>
 
 	</reporting>
+	
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 
 </project>		

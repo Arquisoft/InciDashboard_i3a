@@ -13,10 +13,36 @@
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-heading">Sensor's location</div>
-                <div class="panel-body" th:text="${sensor.location}"></div>
-                <div th:if="${sensor.location != ""}">
-				    <iframe width="400" height="250" frameborder="0" style="border:0" th:src="${mapSrc}" allowfullscreen></iframe>
-                </div>
+				<div id="map" style="min-height: 500px" th:if="${sensor.location} != ''"></div>
+				<script th:inline="javascript">
+					/*<![CDATA[*/
+					function initMap() {
+						var uluru = {
+							lat: /*[[${lat}]]*/ ,
+							lng: /*[[${lng}]]*/
+						};
+						var contentString = /*[[${sensor.location}]]*/ ;
+						var infowindow = new google.maps.InfoWindow({
+							content: contentString
+						});
+						var map = new google.maps.Map(document.getElementById('map'), {
+							zoom: 15,
+							center: uluru,
+							mapTypeId: 'hybrid'
+						});
+						var marker = new google.maps.Marker({
+							position: uluru,
+							map: map,
+							title: /*[[${sensor.location}]]*/
+						});
+						marker.addListener('click', function() {
+							infowindow.open(map, marker);
+						});
+					}
+					/*]]>*/
+				</script>
+				<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC-BZDN5YUHWapbhMk2xwValmvBx8meFs&callback=initMap">
+				</script>
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-heading">Sensor's evolution of incidents</div>

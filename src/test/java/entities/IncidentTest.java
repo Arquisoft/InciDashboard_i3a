@@ -64,11 +64,11 @@ public class IncidentTest {
 		incident.setOperatorId("321");
 		assertTrue(incident.getOperatorId().equals("321"));
 
-		assertTrue(incident.getProperty_value().size() == 0);
+		assertTrue(incident.getPropertyVal().size() == 0);
 		Map<String, String> props = new HashMap<>();
 		props.put("accidente", "true");
-		incident.setProperty_value(props);
-		assertTrue(incident.getProperty_value().size() == 1);
+		incident.setPropertyVal(props);
+		assertTrue(incident.getPropertyVal().size() == 1);
 
 		Incident aux = new Incident(incident.getTitle(), incident.getDescription(), incident.getStatus(),
 				incident.getLocation(), incident.getTags(), incident.getMultimedia(), props, incident.getComments(),

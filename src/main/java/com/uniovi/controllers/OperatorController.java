@@ -45,11 +45,15 @@ public class OperatorController {
 						(String) authenticationResponse.getBody().getObject().get("operatorId"));
 				operatorId.setMaxAge(1000);
 				response.addCookie(operatorId);
+				log.info("Cookie added to the response");
 			} catch (JSONException e) {
+				log.info("Failure creating the cookie in the login process");
 				e.printStackTrace();
 			}
+			log.info("Login successful, redirecting to indicents...");
 			return "redirect:/incidents";
 		}
+		log.info("Login failure, redirecting to login...");
 		return "redirect:/login";
 	}
 
@@ -58,6 +62,7 @@ public class OperatorController {
 		if (opId == null)
 			return "redirect:/login";
 		model.addAttribute("incidents", IncidentService.getInProcessIncidentsOfOperator(opId));
+		log.info("Redirecting to the incidents of the operator");
 		return "operator/incidents";
 	}
 
@@ -68,6 +73,7 @@ public class OperatorController {
 		Cookie agentC = new Cookie("operatorId", opId);
 		agentC.setMaxAge(0);
 		response.addCookie(agentC);
+		log.info("Logout and redirecting to the login page");
 		return "redirect:/";
 	}
 }

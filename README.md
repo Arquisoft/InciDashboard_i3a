@@ -15,7 +15,6 @@ The application also allows them to monitorize and see statistics of all of them
 # Authors
 
 * [Elena Allegue González](https://github.com/eleallegue)
-* [Marcos Álvarez García](https://github.com/alvarezGarciaMarcos)
 * [Anamaria Cotorei](https://github.com/UO251547)
 * [Cristina Vena Naredo](https://github.com/cristinavn)
 
