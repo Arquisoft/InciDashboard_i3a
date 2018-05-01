@@ -59,16 +59,18 @@
 				<div class="panel-body" th:text="${tag}"></div>
 			</div>
 		</div>
-		<div class="panel panel-default" th:if="${!#lists.isEmpty(incident.property_value)}">
+		<div class="panel panel-default" th:if="${!#lists.isEmpty(incident.propertyVal)}">
 			<div class="panel-heading">Property values</div>
-			<div th:each="pv : ${incident.property_value}">
+			<div th:each="pv : ${incident.propertyVal}">
 				<div class="panel-body" th:text="${pv}"></div>
 			</div>
 		</div>
 		<div class="panel panel-default" th:if="${!#lists.isEmpty(incident.comments)}">
 			<div class="panel-heading">Comments</div>
 			<div th:each="comment : ${incident.comments}">
-				<p class="panel-body" th:text="${comment}"></p>
+				<p class="panel-body" th:text="${comment.operatorId}"></p>
+				<p class="panel-body" th:text="${comment.date.toString()}"></p>
+				<p class="panel-body" th:text="${comment.comment}"></p>
 			</div>
 		</div>
 	</div>

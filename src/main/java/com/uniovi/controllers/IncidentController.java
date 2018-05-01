@@ -38,16 +38,19 @@ public class IncidentController {
 			return "redirect:/login";
 		Incident inci = IncidentService.getIncident(id);
 		model.addAttribute("incident", inci);
-		if (inci.getLocation() != "") {
+		try {
+		    if(!inci.getLocation().isEmpty() && inci.getLocation().contains(", "))
 			model.addAttribute("lat", Double.parseDouble(inci.getLocation().split(", ")[0]));
 			model.addAttribute("lng", Double.parseDouble(inci.getLocation().split(", ")[1]));
+		} catch (Exception e ) {
+		    log.error("Error parsin the location of the incident no map will be displayed.");
 		}
 		log.info("Seeing incent: " + id + " details");
 		return "incident/details";
 	}
 
-	@RequestMapping(value = "/incident/edit/{id}")
-	public String getEdit(Model model, @PathVariable String id, @Nullable @CookieValue("operatorId") String opId) {
+	@RequestMapping(value = "/incident/edit/{id}", method = RequestMethod.GET)
+	public String getEdit(Model model, @Nullable @CookieValue("operatorId") String opId, @PathVariable String id) {
 		if (opId == null)
 			return "redirect:/login";
 		Incident incident = IncidentService.getIncident(id);
@@ -57,8 +60,8 @@ public class IncidentController {
 	}
 
 	@RequestMapping(value = "/incident/edit/{id}", method = RequestMethod.POST)
-	public String setEdit(Model model, @PathVariable String id, @ModelAttribute("inciInfo") InciInfo newInciData,
-			@Nullable @CookieValue("operatorId") String opId) {
+	public String setEdit(Model model, @ModelAttribute("inciInfo") InciInfo newInciData,
+			@Nullable @CookieValue("operatorId") String opId, @PathVariable String id) {
 		if (opId == null)
 			return "redirect:/login";
 		Incident incident = IncidentService.getIncident(id);
@@ -66,6 +69,7 @@ public class IncidentController {
 		assignOp(opId, incident);
 		incident.setIncidentId(id);
 		log.info("Operator assigned to the incident");
+		
 		IncidentService.saveIncident(incident);
 		log.info("Incident updated in the database");
 		return "redirect:/incidents";
