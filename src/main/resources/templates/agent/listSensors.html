@@ -5,24 +5,26 @@
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h2 id="usuarios_titulo">Sensors</h2>
-		<div class="panel panel-default table-responsive">
-			<table class="table table-hover table-striped" th:fragment="tableSensors" id="tableSensors">
-				<thead class="thead-dark">
-					<th>Name</th>
-                    <th>ID</th>
-					<th>Location</th>
-					<th>Email</th>
-					<th class="col-md-1"></th>
+		<h2>Sensors</h2>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>ID</th>
+						<th>Location</th>
+						<th>Email</th>
+						<th class="col-md-1"></th>
+					</tr>
 				</thead>
-				<tbody id="tableContents">
+				<tbody>
 					<tr th:each="sen : ${sensors}" th:id="${sen.id}">
 						<td th:text="${sen.name}"></td>
-                        <td th:text="${sen.id}"></td>
+						<td th:text="${sen.id}"></td>
 						<td th:text="${sen.location}"></td>
 						<td th:text="${sen.email}"></td>
 						<td>
-							<a class="awstable-button" th:href="${'/agent/sensorDetails/' + sen.agentId}">details</a>
+							<a class="awstable-button" th:href="${'/agent/sensorDetails/' + sen.agentId}">Details</a>
 						</td>
 					</tr>
 				</tbody>
@@ -31,5 +33,10 @@
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>
+<script>
+	$(document).ready(function() {
+		$('#listSensors a:first').addClass('active');
+	});
+</script>
 
 </html>

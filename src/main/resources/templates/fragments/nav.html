@@ -1,21 +1,21 @@
 <nav class="awsnav">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-        <p class="awsnav-title">Operator's Web Client</p>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-            <li id="listOpenIncidents" class="awsnav-element"><a href="/incidents">List All Open Incidents</a></li>
-            <li id="listMyIncidents" class="awsnav-element"><a href="/operator/listMyIncidents">List My Incidents</a></li>
-            <li id="listSensors" class="awsnav-element"><a href="/agent/listSensors">List All Sensors</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-				<li><a href="/logout"> <span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-        </ul>
-      </div>
+      <p class="awsnav-title">Operator's Web Client</p>
     </div>
-  </nav>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li id="listMyIncidents" class="awsnav-element"><a href="/operator/listMyIncidents">My Incidents</a></li>
+        <li id="listOpenIncidents" class="awsnav-element"><a href="/incidents">All Open Incidents</a></li>
+        <li id="listSensors" class="awsnav-element"><a href="/agent/listSensors">Sensors</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/logout"> <span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

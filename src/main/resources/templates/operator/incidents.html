@@ -1,36 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head th:replace="fragments/head" />
+<script src="/updateTableOfIncidents.js"></script>
 
 <body>
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h2 id="incidencias_titulo">My incidents</h2>
-		<div class="table-responsive">
-			<table class="table" th:fragment="tableIncidents" id="tableIncidents">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Description</th>
-						<th>State</th>
-						<th class="col-md-1"></th>
-						<th class="col-md-1"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="incident : ${incidents}">
-						<td th:text="${incident.title}">Incident</td>
-						<td th:text="${incident.description}">Description</td>
-						<td th:text="${incident.status}">State</td>
-						<td><a class="awstable-button" th:href="${'/incident/details/' + incident.incidentId}">Details</a></td>
-						<td><a class="awstable-button" th:href="${'/incident/edit/' + incident.incidentId}">Edit</a></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		<div class="container">
+      <h2>My Incidents</h2>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th>Date submitted</th>
+              <th class="col-md-1"></th>
+							<th class="col-md-1"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="incident : ${incidents}">
+              <td th:text="${incident.title}" class="awstable-shorttext">Fire at the petrol station</td>
+              <td th:text="${incident.description}" class="awstable-longtext">There is fire at the petros station lalalalalalalalallalalalalalallala long textisadbhf ksadhjfliszhniasdhgpierahgñanvpiu9aerhganfvàiehrg98hgñkadjshg98erhgpiuhgopahgvp9qerhg</td>
+              <td th:text="${incident.status}">OPEN</td>
+              <td th:text="${incident.getDate()}">25/04/2018</td>
+              <td><a class="awstable-button" th:href="${'/incident/details/' + incident.incidentId}">Details</a></td>
+							<td><a class="awstable-button" th:href="${'/incident/edit/' + incident.incidentId}">Edit</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>
+<script>
+	$(document).ready(function() {
+		$('#listMyIncidents a:first').addClass('active');
+	});
+</script>
 
 </html>

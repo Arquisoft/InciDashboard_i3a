@@ -5,27 +5,40 @@
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h2 id="usuarios_titulo">Incidents</h2>
-		<div class="panel panel-default table-responsive">
-			<table class="table table-hover table-striped" th:fragment="tableIncidents" id="tableIncidents">
-				<thead class="thead-dark">
-					<th>Name</th>
-					<th>Status</th>
-					<th>Date</th>
-				</thead>
-				<tbody id="tableContents">
-					<tr th:each="incident : ${incidents}" th:id="${incident.incidentId}">
-						<td th:text="${incident.title}"></td>
-						<td th:text="${incident.status}"></td>
-						<td th:text="${incident.getDate()}"></td>
-						<td><a class="awstable-button" th:href="${'/incident/details/' + incident.incidentId}">Details</a></td>
-						<td><a class="awstable-button" th:href="${'/incident/edit/' + incident.incidentId}">Edit</a></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		<div class="container">
+      <h2>Incidents</h2>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th>Date submitted</th>
+              <th class="col-md-1"></th>
+							<th class="col-md-1"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="incident : ${incidents}">
+              <td th:text="${incident.title}" class="awstable-shorttext">Fire at the petrol station</td>
+              <td th:text="${incident.description}" class="awstable-longtext">There is fire at the petros station lalalalalalalalallalalalalalallala long textisadbhf ksadhjfliszhniasdhgpierahgñanvpiu9aerhganfvàiehrg98hgñkadjshg98erhgpiuhgopahgvp9qerhg</td>
+              <td th:text="${incident.status}">OPEN</td>
+              <td th:text="${incident.getDate()}">25/04/2018</td>
+              <td><a class="awstable-button" th:href="${'/incident/details/' + incident.incidentId}">Details</a></td>
+							<td><a class="awstable-button" th:href="${'/incident/edit/' + incident.incidentId}">Edit</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>
+<script>
+	$(document).ready(function() {
+		$('#listOpenIncidents a:first').addClass('active');
+	});
+</script>
 
 </html>
