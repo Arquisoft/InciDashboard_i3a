@@ -1,45 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head th:replace="fragments/head" />
+
 <body>
 
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
 
 
-	<div class="container">
-		<h2 th:text="'Edit ' + ${incident.title}">Edit incident</h2>
-		<p th:text="${incident.description}"></p>
-        <p th:text="'Current status:' + ${incident.status}"></p>
-		<form class="form-horizontal" method="post" th:action="${'/incident/edit/' + incident.incidentId}" th:object="${inciInfo}">
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="status">Status</label>
-				<div class="col-sm-10">
-					<select th:value="${incident.status}" name="status" class="form-control" id="status">
-						<option id="open" value="OPEN">Open</option>
-						<option id="process" value="IN_PROCESS">In process</option>
-						<option id="close" value="CLOSED">Closed</option>
-						<option id="cancel" value="CANCELLED">Cancelled</option>
-					</select>
+	<div class="container" id="create-incident-cont">
+
+		<div>
+			<h2 class="aws-page-header">Edit Incident</h2>
+		</div>
+		<form id="Datos" action="/incidents/new" method="post" th:action="${'/incident/edit/' + incident.incidentId}" th:object="${inciInfo}">
+			<div class="control-group">
+				<label class="hero-label">Title</label>
+				<div class="controls">
+					<p class="account-name" th:text="${incident.title}">***</p>
+				</div>
+				<label class="hero-label">Description</label>
+				<div class="controls">
+					<p class="account-name" th:text="${incident.description}"></p>
 				</div>
 			</div>
-			<div class="form-group">
-                <div class="col-sm-10">
-				    <label class="control-label col-sm-2" for="comment">Comment</label>
-                </div>
-				<div class="col-sm-30">
-					<textarea rows="5" class="form-control" placeholder="New comment" 
-						name="comment" id="comment" required="false"></textarea>
+			<div class="control-group">
+				<label class="hero-label control-label col-sm-2" for="status">Status:</label>
+				<div class="controls">
+					<select id="status" name="status" class="form-control">
+							<option id="open" value="OPEN">Open</option>
+							<option id="process" value="IN_PROCESS">In process</option>
+							<option id="close" value="CLOSED">Closed</option>
+							<option id="cancel" value="CANCELLED">Cancelled</option>
+	         </select>
+				</div>
+				<script th:inline="javascript">
+				/*<![CDATA[*/
+					$(document).ready(function() {
+						var status = /*[[${incident.status}]]*/
+						if(status=='OPEN') {
+							document.getElementById('status').selectedIndex = 0;
+						} if(status=='IN_PROCESS') {
+							document.getElementById('status').selectedIndex = 1;
+						} if(status=='CLOSED') {
+							document.getElementById('status').selectedIndex = 2;
+						} if(status=='CANCELLED') {
+							document.getElementById('status').selectedIndex = 3;
+						}
+					});
+					/*]]>*/
+				</script>
+			</div>
+			<div class="control-group control-last">
+				<label class="hero-label control-label col-sm-2" for="comment">Comment*:</label>
+				<div class="controls">
+					<textarea id="comment" name="comment" type="text" class="form-control" form="Datos" required></textarea>
 				</div>
 			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" id="save" class="btn btn-primary">Save</button>
-				</div>
+			<div class="control-group pull-right">
+				<button id="Enter" name="Enter" type="submit" value="enter" class="btn btn-primary">Save Incident</button>
 			</div>
-		</form>
+	</div>
+	</form>
+
 	</div>
 	<footer th:replace="fragments/footer" />
 
 </body>
+
 </html>
