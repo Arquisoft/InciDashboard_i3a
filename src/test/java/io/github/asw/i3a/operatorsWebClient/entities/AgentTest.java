@@ -14,8 +14,8 @@ public class AgentTest {
 
 	@Test
 	public void allPropertiesTest() {
-		assertPojoMethodsFor(Agent.class).testing(Method.GETTER, Method.SETTER).testing(Method.EQUALS)
-				.testing(Method.HASH_CODE).testing(Method.CONSTRUCTOR).areWellImplemented();
+		assertPojoMethodsFor(Agent.class).testing(Method.GETTER, Method.SETTER, Method.EQUALS, Method.HASH_CODE,
+				Method.TO_STRING, Method.CONSTRUCTOR).areWellImplemented();
 	}
 
 }

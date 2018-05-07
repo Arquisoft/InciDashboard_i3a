@@ -14,8 +14,8 @@ public class IncidentTest {
 
 	@Test
 	public void allPropertiesTest() {
-		assertPojoMethodsFor(Incident.class).testing(Method.GETTER, Method.SETTER).testing(Method.EQUALS)
-				.testing(Method.HASH_CODE).testing(Method.CONSTRUCTOR).areWellImplemented();
+		assertPojoMethodsFor(Incident.class).testing(Method.GETTER, Method.SETTER, Method.EQUALS, Method.HASH_CODE,
+				Method.TO_STRING, Method.CONSTRUCTOR).areWellImplemented();
 	}
 
 }
