@@ -141,6 +141,13 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>pl.pojo</groupId>
+			<artifactId>pojo-tester</artifactId>
+			<version>${latest-version}</version>
+			<type>pom</type>
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
@@ -191,10 +198,10 @@
 				<version>0.7.7.201606060606</version>
 				<configuration>
 					<excludes>
-						<exclude>**/client/**</exclude>	
-						<exclude>**/listeners/**</exclude>	
+						<exclude>**/client/**</exclude>
+						<exclude>**/listeners/**</exclude>
 						<exclude>**/Application.**</exclude>
-						<exclude>**/WebSocketConfig.**</exclude>	
+						<exclude>**/WebSocketConfig.**</exclude>
 					</excludes>
 				</configuration>
 				<executions>
@@ -282,11 +289,16 @@
 		</plugins>
 
 	</reporting>
-	
+
 	<repositories>
 		<repository>
 			<id>jitpack.io</id>
 			<url>https://jitpack.io</url>
+		</repository>
+
+		<repository>
+			<id>jcenter</id>
+			<url>http://jcenter.bintray.com/</url>
 		</repository>
 	</repositories>
 
