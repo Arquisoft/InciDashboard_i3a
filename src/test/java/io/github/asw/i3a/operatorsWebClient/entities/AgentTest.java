@@ -17,5 +17,4 @@ public class AgentTest {
 		assertPojoMethodsFor(Agent.class).testing(Method.GETTER, Method.SETTER, Method.EQUALS, Method.HASH_CODE,
 				Method.TO_STRING, Method.CONSTRUCTOR).areWellImplemented();
 	}
-
 }

@@ -1,5 +1,6 @@
 package io.github.asw.i3a.operatorsWebClient.entities;
 
+import static org.junit.Assert.assertTrue;
 import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
 import org.junit.Test;
@@ -16,6 +17,13 @@ public class UserInfoTest {
 	public void allPropertiesTest() {
 		assertPojoMethodsFor(UserInfo.class).testing(Method.GETTER, Method.SETTER, Method.EQUALS, Method.HASH_CODE,
 				Method.TO_STRING, Method.CONSTRUCTOR).areWellImplemented();
+	}
+
+	@Test
+	public void textExtra() {
+		UserInfo u = new UserInfo("hola", "holi");
+		assertTrue(u.getLogin().equals("hola"));
+		assertTrue(u.getPassword().equals("holi"));
 	}
 
 }
