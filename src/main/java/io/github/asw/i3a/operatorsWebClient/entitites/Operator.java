@@ -14,19 +14,14 @@ public class Operator {
 	private String name;
 	private String email;
 	private String password;
-    private String operatorId;
-    
-	public Operator() {}
-	
+	private String operatorId;
+
+	public Operator() {
+	}
+
 	public Operator(String email, String password) {
 		super();
 		this.email = email;
 		this.password = password;
 	}
-
-	@Override
-	public String toString() {
-		return "Operator [email=" + email + ", password=" + password + "]";
-	}
-
 }
