@@ -29,4 +29,8 @@ public class Incident {
 		return new ObjectId(this.incidentId).getDate().toString();
 	}
 
+	public boolean canEquals(Object o) {
+		return this.canEqual(o);
+	}
+
 }

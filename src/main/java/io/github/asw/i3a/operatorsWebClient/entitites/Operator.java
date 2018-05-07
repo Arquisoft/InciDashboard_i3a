@@ -24,4 +24,8 @@ public class Operator {
 		this.email = email;
 		this.password = password;
 	}
+
+	public boolean canEquals(Object o) {
+		return this.canEqual(o);
+	}
 }

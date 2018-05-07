@@ -24,6 +24,8 @@ public class UserInfoTest {
 		UserInfo u = new UserInfo("hola", "holi");
 		assertTrue(u.getLogin().equals("hola"));
 		assertTrue(u.getPassword().equals("holi"));
+		UserInfo u2 = new UserInfo();
+		assertTrue(u.canEquals(u2));
 	}
 
 }

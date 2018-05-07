@@ -24,6 +24,9 @@ public class InciInfoTest {
 		InciInfo in = new InciInfo("OPEN", "pruebaa");
 		assertTrue(in.getStatus().equals("OPEN"));
 		assertTrue(in.getComment().equals("pruebaa"));
+
+		InciInfo in2 = new InciInfo();
+		assertTrue(in.canEquals(in2));
 	}
 
 }

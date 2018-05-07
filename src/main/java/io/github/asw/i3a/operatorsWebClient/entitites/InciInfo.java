@@ -12,4 +12,8 @@ public class InciInfo {
 	public InciInfo() {
 
 	}
+
+	public boolean canEquals(Object o) {
+		return this.canEqual(o);
+	}
 }
