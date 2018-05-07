@@ -146,7 +146,6 @@
 			<groupId>pl.pojo</groupId>
 			<artifactId>pojo-tester</artifactId>
 			<version>0.7.6</version>
-			<type>pom</type>
 		</dependency>
 
 	</dependencies>
@@ -200,6 +199,7 @@
 				<configuration>
 					<excludes>
 						<exclude>**/client/**</exclude>
+						<exclude>**/controllers/**</exclude>
 						<exclude>**/listeners/**</exclude>
 						<exclude>**/Application.**</exclude>
 						<exclude>**/WebSocketConfig.**</exclude>
