@@ -1,6 +1,7 @@
 package io.github.asw.i3a.operatorsWebClient.entities;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
 import org.junit.Test;
@@ -24,6 +25,9 @@ public class IncidentTest {
 		Incident i = new Incident();
 		i.setIncidentId("5aef2acdb1f3911fd0bdb41c");
 		assertNotNull(i.getDate().equals("Sun May 06 18:18:21 CEST 2018"));
+
+		Incident i2 = new Incident();
+		assertTrue(i.canEquals(i2));
 	}
 
 }

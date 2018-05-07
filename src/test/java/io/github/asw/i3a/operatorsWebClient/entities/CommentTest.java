@@ -26,6 +26,9 @@ public class CommentTest {
 		Comment c = new Comment("hola", "idOp");
 		Date d = new Date();
 		assertTrue(c.getDate().getTime() <= d.getTime());
+
+		Comment c2 = new Comment();
+		assertTrue(c.canEquals(c2));
 	}
 
 }

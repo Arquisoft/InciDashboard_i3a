@@ -9,4 +9,11 @@ public class UserInfo {
 
 	private String login;
 	private String password;
+
+	public UserInfo() {
+	}
+
+	public boolean canEquals(Object o) {
+		return this.canEqual(o);
+	}
 }

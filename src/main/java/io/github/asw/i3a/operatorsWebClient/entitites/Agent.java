@@ -12,4 +12,12 @@ public class Agent {
 	private int kindCode;
 	private String kind;
 	private String agentId;
+
+	public Agent() {
+
+	}
+
+	public boolean canEquals(Object o) {
+		return this.canEqual(o);
+	}
 }

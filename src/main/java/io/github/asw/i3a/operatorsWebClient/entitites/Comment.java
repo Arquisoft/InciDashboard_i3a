@@ -19,4 +19,8 @@ public class Comment {
 		this.date = new Date();
 		this.operatorId = idOp;
 	}
+
+	public boolean canEquals(Object o) {
+		return this.canEqual(o);
+	}
 }

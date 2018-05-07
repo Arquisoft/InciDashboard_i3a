@@ -24,6 +24,9 @@ public class OperatorTest {
 		Operator op = new Operator("Pepe@gmail.com", "123456");
 		assertTrue(op.getEmail().equals("Pepe@gmail.com"));
 		assertTrue(op.getPassword().equals("123456"));
+
+		Operator op2 = new Operator();
+		assertTrue(op.canEquals(op2));
 	}
 
 }

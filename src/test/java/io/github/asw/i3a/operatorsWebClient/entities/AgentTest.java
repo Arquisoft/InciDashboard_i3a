@@ -1,5 +1,6 @@
 package io.github.asw.i3a.operatorsWebClient.entities;
 
+import static org.junit.Assert.assertTrue;
 import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
 import org.junit.Test;
@@ -18,4 +19,10 @@ public class AgentTest {
 				Method.TO_STRING, Method.CONSTRUCTOR).areWellImplemented();
 	}
 
+	@Test
+	public void extraTest() {
+		Agent a = new Agent();
+		Agent a2 = new Agent();
+		assertTrue(a.canEquals(a2));
+	}
 }
