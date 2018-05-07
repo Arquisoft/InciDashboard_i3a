@@ -14,8 +14,8 @@ public class UserInfoTest {
 
 	@Test
 	public void allPropertiesTest() {
-		assertPojoMethodsFor(UserInfo.class).testing(Method.GETTER, Method.SETTER).testing(Method.EQUALS)
-				.testing(Method.HASH_CODE).areWellImplemented();
+		assertPojoMethodsFor(UserInfo.class).testing(Method.GETTER, Method.SETTER, Method.EQUALS, Method.HASH_CODE,
+				Method.TO_STRING, Method.CONSTRUCTOR).areWellImplemented();
 	}
 
 }
